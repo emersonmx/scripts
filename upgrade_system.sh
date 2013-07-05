@@ -1,3 +1,8 @@
 #! /bin/bash
 
-emerge -NDuv @world && dispatch-conf && emerge --depclean && revdep-rebuild && module-rebuild rebuild
+emerge -NDuv @world
+emerge --depclean
+revdep-rebuild
+module-rebuild rebuild
+dispatch-conf
+
