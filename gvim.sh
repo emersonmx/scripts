@@ -5,4 +5,5 @@ then
     cd $1
 fi
 
-[ -f .vimsession ] && gvim -S .vimsession || gvim
+[ -f .vimsession ] && gvim -geometry 90x40 -S .vimsession ||
+                      gvim -geometry 90x40

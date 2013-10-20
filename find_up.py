@@ -21,6 +21,8 @@ if __name__ == "__main__":
             else:
                 if file_exists:
                     print full_path
+                    sys.exit(0)
 
     else:
         print "Usage: {} <path> <file>".format(sys.argv[0])
+        sys.exit(1)
