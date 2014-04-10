@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 
 SINKID=$(pactl list | grep -B 1 "Name: module-jack-sink" | grep Module | \
     sed 's/[^0-9]//g')

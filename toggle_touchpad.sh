@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 
 value=`synclient -l | grep TouchpadOff | awk {'print $3'}`
 

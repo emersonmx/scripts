@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 
 # Script que limpa (remove) TODOS os arquivos gerados pelo latexmk
 # e do diretorio dist.

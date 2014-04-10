@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 
 sleep 30
 conky &

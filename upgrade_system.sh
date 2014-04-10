@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 
 emerge -NDuv @world \
     --buildpkg --buildpkg-exclude "virtual/* sys-kernel/*-sources"

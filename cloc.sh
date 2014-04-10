@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 
 if test $# -ne 2
 then
