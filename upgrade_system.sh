@@ -1,5 +1,8 @@
 #!/bin/bash
 
+export SOLARIZED="true"
+
+eix-sync &&
 emerge -NDuv @world \
     --buildpkg --buildpkg-exclude "virtual/* sys-kernel/*-sources" &&
 emerge -v @preserved-rebuild &&
