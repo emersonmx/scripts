@@ -1,10 +1,10 @@
 #!/bin/bash
 
-xfce4-popup-whiskermenu
+xfce4-popup-whiskermenu &
 
-xfce4-terminal &&
-xfce4-terminal -x vim
+xfce4-terminal &
+xfce4-terminal -x vim &
 
-chromium-browser &&
-pidgin &&
-eclipse
+chromium-browser &
+pidgin &
+eclipse &
