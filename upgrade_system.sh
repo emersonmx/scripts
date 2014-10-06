@@ -10,8 +10,7 @@ umount /var/tmp/portage
 mount -t tmpfs -o size=2048M,nr_inodes=1M tmpfs /var/tmp/portage
 
 echo "Atualizando o sistema"
-emerge -NDuv @world \
-    --buildpkg --buildpkg-exclude "virtual/* sys-kernel/*-sources" &&
+emerge -NDuv @world &&
 emerge -v @preserved-rebuild &&
 emerge --depclean &&
 revdep-rebuild &&
