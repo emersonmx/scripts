@@ -11,8 +11,8 @@ eix-sync
 
 echo "Atualizando o sistema"
 emerge -NDuv @world &&
-emerge -v @preserved-rebuild &&
 emerge --depclean &&
+emerge -v @preserved-rebuild &&
 revdep-rebuild &&
 emerge @module-rebuild &&
 dispatch-conf
