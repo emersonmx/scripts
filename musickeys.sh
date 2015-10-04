@@ -4,18 +4,18 @@
 
 case $1 in
    "play")
-       key="XF86AudioPlay"
+       action="PlayPause"
        ;;
    "next")
-       key="XF86AudioNext"
+       action="Next"
        ;;
    "prev")
-       key="XF86AudioPrev"
+       action="Previous"
        ;;
    *)
        echo "Usage: $0 play|next|prev"
        exit 1
         ;;
 esac
-xdotool key --window $(xdotool search --name "Spotify (Premium |Unlimited |Free )?- Linux Preview"|head -n1) $key
+dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.$action
 exit 0
