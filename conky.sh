@@ -1,5 +1,6 @@
 #!/bin/bash
 
-conky &
-sleep 1
+sleep 30
+conky $@ &
+sleep 5
 xdotool search --class "Pcmanfm" behave %@ focus windowraise $(xdotool search --class "Conky")
