@@ -1,10 +1,11 @@
 #!/bin/bash
 
-value=`synclient -l | grep TouchpadOff | awk {'print $3'}`
+value=$(xinput list-props 'SynPS/2 Synaptics TouchPad' | grep 'Device Enabled' | awk '{print $4}')
+device='SynPS/2 Synaptics TouchPad'
 
 if [ $value = 0 ]
 then
-    synclient TouchpadOff=1
+    xinput enable "$device"
 else
-    synclient TouchpadOff=0
+    xinput disable "$device"
 fi
