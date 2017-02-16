@@ -20,7 +20,8 @@ if [[ -n "${switch_to}" ]]
 then
     (wmctrl -ia "$switch_to") &
 else
-    ($app_name) &
+    shift
+    ($app_name $@) &
 fi
 
 
