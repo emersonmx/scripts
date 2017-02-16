@@ -1,6 +1,17 @@
 #!/bin/bash
 
+if [[ $# -lt 1 ]]; then
+    echo "Usage: $0 <app_name> [app]"
+    exit
+fi
+
+app=$1
 app_name=$1
+
+if [[ $# -ge 2 ]]; then
+    app=$2
+fi
+
 workspace_number=`wmctrl -d | grep '\*' | cut -d' ' -f 1`
 win_list=`wmctrl -lx | grep $app_name | grep " $workspace_number " | awk '{print $1}'` 
 
@@ -21,7 +32,8 @@ then
     (wmctrl -ia "$switch_to") &
 else
     shift
-    ($app_name $@) &
+    shift
+    ($app "$@") &
 fi
 
 
