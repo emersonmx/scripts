@@ -6,10 +6,10 @@ download_dirs="dotfiles my_arch_config scripts"
 pushd $code_dir > /dev/null
 for dir in $download_dirs
 do
-    echo "Fetching repository $dir..."
+    echo "- Fetching repository $dir... -"
     pushd $dir > /dev/null
     git fetch
     popd > /dev/null
-    echo "Fetching repository $dir done."
+    echo "- Fetching repository $dir done. -"
 done
 popd > /dev/null
