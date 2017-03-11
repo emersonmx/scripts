@@ -1,7 +1,7 @@
 #!/bin/bash
 
 code_dir="$HOME/code"
-download_dirs="dotfiles/ my_arch_config/ scripts/"
+download_dirs="dotfiles my_arch_config scripts"
 
 pushd $code_dir > /dev/null
 for dir in $download_dirs
