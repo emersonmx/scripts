@@ -8,7 +8,7 @@ for dir in $download_dirs
 do
     echo "- Fetching repository $dir... -"
     pushd $dir > /dev/null
-    git fetch
+    git pull
     popd > /dev/null
     echo "- Fetching repository $dir done. -"
 done
