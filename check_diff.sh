@@ -14,9 +14,18 @@ fi
 IFS="
 "
 
-for e in `diff -q -r $1 $2 | grep -v Only`
+src=2
+dest=4
+grep_str='Only'
+if [[ $LANG == *"pt_BR"* ]]; then
+    src=3
+    dest=5
+    grep_str='Somente'
+fi
+
+for e in `diff -q -r "$1" "$2" | grep -v "$grep_str"`
 do
-    file_a=`echo $e | awk '{print $2}'`
-    file_b=`echo $e | awk '{print $4}'`
+    file_a=`echo $e | awk "{print $"$src"}"`
+    file_b=`echo $e | awk "{print $"$dest"}"`
     $use_editor $file_a $file_b
 done
