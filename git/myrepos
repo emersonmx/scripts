@@ -9,7 +9,7 @@ function exec_action() {
     repositories="$(git config --global --get-all myrepos.repo)"
     for repository in $repositories
     do
-        echo "- $repository -"
+        echo "- $(basename $repository) -"
         pushd $repository > /dev/null
         eval $action
         popd > /dev/null
