@@ -13,6 +13,7 @@ function exec_action() {
         pushd $repository > /dev/null
         eval $action
         popd > /dev/null
+        echo ''
     done
 }
 
