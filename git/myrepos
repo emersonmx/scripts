@@ -6,7 +6,7 @@ function show_usage() {
 
 function exec_action() {
     action=$1
-    repositories="$(git config --global --get-all my-repositories.repository)"
+    repositories="$(git config --global --get-all myrepos.repo)"
     for repository in $repositories
     do
         echo "- $repository -"
