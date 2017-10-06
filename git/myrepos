@@ -1,0 +1,45 @@
+#!/bin/bash
+
+function show_usage() {
+    echo "Usage: myrepos <status|fetch|pull|push>"
+}
+
+function exec_action() {
+    action=$1
+    repositories="$(git config --global --get-all my-repositories.repository)"
+    for repository in $repositories
+    do
+        echo "- $repository -"
+        pushd $repository > /dev/null
+        eval $action
+        popd > /dev/null
+    done
+}
+
+function handle_action() {
+    action=$1
+    case $action in
+        status )
+            exec_action 'git status -s'
+            ;;
+        fetch )
+            exec_action 'git fetch'
+            ;;
+        pull )
+            exec_action 'git pull'
+            ;;
+        push )
+            exec_action 'git push'
+            ;;
+        * )
+            show_usage
+            ;;
+    esac
+}
+
+if [[ $# != 1 ]]; then
+    show_usage
+    exit 0
+fi
+
+handle_action $1
