@@ -17,8 +17,7 @@ function exec_action() {
 }
 
 function handle_action() {
-    action=$1
-    case $action in
+    case $1 in
         status )
             exec_action 'git status -s'
             ;;
