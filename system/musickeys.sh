@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if ! [ -x "$(command -v xdotool)" ]; then
+    echo "Install xdotool"
+    exit 1
+fi
+
 case $1 in
    "play-pause")
        dbusAction="PlayPause"
