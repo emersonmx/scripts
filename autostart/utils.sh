@@ -1,6 +1,6 @@
 is_running() {
     [ "$1" = "" ] && return 0
-    [ $(pgrep -f -c "$1") -gt 0 ] && return 1 || return 0
+    [ $(pidof -x "$1" | wc -c) -gt 0 ] && return 1 || return 0
 }
 
 function wait_for()

@@ -6,7 +6,7 @@ source "$abspath/utils.sh"
 
 icon="$abspath/icons/jupyter.png"
 
-is_running "jupyter-notebook"
+is_running 'jupyter-notebook'
 if [ $? -eq 1 ]
 then
     exit
