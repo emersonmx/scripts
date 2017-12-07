@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Move User to App/Models
+echo 'Move User to App/Models'
 if [ -f 'app/User.php' ]
 then
     mkdir -p app/Models
@@ -14,10 +14,10 @@ sed 's#App\\User::class#App\\Models\\User::class#g' -i config/services.php
 sed 's#App\\User::class#App\\Models\\User::class#g' -i database/factories/UserFactory.php
 sed 's#App\\User#App\\Models\\User#g' -i app/Http/Controllers/Auth/RegisterController.php
 
-# Create Services and Repositories
+echo 'Create Services and Repositories'
 mkdir -p app/{Services,Repositories}
 
-# Setup phpunit to use sqlite db in memory
+echo 'Setup phpunit to use sqlite db in memory'
 sed '
 /<env name="APP_ENV" value="testing"\/>/ a\
         <env name="DB_CONNECTION" value="sqlite"/>\
@@ -25,7 +25,7 @@ sed '
 ' -i phpunit.xml
 
 
-# Setup dev packages
+echo 'Setup dev packages'
 composer require doctrine/dbal
 composer require --dev barryvdh/laravel-debugbar
 composer require --dev barryvdh/laravel-ide-helper
