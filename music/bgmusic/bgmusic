@@ -1,5 +1,0 @@
-#!/bin/bash
-
-SCRIPTPATH="$( cd "$(dirname $(readlink -f "$0"))" ; pwd -P )"
-VPYTHON="$SCRIPTPATH/venv/bin/python"
-$VPYTHON "$SCRIPTPATH/bgmusic.py" $*
