@@ -1,3 +1,5 @@
 #!/bin/bash
 
-pactl suspend-sink 1 && pactl suspend-sink 0
+systemctl restart bluetooth
+sleep 3
+echo 'connect 04:FE:A1:4F:26:9F' | bluetoothctl
