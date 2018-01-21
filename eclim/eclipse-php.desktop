@@ -1,9 +1,11 @@
 [Desktop Entry]
+Version=1.0
+Type=Application
 Name=Eclipse
 Comment=A PHP Development Environment
 Icon=eclipse
-Exec="/home/emersonmx/.local/opt/eclipse-php"
-Terminal=false
-Type=Application
+Exec=/home/emersonmx/.local/opt/eclipse-php/eclipse
+NoDisplay=false
 Categories=Development;IDE;PHP;
 StartupNotify=true
+Terminal=false
