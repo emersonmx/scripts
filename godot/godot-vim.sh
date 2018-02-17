@@ -1,3 +1,7 @@
 #!/bin/bash
 
-/usr/bin/vim --servername godot-vim --remote-silent "$@"
+if [[ $# == 0 ]]; then
+    /usr/bin/vim --servername godot-vim
+else
+    /usr/bin/vim --servername godot-vim --remote-silent "$@"
+fi
