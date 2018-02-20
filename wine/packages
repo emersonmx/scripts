@@ -1,0 +1,8 @@
+pac -S wine_gecko wine-mono wine
+pac -S lib32-alsa-lib lib32-alsa-plugins lib32-libpulse lib32-openal
+pac -S lib32-libxml2 lib32-mpg123 lib32-lcms2 lib32-giflib lib32-libpng lib32-gnutls lib32-gst-plugins-base lib32-gst-plugins-good lib32-gst-plugins-bad lib32-gst-plugins-ugl
+pac -S winetricks
+pac -S lib32-libxrandr lib32-libxinerama
+pac -S samba
+pac -S lib32-libxml2
+pac -S exe-thumbnailer
