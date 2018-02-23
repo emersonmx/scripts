@@ -1,6 +1,6 @@
 #!/bin/bash
 
-terminal="xfce4-terminal"
+terminal="terminator"
 terminal_pid=`pgrep $terminal`
 
 if [[ ! -z $terminal_pid ]]; then
