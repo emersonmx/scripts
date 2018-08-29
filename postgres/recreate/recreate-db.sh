@@ -25,6 +25,7 @@ echo ""
 while true; do
     read -p "Continue (yes/no)? " yesno
     case $yesno in
+        yes) break;;
         no) exit;;
         *) echo "Please answer yes or no."
     esac
