@@ -7,7 +7,7 @@ else
     exit
 fi
 
-echo "THIS OPERATION CAN BE DANGEROUS!!!"
+echo "THIS OPERATION CAN BE DANGEROUS AND MAKE A LOT OF DAMAGE!!!"
 echo "Verify the connection to the source and destination database are correct"
 echo "before continuing."
 echo ""
