@@ -12,21 +12,23 @@ echo "Verify the connection to the source and destination database are correct"
 echo "before continuing."
 echo ""
 echo "OPERATIONS"
-echo " - Connections to \"$DEST_USER@$DEST_HOST/$DEST_DB-new\" will be killed"
-echo " - The \"$DEST_USER@$DEST_HOST/$DEST_DB-new\" will be recreated (drop/create)"
-echo " - The old dump \"$SQL_FILE\" will be deleted"
-echo " - A new dump from \"$SRC_USER@$SRC_HOST/$SRC_DB\" named \"$SQL_FILE\" will be created"
-echo " - The dump from \"$SRC_USER@$SRC_HOST/$SRC_DB\" will be imported in \"$DEST_USER@$DEST_HOST/$DEST_DB-new\""
-echo " - Connections to \"$DEST_USER@$DEST_HOST/$DEST_DB\" and \"$DEST_USER@$DEST_HOST/$DEST_DB-new\" will be killed"
-echo " - The \"$DEST_USER@$DEST_HOST/$DEST_DB\" will be deleted"
-echo " - The \"$DEST_USER@$DEST_HOST/$DEST_DB-new\" will be renamed to \"$DEST_USER@$DEST_HOST/$DEST_DB\""
+echo " - Connections to \"$DEST_USER@$DEST_HOST/$DEST_DB-new\" will be killed;"
+echo " - The \"$DEST_USER@$DEST_HOST/$DEST_DB-new\" will be recreated (drop/create);"
+echo " - The old dump \"$SQL_FILE\" will be deleted;"
+echo " - A new dump from \"$SRC_USER@$SRC_HOST/$SRC_DB\" named \"$SQL_FILE\" will be created;"
+echo " - The dump from \"$SRC_USER@$SRC_HOST/$SRC_DB\" will be imported in \"$DEST_USER@$DEST_HOST/$DEST_DB-new\";"
+echo " - Connections to \"$DEST_USER@$DEST_HOST/$DEST_DB\" and \"$DEST_USER@$DEST_HOST/$DEST_DB-new\" will be killed;"
+echo " - The \"$DEST_USER@$DEST_HOST/$DEST_DB\" will be deleted;"
+echo " - The \"$DEST_USER@$DEST_HOST/$DEST_DB-new\" will be renamed to \"$DEST_USER@$DEST_HOST/$DEST_DB\"."
 echo ""
-read -p "Continue? (yes/no)" yesno
 
-case $yesno in
-    no) exit;;
-    *) echo ""
-esac
+while true; do
+    read -p "Continue (yes/no)? " yesno
+    case $yesno in
+        no) exit;;
+        *) echo "Please answer yes or no."
+    esac
+done
 
 kill_connections() {
     psql -h $DEST_HOST -U $DEST_USER -c "select pg_terminate_backend(pg_stat_activity.pid) from pg_stat_activity where pg_stat_activity.datname = '$1' and pid <> pg_backend_pid();"
