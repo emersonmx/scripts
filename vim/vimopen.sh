@@ -4,6 +4,7 @@ IFS=$'\n\t'
 
 SHELL=/bin/zsh
 EDITOR=nvim
+TERMINAL=/usr/bin/terminator
 
 if ! [ -x "$(command -v tmux)" ]
 then
@@ -17,5 +18,13 @@ then
     exit
 fi
 
+set +e
 wmctrl -a $SHELL
+if [ $? = 1 ]
+then
+    $TERMINAL
+    sleep 1
+fi
+set -e
+
 tmux new-window $EDITOR $@
