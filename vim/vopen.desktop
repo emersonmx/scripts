@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Vim
-TryExec=vimopen.sh
-Exec=vimopen.sh %F
+TryExec=vopen
+Exec=vopen %F
 Terminal=false
 Type=Application
 Keywords=Text;editor;
