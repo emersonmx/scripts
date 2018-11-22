@@ -6,13 +6,13 @@ SHELL=/bin/zsh
 EDITOR=nvim
 TERMINAL=/usr/bin/terminator
 
-if ! [ -x "$(command -v tmux)" ]
+if [ ! -x "$(command -v tmux)" ]
 then
     echo 'TMUX não encontrado!'
     exit
 fi
 
-if ! [ -x "$(command -v wmctrl)" ]
+if [ ! -x "$(command -v wmctrl)" ]
 then
     echo 'wmctrl não encontrado!'
     exit
