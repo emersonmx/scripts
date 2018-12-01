@@ -1,0 +1,8 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Diablo II
+Type=Application
+Exec=/mnt/LinBKP/Jogos/PC/Diablo2/run_game.sh
+Icon=/mnt/LinBKP/Jogos/PC/Diablo2/icon.png
+StartupWMClass=Diablo II.exe
+Categories=Game
