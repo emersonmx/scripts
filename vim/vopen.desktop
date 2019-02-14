@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=Vim
+Name=Vim (tmux)
 TryExec=vopen
 Exec=vopen %F
 Terminal=false
