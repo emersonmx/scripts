@@ -42,5 +42,5 @@ make_snippet .gutctags phptempl
 make_phpactor_config
 make_snippet .projections.json laraveltempl
 make_snippet .shenv laraveltempl
-make_snippet .vimproject phptempl
+make_snippet .vmx phptempl
 make_snippet .php_cs.dist defaulttempl
