@@ -2,7 +2,8 @@
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-if [ -f .env ]; then
+if [ -f "$SCRIPT_DIR/.env" ]
+then
     source "$SCRIPT_DIR/.env"
 else
     echo "Copy .env.example to .env, edit and run script again"
@@ -22,12 +23,13 @@ echo " - The \"$DEST_USER@$DEST_HOST/$DEST_DB\" will be deleted;"
 echo " - The \"$DEST_USER@$DEST_HOST/$DEST_DB-new\" will be renamed to \"$DEST_USER@$DEST_HOST/$DEST_DB\"."
 echo ""
 
-while true; do
+while true
+do
     read -p "Continue (yes/no)? " yesno
     case $yesno in
         yes) break;;
         no) exit;;
-        *) echo "Please answer yes or no."
+        *) echo "Please answer with yes or no."
     esac
 done
 
@@ -39,8 +41,8 @@ kill_connections "$DEST_DB-new"
 dropdb --if-exists -h $DEST_HOST -U $DEST_USER "$DEST_DB-new"
 createdb -h $DEST_HOST -U $DEST_USER "$DEST_DB-new"
 
-psql -h $DEST_HOST -U $DEST_USER "$DEST_DB-new" < $SCHEMA_SQL_FILE
-psql -h $DEST_HOST -U $DEST_USER "$DEST_DB-new" < $DATA_SQL_FILE
+psql -h $DEST_HOST -U $DEST_USER "$DEST_DB-new" < "$SCRIPT_DIR/$SCHEMA_SQL_FILE"
+psql -h $DEST_HOST -U $DEST_USER "$DEST_DB-new" < "$SCRIPT_DIR/$DATA_SQL_FILE"
 
 kill_connections "$DEST_DB"
 kill_connections "$DEST_DB-new"
