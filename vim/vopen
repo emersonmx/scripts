@@ -2,9 +2,9 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-SHELL=/bin/zsh
+SHELL=zsh
 EDITOR=nvim
-TERMINAL=/usr/bin/kitty
+TERMINAL=kitty
 
 if [ ! -x "$(command -v tmux)" ]
 then
@@ -23,8 +23,8 @@ wmctrl -a $SHELL
 if [ $? = 1 ]
 then
     $TERMINAL
-    sleep 1
 fi
 set -e
 
-tmux new-window $EDITOR $@
+sleep 1
+tmux new-window $EDITOR "$@"
