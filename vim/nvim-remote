@@ -2,4 +2,8 @@
 
 notify-send "Opening in vim"
 
-nvr --remote $@
+wmctrl -s 0
+wmctrl -a kitty
+tmux select-window -t 1
+
+nvr --nostart -s --remote $*
