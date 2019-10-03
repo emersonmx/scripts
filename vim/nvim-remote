@@ -1,9 +1,14 @@
 #!/bin/bash
 
-notify-send "Opening in vim"
+project_path=$1
+file_path=$2
+line=$3
+column=$4
+
+notify-send "Opening in vim..."
 
 wmctrl -s 0
 wmctrl -a kitty
 tmux select-window -t 1
 
-nvr --nostart -s --remote $*
+nvr --nostart -s --remote $file_path
