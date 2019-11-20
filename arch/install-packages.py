@@ -41,7 +41,6 @@ def process_configs(configs):
                 package_list.append(pkg)
 
             if not package_list:
-                print("No {} packages to install.".format(pkgname))
                 continue
 
             run_install_packages(install_command, package_list)
@@ -50,7 +49,6 @@ def process_configs(configs):
                 cmd, install_command = p['command'], p['install-command']
 
                 if command_exists(cmd):
-                    print("Package {} is already installed.".format(cmd))
                     continue
 
                 run_manual_install(install_command)
