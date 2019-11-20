@@ -1,7 +1,0 @@
-#!/bin/bash
-
-eclipse_workspace='/home/emersonmx/code/projects/php'
-eclim_bin="$eclipse_workspace/eclipse/plugins/org.eclim_2.7.1/bin/eclimd"
-settings="-Dosgi.instance.area.default=$eclipse_workspace"
-
-$eclim_bin $settings $*
