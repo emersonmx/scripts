@@ -1,0 +1,67 @@
+{
+    "arch": {
+        "install-command": ["yay", "-S"],
+        "packages": [
+            "jq",
+            "bat",
+            "bear",
+            "ccls",
+            "cmake",
+            "composer",
+            "exa",
+            "fd",
+            "ffmpegthumbnailer",
+            "go",
+            { "command": "go-langserver", "package_name": "go-langserver-git" },
+            { "command": "guru", "package_name": "go-tools" },
+            "highlight",
+            { "command": "http", "package_name": "httpie" },
+            "icat",
+            "ipython",
+            "kitty",
+            { "command": "node", "package_name": "nodejs" },
+            { "command": "nvr", "package_name": "neovim-remote" },
+            "pass",
+            { "command": "pylint", "package_name": "python-pylint" },
+            { "command": "pylint2", "package_name": "python2-pylint" },
+            { "command": "pyls", "package_name": "python-language-server" },
+            "ranger",
+            { "command": "rg", "package_name": "ripgrep" },
+            "w3m",
+            "watchman",
+            "wmctrl",
+            "xclip",
+            "xdotool",
+            "xsel",
+            "yarn",
+            "fzf"
+        ]
+    },
+    "node": {
+        "install-command": ["yarn", "global", "add"],
+        "packages": [
+            "intelephense",
+            { "command": "nvim", "package_name": "neovim" }
+        ]
+    },
+    "composer": {
+        "install-command": ["composer", "global", "require"],
+        "packages": [
+            { "command": "php-cs-fixer", "package_name": "friendsofphp/php-cs-fixer" }
+        ]
+    },
+    "golang": {
+        "install-command": ["go", "get", "-v"],
+        "packages": [
+            { "command": "golint", "package_name": "golang.org/x/lint/golint" }
+        ]
+    },
+    "misc": {
+        "packages": [
+            {
+                "command": "symfony",
+                "install-command": "wget https://get.symfony.com/cli/installer -O - | sed 's/^CLI_CONFIG_DIR=.*/CLI_CONFIG_DIR=\".local\"/' | bash"
+            }
+        ]
+    }
+}
