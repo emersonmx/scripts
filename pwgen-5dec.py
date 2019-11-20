@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 # Copyright 2009:  dogbert <dogber1@gmail.com>
 #
@@ -99,7 +99,7 @@ print("decimal number from which the master password can be calculated,")
 print("e.g. 12345")
 print("")
 print("Please enter the number: ")
-code = raw_input().replace('[', '').replace(']', '')
+code = input().replace('[', '').replace(']', '')
 hash = int(code)
 print("")
 print("Brute forcing passwords...")
@@ -117,4 +117,4 @@ print("Please note that the password has been encoded for the standard US")
 print("keyboard layout (QWERTY).")
 if (os.name == 'nt'):
 	print("Press a key to exit...")
-	raw_input()
+	input()

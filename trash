@@ -1,3 +1,0 @@
-#!/bin/bash
-
-mv $@ ~/.local/share/Trash/files/
