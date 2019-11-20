@@ -3,8 +3,8 @@
         "install-command": "yay -S",
         "packages": [
             "git",
-            { "command": "svn", "package_name": "subversion" },
-            { "command": "nvr", "package_name": "neovim-remote" },
+            { "command": "svn", "package": "subversion" },
+            { "command": "nvr", "package": "neovim-remote" },
             "fzf",
             "wmctrl",
             "xdotool",
@@ -12,9 +12,9 @@
             "xsel",
             "bat",
             "exa",
-            { "command": "rg", "package_name": "ripgrep" },
-            { "command": "http", "package_name": "httpie" },
-            { "command": "node", "package_name": "nodejs" },
+            { "command": "rg", "package": "ripgrep" },
+            { "command": "http", "package": "httpie" },
+            { "command": "node", "package": "nodejs" },
             "jq",
             "yarn",
             "composer",
@@ -25,15 +25,15 @@
             "fd",
             "ffmpegthumbnailer",
             "go",
-            { "command": "go-langserver", "package_name": "go-langserver-git" },
-            { "command": "guru", "package_name": "go-tools" },
+            { "command": "go-langserver", "package": "go-langserver-git" },
+            { "command": "guru", "package": "go-tools" },
             "highlight",
             "icat",
             "ipython",
             "kitty",
-            { "command": "pylint", "package_name": "python-pylint" },
-            { "command": "pylint2", "package_name": "python2-pylint" },
-            { "command": "pyls", "package_name": "python-language-server" },
+            { "command": "pylint", "package": "python-pylint" },
+            { "command": "pylint2", "package": "python2-pylint" },
+            { "command": "pyls", "package": "python-language-server" },
             "w3m",
             "watchman",
             "pass"
@@ -43,19 +43,19 @@
         "install-command": "yarn global add",
         "packages": [
             "intelephense",
-            { "command": "nvim", "package_name": "neovim" }
+            { "command": "nvim", "package": "neovim" }
         ]
     },
     "composer": {
         "install-command": "composer global require",
         "packages": [
-            { "command": "php-cs-fixer", "package_name": "friendsofphp/php-cs-fixer" }
+            { "command": "php-cs-fixer", "package": "friendsofphp/php-cs-fixer" }
         ]
     },
     "golang": {
         "install-command": "go get -v",
         "packages": [
-            { "command": "golint", "package_name": "golang.org/x/lint/golint" }
+            { "command": "golint", "package": "golang.org/x/lint/golint" }
         ]
     },
     "misc": {

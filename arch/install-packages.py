@@ -37,7 +37,7 @@ def process_configs(configs):
                 if isinstance(p, str):
                     cmd, pkg = p, p
                 else:
-                    cmd, pkg = p['command'], p['package_name']
+                    cmd, pkg = p['command'], p['package']
 
                 assert cmd and pkg
 
