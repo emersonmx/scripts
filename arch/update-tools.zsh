@@ -6,12 +6,11 @@ pushd "$script_dir/.."
 
 source ~/.zshrc
 
-antibody bundle < zsh/plugins.txt > zsh/plugins.zsh
-antibody update
+zplugin self-update
 (cd ~/.config/base16-shell && git pull origin master)
 composer global update
-wget https://get.symfony.com/cli/installer -O - | sed 's/^CLI_CONFIG_DIR=.*/CLI_CONFIG_DIR=".local"/' | bash
-nvim +PlugUpdate +UpdateRemotePlugins +qall
+symfony self:update
+nvim +PlugInstall +PlugUpdate +UpdateRemotePlugins +qall
 nvim +CocUpdateSync +qall
 nvim +PythonSupportInitPython2 +PythonSupportInitPython3 +qall
 $HOME/.config/tmux/plugins/tpm/bindings/update_plugins
