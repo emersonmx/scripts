@@ -3,6 +3,7 @@
 import sys
 import json
 import shutil
+import shlex
 import subprocess
 
 
@@ -10,10 +11,15 @@ def command_exists(cmd):
     return shutil.which(cmd)
 
 
-def run_install_packages(install_command, packages):
-    with subprocess.Popen([*install_command, *packages]) as _:
-        print("{} {}".format(
-            ' '.join(install_command), ' '.join(packages)))
+def run_install_packages(command, packages):
+    args = None
+    if isinstance(command, str):
+        args = shlex.split(command) + packages
+    else:
+        args = command + packages
+
+    with subprocess.Popen(args) as _:
+        print("{}".format(' '.join(args)))
 
 
 def run_manual_install(command):
@@ -22,7 +28,7 @@ def run_manual_install(command):
 
 
 def process_configs(configs):
-    for pkgname, data in configs.items():
+    for _, data in configs.items():
         package_list = []
         install_command = data.get('install-command', None)
         if install_command:
