@@ -17,28 +17,33 @@ class SubcommandHelpFormatter(argparse.RawDescriptionHelpFormatter):
         return parts
 
 
-def command_exists(cmd):
-    return shutil.which(cmd)
-
-
 def load_config_file(path):
     with open(path) as j:
         return json.load(j)
     return {}
 
 
+def command_exists(cmd):
+    return shutil.which(cmd)
+
+
+def run_command(command, packages, shell=False):
+    args = ([command] if isinstance(command, str) else command) + packages
+    with subprocess.Popen(args, shell=shell) as _:
+        print("{}".format(' '.join(args)))
+
+
 def install_action(args):
     configs = load_config_file(args.file)
 
-    for _, data in configs.items():
+    managers = configs.get('managers', [])
+    for data in managers:
         package_list = []
         command = data.get('install-command', None)
         if command:
             for p in data['packages']:
-                cmd, pkg = None, None
-                if isinstance(p, str):
-                    cmd, pkg = p, p
-                else:
+                cmd, pkg = p, p
+                if not isinstance(p, str):
                     cmd, pkg = p['command'], p['package']
 
                 assert cmd and pkg
@@ -62,10 +67,30 @@ def install_action(args):
                 run_command(command, [], True)
 
 
-def run_command(command, packages, shell=False):
-    args = ([command] if isinstance(command, str) else command) + packages
-    with subprocess.Popen(args, shell=shell) as _:
-        print("{}".format(' '.join(args)))
+def update_action(args):
+    configs = load_config_file(args.file)
+
+    managers = configs.get('managers', [])
+    for data in managers:
+        package_list = []
+        command = data.get('update-command', None)
+        if command:
+            for p in data['packages']:
+                pkg = p
+                if not isinstance(p, str):
+                    pkg = p['package']
+
+                assert pkg
+
+                package_list.append(pkg)
+
+            if not package_list:
+                continue
+
+            run_command(shlex.split(command), package_list)
+        else:
+            for p in data['packages']:
+                run_command(p['update-command'], [], True)
 
 
 def main():
@@ -81,6 +106,9 @@ def main():
     install_parser = actions_parser.add_parser(
         'install', help='Install packages')
     install_parser.set_defaults(func=install_action)
+    update_parse = actions_parser.add_parser(
+        'update', help='Update packages')
+    update_parse.set_defaults(func=update_action)
 
     parser.set_defaults(file='cpm.json', func=lambda _: parser.print_help())
 

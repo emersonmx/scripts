@@ -1,69 +1,76 @@
 {
-    "arch": {
-        "install-command": "yay -S",
-        "packages": [
-            "git",
-            { "command": "svn", "package": "subversion" },
-            { "command": "nvr", "package": "neovim-remote" },
-            "fzf",
-            "wmctrl",
-            "xdotool",
-            "xclip",
-            "xsel",
-            "bat",
-            "exa",
-            { "command": "rg", "package": "ripgrep" },
-            { "command": "http", "package": "httpie" },
-            { "command": "node", "package": "nodejs" },
-            "jq",
-            "yarn",
-            "composer",
-            "cmake",
-            "ccls",
-            "ranger",
-            "bear",
-            "fd",
-            "ffmpegthumbnailer",
-            "go",
-            { "command": "go-langserver", "package": "go-langserver-git" },
-            { "command": "guru", "package": "go-tools" },
-            "highlight",
-            "icat",
-            "ipython",
-            "kitty",
-            { "command": "pylint", "package": "python-pylint" },
-            { "command": "pylint2", "package": "python2-pylint" },
-            { "command": "pyls", "package": "python-language-server" },
-            "w3m",
-            "watchman",
-            "pass"
-        ]
-    },
-    "node": {
-        "install-command": "yarn global add",
-        "packages": [
-            "intelephense",
-            { "command": "nvim", "package": "neovim" }
-        ]
-    },
-    "composer": {
-        "install-command": "composer global require",
-        "packages": [
-            { "command": "php-cs-fixer", "package": "friendsofphp/php-cs-fixer" }
-        ]
-    },
-    "golang": {
-        "install-command": "go get -v",
-        "packages": [
-            { "command": "golint", "package": "golang.org/x/lint/golint" }
-        ]
-    },
-    "misc": {
-        "packages": [
-            {
-                "command": "symfony",
-                "install-command": "wget https://get.symfony.com/cli/installer -O - | sed 's/^CLI_CONFIG_DIR=.*/CLI_CONFIG_DIR=\".local\"/' | bash"
-            }
-        ]
-    }
+    "managers": [
+        {
+            "install-command": "yay -S",
+            "update-command": "yay -Sy",
+            "packages": [
+                "git",
+                { "command": "svn", "package": "subversion" },
+                { "command": "nvr", "package": "neovim-remote" },
+                "fzf",
+                "wmctrl",
+                "xdotool",
+                "xclip",
+                "xsel",
+                "bat",
+                "exa",
+                { "command": "rg", "package": "ripgrep" },
+                { "command": "http", "package": "httpie" },
+                { "command": "node", "package": "nodejs" },
+                "jq",
+                "yarn",
+                "composer",
+                "cmake",
+                "ccls",
+                "ranger",
+                "bear",
+                "fd",
+                "ffmpegthumbnailer",
+                "go",
+                { "command": "go-langserver", "package": "go-langserver-git" },
+                { "command": "guru", "package": "go-tools" },
+                "highlight",
+                "icat",
+                "ipython",
+                "kitty",
+                { "command": "pylint", "package": "python-pylint" },
+                { "command": "pylint2", "package": "python2-pylint" },
+                { "command": "pyls", "package": "python-language-server" },
+                "w3m",
+                "watchman",
+                "pass"
+            ]
+        },
+        {
+            "install-command": "yarn global add",
+            "update-command": "yarn global upgrade",
+            "packages": [
+                "intelephense",
+                { "command": "nvim", "package": "neovim" }
+            ]
+        },
+        {
+            "install-command": "composer global require",
+            "update-command": "composer global update",
+            "packages": [
+                { "command": "php-cs-fixer", "package": "friendsofphp/php-cs-fixer" }
+            ]
+        },
+        {
+            "install-command": "go get -v",
+            "update-command": "go get -u",
+            "packages": [
+                { "command": "golint", "package": "golang.org/x/lint/golint" }
+            ]
+        },
+        {
+            "packages": [
+                {
+                    "command": "symfony",
+                    "install-command": "wget https://get.symfony.com/cli/installer -O - | sed 's/^CLI_CONFIG_DIR=.*/CLI_CONFIG_DIR=\".local\"/' | bash",
+                    "update-command": "symfony self:update"
+                }
+            ]
+        }
+    ]
 }
