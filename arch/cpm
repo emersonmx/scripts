@@ -37,12 +37,10 @@ def install_action(args):
     managers = configs.get('managers', [])
     for data in managers:
         package_list = []
-        command = data.get('install-command', None)
+        command = data.get('install-command')
         if command:
             for p in data['packages']:
-                cmd, pkg = p, p
-                if not isinstance(p, str):
-                    cmd, pkg = p['command'], p['package']
+                cmd, pkg = p['command'], p['package']
 
                 assert cmd and pkg
 
@@ -57,12 +55,15 @@ def install_action(args):
             run_command(shlex.split(command), package_list)
         else:
             for p in data['packages']:
-                cmd, command = p.get('command'), p.get('install-command')
+                cmd, install_cmd = p.get('command'), p.get('install-command')
+
+                if not install_cmd:
+                    continue
 
                 if command_exists(cmd):
                     continue
 
-                run_command(command, [], True)
+                run_command(install_cmd, [], True)
 
 
 def update_action(args):
