@@ -69,7 +69,13 @@
                     "command": "symfony",
                     "install-command": "wget https://get.symfony.com/cli/installer -O - | sed 's/^CLI_CONFIG_DIR=.*/CLI_CONFIG_DIR=\".local\"/' | bash",
                     "update-command": "symfony self:update"
-                }
+                },
+                { "update-command": "zplug self-update" },
+                { "update-command": "(cd $HOME/.config/base16-shell && git pull origin master)" },
+                { "update-command": "nvim +PlugInstall +PlugUpdate +UpdateRemotePlugins +qall" },
+                { "update-command": "nvim +CocUpdateSync +qall" },
+                { "update-command": "nvim +PythonSupportInitPython2 +PythonSupportInitPython3 +qall" },
+                { "update-command": "$HOME/.config/tmux/plugins/tpm/scripts/update_plugin_prompt_handler.sh all" }
             ]
         }
     ]
