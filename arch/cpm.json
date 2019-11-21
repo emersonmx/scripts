@@ -10,6 +10,7 @@
                 { "command": "cmake", "package": "cmake" },
                 { "command": "composer", "package": "composer" },
                 { "command": "exa", "package": "exa" },
+                { "command": "exiftool", "package": "perl-image-exiftool" },
                 { "command": "fd", "package": "fd" },
                 { "command": "ffmpegthumbnailer", "package": "ffmpegthumbnailer" },
                 { "command": "fzf", "package": "fzf" },
@@ -67,7 +68,6 @@
                     "update-command": "symfony self:update"
                 },
                 { "update-command": "zplug self-update" },
-                { "update-command": "(cd $HOME/.config/base16-shell && git pull origin master)" },
                 { "update-command": "nvim +PlugInstall +PlugUpdate +UpdateRemotePlugins +qall" },
                 { "update-command": "nvim +CocUpdateSync +qall" },
                 { "update-command": "nvim +PythonSupportInitPython2 +PythonSupportInitPython3 +qall" },
