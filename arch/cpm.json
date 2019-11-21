@@ -52,16 +52,12 @@
         {
             "install-command": "composer global require",
             "update-command": "composer global update",
-            "packages": [
-                { "command": "php-cs-fixer", "package": "friendsofphp/php-cs-fixer" }
-            ]
+            "packages": [{ "command": "php-cs-fixer", "package": "friendsofphp/php-cs-fixer" }]
         },
         {
             "install-command": "go get -v",
             "update-command": "go get -u",
-            "packages": [
-                { "command": "golint", "package": "golang.org/x/lint/golint" }
-            ]
+            "packages": [{ "command": "golint", "package": "golang.org/x/lint/golint" }]
         },
         {
             "packages": [
