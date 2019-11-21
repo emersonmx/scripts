@@ -67,7 +67,7 @@
                     "install-command": "wget https://get.symfony.com/cli/installer -O - | sed 's/^CLI_CONFIG_DIR=.*/CLI_CONFIG_DIR=\".local\"/' | bash",
                     "update-command": "symfony self:update"
                 },
-                { "update-command": "zplug self-update" },
+                { "update-command": "zplugin self-update" },
                 { "update-command": "nvim +PlugInstall +PlugUpdate +UpdateRemotePlugins +qall" },
                 { "update-command": "nvim +CocUpdateSync +qall" },
                 { "update-command": "nvim +PythonSupportInitPython2 +PythonSupportInitPython3 +qall" },
