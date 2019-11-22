@@ -37,7 +37,7 @@ def install_action(args):
     managers = configs.get('managers', [])
     for data in managers:
         package_list = []
-        command = data.get('install-command')
+        command = data.get('install_command')
         if command:
             for p in data['packages']:
                 cmd, pkg = p['command'], p['package']
@@ -55,7 +55,7 @@ def install_action(args):
             run_command(shlex.split(command), package_list)
         else:
             for p in data['packages']:
-                cmd, install_cmd = p.get('command'), p.get('install-command')
+                cmd, install_cmd = p.get('command'), p.get('install_command')
 
                 if not install_cmd:
                     continue
@@ -72,7 +72,7 @@ def update_action(args):
     managers = configs.get('managers', [])
     for data in managers:
         package_list = []
-        command = data.get('update-command', None)
+        command = data.get('update_command', None)
         if command:
             for p in data['packages']:
                 pkg = p
@@ -89,7 +89,7 @@ def update_action(args):
             run_command(shlex.split(command), package_list)
         else:
             for p in data['packages']:
-                run_command(p['update-command'], [], True)
+                run_command(p['update_command'], [], True)
 
 
 def main():

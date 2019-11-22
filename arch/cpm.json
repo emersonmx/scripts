@@ -1,8 +1,8 @@
 {
     "managers": [
         {
-            "install-command": "yay -S",
-            "update-command": "yay -Sy",
+            "install_command": "yay -S",
+            "update_command": "yay -Sy",
             "packages": [
                 { "command": "bat", "package": "bat" },
                 { "command": "bear", "package": "bear" },
@@ -43,35 +43,35 @@
             ]
         },
         {
-            "install-command": "yarn global add",
-            "update-command": "yarn global upgrade",
+            "install_command": "yarn global add",
+            "update_command": "yarn global upgrade",
             "packages": [
                 { "command": "intelephense", "package": "intelephense" },
                 { "command": "nvim", "package": "neovim" }
             ]
         },
         {
-            "install-command": "composer global require",
-            "update-command": "composer global update",
+            "install_command": "composer global require",
+            "update_command": "composer global update",
             "packages": [{ "command": "php-cs-fixer", "package": "friendsofphp/php-cs-fixer" }]
         },
         {
-            "install-command": "go get -v",
-            "update-command": "go get -u",
+            "install_command": "go get -v",
+            "update_command": "go get -u",
             "packages": [{ "command": "golint", "package": "golang.org/x/lint/golint" }]
         },
         {
             "packages": [
                 {
                     "command": "symfony",
-                    "install-command": "wget https://get.symfony.com/cli/installer -O - | sed 's/^CLI_CONFIG_DIR=.*/CLI_CONFIG_DIR=\".local\"/' | bash",
-                    "update-command": "symfony self:update"
+                    "install_command": "wget https://get.symfony.com/cli/installer -O - | sed 's/^CLI_CONFIG_DIR=.*/CLI_CONFIG_DIR=\".local\"/' | bash",
+                    "update_command": "symfony self:update"
                 },
-                { "update-command": "zplugin self-update" },
-                { "update-command": "nvim +PlugInstall +PlugUpdate +UpdateRemotePlugins +qall" },
-                { "update-command": "nvim +CocUpdateSync +qall" },
-                { "update-command": "nvim +PythonSupportInitPython2 +PythonSupportInitPython3 +qall" },
-                { "update-command": "$HOME/.config/tmux/plugins/tpm/scripts/update_plugin_prompt_handler.sh all" }
+                { "update_command": "zplugin self-update" },
+                { "update_command": "nvim +PlugInstall +PlugUpdate +UpdateRemotePlugins +qall" },
+                { "update_command": "nvim +CocUpdateSync +qall" },
+                { "update_command": "nvim +PythonSupportInitPython2 +PythonSupportInitPython3 +qall" },
+                { "update_command": "$HOME/.config/tmux/plugins/tpm/scripts/update_plugin_prompt_handler.sh all" }
             ]
         }
     ]
