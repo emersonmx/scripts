@@ -25,10 +25,12 @@ def command_exists(cmd):
     return shutil.which(cmd)
 
 
-def run_command(command, packages, shell=False):
-    args = ([command] if isinstance(command, str) else command) + packages
-    with subprocess.Popen(args, shell=shell) as _:
-        print("{}".format(' '.join(args)))
+def run_command(**kwargs):
+    with subprocess.Popen(**kwargs) as _:
+        args = kwargs['args']
+        if isinstance(args, str):
+            args = [args]
+        print(' '.join(args))
 
 
 def install_action(args):
@@ -52,7 +54,7 @@ def install_action(args):
             if not package_list:
                 continue
 
-            run_command(shlex.split(command), package_list)
+            run_command(args=shlex.split(command) + package_list)
         else:
             for p in data['packages']:
                 cmd, install_cmd = p.get('command'), p.get('install_command')
@@ -63,7 +65,7 @@ def install_action(args):
                 if command_exists(cmd):
                     continue
 
-                run_command(install_cmd, [], True)
+                run_command(args=install_cmd, shell=True)
 
 
 def update_action(args):
@@ -86,10 +88,10 @@ def update_action(args):
             if not package_list:
                 continue
 
-            run_command(shlex.split(command), package_list)
+            run_command(args=shlex.split(command) + package_list)
         else:
             for p in data['packages']:
-                run_command(p['update_command'], [], True)
+                run_command(args=p['update_command'], shell=True)
 
 
 def main():

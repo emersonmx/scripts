@@ -2,7 +2,7 @@
     "managers": [
         {
             "install_command": "yay -S",
-            "update_command": "yay -Sy",
+            "update_command": "yay -Syu",
             "packages": [
                 { "command": "bat", "package": "bat" },
                 { "command": "bear", "package": "bear" },
