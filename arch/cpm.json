@@ -51,6 +51,25 @@
             ]
         },
         {
+            "packages": [
+                {
+                    "command": "phpenv",
+                    "install_command": "git clone git://github.com/phpenv/phpenv.git $PHPENV_HOME",
+                    "update_command": "(cd $PHPENV_HOME && git pull --rebase --autostash)"
+                },
+                {
+                    "command": "$PHPENV_HOME/plugins/php-build/bin/php-build",
+                    "install_command": "git clone https://github.com/php-build/php-build $PHPENV_HOME/plugins/php-build",
+                    "update_command": "(cd $PHPENV_HOME/plugins/php-build && git pull --rebase --autostash)"
+                },
+                {
+                    "command": "symfony",
+                    "install_command": "wget https://get.symfony.com/cli/installer -O - | sed 's/^CLI_CONFIG_DIR=.*/CLI_CONFIG_DIR=\".local\"/' | bash",
+                    "update_command": "symfony self:update"
+                }
+            ]
+        },
+        {
             "install_command": "composer global require",
             "update_command": "composer global update",
             "packages": [{ "command": "php-cs-fixer", "package": "friendsofphp/php-cs-fixer" }]
@@ -62,15 +81,6 @@
         },
         {
             "packages": [
-                {
-                    "command": "phpenv",
-                    "install_command": "git clone git://github.com/phpenv/phpenv.git $PHPENV_HOME && git clone https://github.com/php-build/php-build $PHPENV_HOME/plugins/php-build"
-                },
-                {
-                    "command": "symfony",
-                    "install_command": "wget https://get.symfony.com/cli/installer -O - | sed 's/^CLI_CONFIG_DIR=.*/CLI_CONFIG_DIR=\".local\"/' | bash",
-                    "update_command": "symfony self:update"
-                },
                 { "update_command": "zplugin self-update" },
                 { "update_command": "nvim +PlugInstall +PlugUpdate +UpdateRemotePlugins +qall" },
                 { "update_command": "nvim +CocUpdateSync +qall" },
