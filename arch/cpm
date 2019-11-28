@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import os
 import json
 import shutil
 import shlex
@@ -22,7 +23,9 @@ def load_config_file(path):
 
 
 def command_exists(cmd):
-    return shutil.which(cmd)
+    if shutil.which(cmd):
+        return True
+    return os.path.exists(os.path.expandvars(cmd))
 
 
 def run_command(**kwargs):

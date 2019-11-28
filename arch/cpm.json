@@ -46,7 +46,7 @@
             "install_command": "yarn global add",
             "update_command": "yarn global upgrade",
             "packages": [
-                { "command": "intelephense", "package": "intelephense" },
+                { "command": "$YARN_HOME/global/node_modules/.bin/intelephense", "package": "intelephense" },
                 { "command": "nvim", "package": "neovim" }
             ]
         },
@@ -62,6 +62,10 @@
         },
         {
             "packages": [
+                {
+                    "command": "phpenv",
+                    "install_command": "git clone git://github.com/phpenv/phpenv.git $PHPENV_HOME && git clone https://github.com/php-build/php-build $PHPENV_HOME/plugins/php-build"
+                },
                 {
                     "command": "symfony",
                     "install_command": "wget https://get.symfony.com/cli/installer -O - | sed 's/^CLI_CONFIG_DIR=.*/CLI_CONFIG_DIR=\".local\"/' | bash",
