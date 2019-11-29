@@ -69,16 +69,6 @@
         {
             "packages": [
                 {
-                    "command": "phpenv",
-                    "install_command": "git clone git://github.com/phpenv/phpenv.git $PHPENV_ROOT",
-                    "update_command": "(cd $PHPENV_ROOT && git pull --rebase --autostash)"
-                },
-                {
-                    "command": "$PHPENV_ROOT/plugins/php-build/bin/php-build",
-                    "install_command": "git clone https://github.com/php-build/php-build $PHPENV_ROOT/plugins/php-build",
-                    "update_command": "(cd $PHPENV_ROOT/plugins/php-build && git pull --rebase --autostash)"
-                },
-                {
                     "command": "symfony",
                     "install_command": "wget https://get.symfony.com/cli/installer -O - | sed 's/^CLI_CONFIG_DIR=.*/CLI_CONFIG_DIR=\".local\"/' | bash",
                     "update_command": "symfony self:update"
