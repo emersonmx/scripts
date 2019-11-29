@@ -70,13 +70,13 @@
             "packages": [
                 {
                     "command": "phpenv",
-                    "install_command": "git clone git://github.com/phpenv/phpenv.git $PHPENV_HOME",
-                    "update_command": "(cd $PHPENV_HOME && git pull --rebase --autostash)"
+                    "install_command": "git clone git://github.com/phpenv/phpenv.git $PHPENV_ROOT",
+                    "update_command": "(cd $PHPENV_ROOT && git pull --rebase --autostash)"
                 },
                 {
-                    "command": "$PHPENV_HOME/plugins/php-build/bin/php-build",
-                    "install_command": "git clone https://github.com/php-build/php-build $PHPENV_HOME/plugins/php-build",
-                    "update_command": "(cd $PHPENV_HOME/plugins/php-build && git pull --rebase --autostash)"
+                    "command": "$PHPENV_ROOT/plugins/php-build/bin/php-build",
+                    "install_command": "git clone https://github.com/php-build/php-build $PHPENV_ROOT/plugins/php-build",
+                    "update_command": "(cd $PHPENV_ROOT/plugins/php-build && git pull --rebase --autostash)"
                 },
                 {
                     "command": "symfony",
