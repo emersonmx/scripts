@@ -24,7 +24,6 @@
                 { "command": "ipython", "package": "ipython" },
                 { "command": "jq", "package": "jq" },
                 { "command": "kitty", "package": "kitty" },
-                { "command": "libmcrypt-config", "package": "mcrypt" },
                 { "command": "node", "package": "nodejs" },
                 { "command": "nvr", "package": "neovim-remote" },
                 { "command": "pass", "package": "pass" },
