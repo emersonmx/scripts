@@ -4,11 +4,11 @@
             "install_command": "yay -S",
             "update_command": "yay -Syu",
             "packages": [
-                { "command": "/usr/include/readline", "package": "readline" },
                 { "command": "bat", "package": "bat" },
                 { "command": "bear", "package": "bear" },
                 { "command": "ccls", "package": "ccls" },
                 { "command": "cmake", "package": "cmake" },
+                { "command": "composer", "package": "composer" },
                 { "command": "exa", "package": "exa" },
                 { "command": "exiftool", "package": "perl-image-exiftool" },
                 { "command": "fd", "package": "fd" },
@@ -28,6 +28,21 @@
                 { "command": "node", "package": "nodejs" },
                 { "command": "nvr", "package": "neovim-remote" },
                 { "command": "pass", "package": "pass" },
+                {
+                    "command": "php",
+                    "package": [
+                        "php",
+                        "php-gd",
+                        "php-imagick",
+                        "php-intl",
+                        "php-pear",
+                        "php-pgsql",
+                        "php-sqlite",
+                        "php-tidy",
+                        "php-xsl"
+                    ]
+                },
+                { "command": "phpmd", "package": "phpmd" },
                 { "command": "pylint", "package": "python-pylint" },
                 { "command": "pylint2", "package": "python2-pylint" },
                 { "command": "pyls", "package": "python-language-server" },
@@ -35,7 +50,6 @@
                 { "command": "rg", "package": "ripgrep" },
                 { "command": "semver", "package": "semver" },
                 { "command": "svn", "package": "subversion" },
-                { "command": "tidy", "package": "tidy" },
                 { "command": "w3m", "package": "w3m" },
                 { "command": "watchman", "package": "watchman" },
                 { "command": "wmctrl", "package": "wmctrl" },
@@ -69,14 +83,6 @@
                     "command": "symfony",
                     "install_command": "wget https://get.symfony.com/cli/installer -O - | sed 's/^CLI_CONFIG_DIR=.*/CLI_CONFIG_DIR=\".local\"/' | bash",
                     "update_command": "symfony self:update"
-                }
-            ]
-        },
-        {
-            "packages": [
-                {
-                    "command": "php",
-                    "install_command": "PHP_BUILD_EXTRA_MAKE_ARGUMENTS='-j$(nproc)' phpenv install -v $(semver -r '7.x' $(phpenv install -l) | tail -n1)"
                 }
             ]
         },

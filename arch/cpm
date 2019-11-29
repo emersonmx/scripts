@@ -52,7 +52,10 @@ def install_action(args):
                 if command_exists(cmd):
                     continue
 
-                package_list.append(pkg)
+                if isinstance(pkg, list):
+                    package_list += pkg
+                else:
+                    package_list.append(pkg)
 
             if not package_list:
                 continue
@@ -86,7 +89,10 @@ def update_action(args):
 
                 assert pkg
 
-                package_list.append(pkg)
+                if isinstance(pkg, list):
+                    package_list += pkg
+                else:
+                    package_list.append(pkg)
 
             if not package_list:
                 continue
