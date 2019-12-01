@@ -27,20 +27,9 @@
                 { "command": "node", "package": "nodejs" },
                 { "command": "nvr", "package": "neovim-remote" },
                 { "command": "pass", "package": "pass" },
-                {
-                    "command": "php",
-                    "package": [
-                        "php",
-                        "php-gd",
-                        "php-imagick",
-                        "php-intl",
-                        "php-pear",
-                        "php-pgsql",
-                        "php-sqlite",
-                        "php-tidy",
-                        "php-xsl"
-                    ]
-                },
+                { "command": "pear", "package": "php-pear" },
+                { "command": "php", "package": "php" },
+                { "command": "php72", "package": "php72" },
                 { "command": "phpmd", "package": "phpmd" },
                 { "command": "pylint", "package": "python-pylint" },
                 { "command": "pylint2", "package": "python2-pylint" },
@@ -55,7 +44,21 @@
                 { "command": "xclip", "package": "xclip" },
                 { "command": "xdotool", "package": "xdotool" },
                 { "command": "xsel", "package": "xsel" },
-                { "command": "yarn", "package": "yarn" }
+                { "command": "yarn", "package": "yarn" },
+                { "path": "/usr/lib/php/modules/gd.so", "package": "php-gd" },
+                { "path": "/usr/lib/php/modules/imagick.so", "package": "php-imagick" },
+                { "path": "/usr/lib/php/modules/intl.so", "package": "php-intl" },
+                { "path": "/usr/lib/php/modules/pgsql.so", "package": "php-pgsql" },
+                { "path": "/usr/lib/php/modules/sqlite3.so", "package": "php-sqlite" },
+                { "path": "/usr/lib/php/modules/tidy.so", "package": "php-tidy" },
+                { "path": "/usr/lib/php/modules/xsl.so", "package": "php-xsl" },
+                { "path": "/usr/lib/php72/modules/gd.so", "package": "php72-gd" },
+                { "path": "/usr/lib/php72/modules/imagick.so", "package": "php72-imagick" },
+                { "path": "/usr/lib/php72/modules/intl.so", "package": "php72-intl" },
+                { "path": "/usr/lib/php72/modules/pgsql.so", "package": "php72-pgsql" },
+                { "path": "/usr/lib/php72/modules/sqlite3.so", "package": "php72-sqlite" },
+                { "path": "/usr/lib/php72/modules/tidy.so", "package": "php72-tidy" },
+                { "path": "/usr/lib/php72/modules/xsl.so", "package": "php72-xsl" }
             ]
         },
         {
