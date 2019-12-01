@@ -43,42 +43,48 @@ def install_action(args):
 
     managers = configs.get('managers', [])
     for data in managers:
-        package_list = []
-        command = data.get('install_command')
-        if command:
-            for p in data['packages']:
-                cmd, path, pkg = p.get('command'), p.get('path'), p['package']
+        install_default_action(data)
 
-                assert (cmd or path) and pkg
 
-                if command_exists(cmd) or path_exists(path):
-                    continue
+def install_default_action(data):
+    package_list = []
+    for p in data['packages']:
+        if p.get('install_command'):
+            install_custom_action(data)
+            continue
 
-                if not pkg:
-                    continue
+        cmd, path, pkg = p.get('command'), p.get('path'), p.get('package')
 
-                if isinstance(pkg, list):
-                    package_list += pkg
-                else:
-                    package_list.append(pkg)
+        if command_exists(cmd) or path_exists(path):
+            continue
 
-            if not package_list:
-                continue
+        if not pkg:
+            continue
 
-            run_command(args=shlex.split(command) + package_list)
+        if isinstance(pkg, list):
+            package_list += pkg
         else:
-            for p in data['packages']:
-                cmd, path, install_cmd = (
-                    p.get('command'), p.get('path'), p.get('install_command')
-                )
+            package_list.append(pkg)
 
-                if not install_cmd:
-                    continue
+    if not package_list:
+        return
 
-                if command_exists(cmd) or path_exists(path):
-                    continue
+    run_command(args=shlex.split(data.get('install_command')) + package_list)
 
-                run_command(args=install_cmd, shell=True)
+
+def install_custom_action(data):
+    for p in data.get('packages', []):
+        cmd, path, install_cmd = (
+            p.get('command'), p.get('path'), p.get('install_command')
+        )
+
+        if not install_cmd:
+            continue
+
+        if command_exists(cmd) or path_exists(path):
+            continue
+
+        run_command(args=install_cmd, shell=True)
 
 
 def update_action(args):
