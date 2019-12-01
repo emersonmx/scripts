@@ -31,10 +31,12 @@ def path_exists(path):
 
 
 def run_command(**kwargs):
+    args = kwargs.get('args', [])
+    if not args:
+        return
+    if isinstance(args, str):
+        args = [args]
     with subprocess.Popen(**kwargs) as _:
-        args = kwargs['args']
-        if isinstance(args, str):
-            args = [args]
         print(' '.join(args))
 
 
@@ -48,7 +50,7 @@ def install_action(args):
 
 def install_default_action(data):
     package_list = []
-    for p in data['packages']:
+    for p in data.get('packages', []):
         if p.get('install_command'):
             install_custom_action(data)
             continue
@@ -92,28 +94,39 @@ def update_action(args):
 
     managers = configs.get('managers', [])
     for data in managers:
-        package_list = []
-        command = data.get('update_command', None)
-        if command:
-            for p in data['packages']:
-                pkg = p
-                if not isinstance(p, str):
-                    pkg = p['package']
+        if data.get('ignore'):
+            continue
+        update_default_action(data)
 
-                assert pkg
 
-                if isinstance(pkg, list):
-                    package_list += pkg
-                else:
-                    package_list.append(pkg)
+def update_default_action(data):
+    package_list = []
+    for p in data.get('packages', []):
+        if p.get('update_command'):
+            update_custom_action(data)
+            continue
 
-            if not package_list:
-                continue
+        pkg = p
+        if not isinstance(p, str):
+            pkg = p.get('package')
 
-            run_command(args=shlex.split(command) + package_list)
+        if not pkg:
+            continue
+
+        if isinstance(pkg, list):
+            package_list += pkg
         else:
-            for p in data['packages']:
-                run_command(args=p['update_command'], shell=True)
+            package_list.append(pkg)
+
+    if not package_list:
+        return
+
+    run_command(args=shlex.split(data.get('update_command')) + package_list)
+
+
+def update_custom_action(data):
+    for p in data['packages']:
+        run_command(args=p.get('update_command'), shell=True)
 
 
 def main():
