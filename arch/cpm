@@ -23,9 +23,11 @@ def load_config_file(path):
 
 
 def command_exists(cmd):
-    if shutil.which(cmd):
-        return True
-    return os.path.exists(os.path.expandvars(cmd))
+    return cmd and shutil.which(cmd)
+
+
+def path_exists(path):
+    return path and os.path.exists(os.path.expandvars(path))
 
 
 def run_command(**kwargs):
@@ -45,11 +47,14 @@ def install_action(args):
         command = data.get('install_command')
         if command:
             for p in data['packages']:
-                cmd, pkg = p['command'], p['package']
+                cmd, path, pkg = p.get('command'), p.get('path'), p['package']
 
-                assert cmd and pkg
+                assert (cmd or path) and pkg
 
-                if command_exists(cmd):
+                if command_exists(cmd) or path_exists(path):
+                    continue
+
+                if not pkg:
                     continue
 
                 if isinstance(pkg, list):
@@ -63,12 +68,14 @@ def install_action(args):
             run_command(args=shlex.split(command) + package_list)
         else:
             for p in data['packages']:
-                cmd, install_cmd = p.get('command'), p.get('install_command')
+                cmd, path, install_cmd = (
+                    p.get('command'), p.get('path'), p.get('install_command')
+                )
 
                 if not install_cmd:
                     continue
 
-                if command_exists(cmd):
+                if command_exists(cmd) or path_exists(path):
                     continue
 
                 run_command(args=install_cmd, shell=True)
