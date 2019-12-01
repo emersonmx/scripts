@@ -54,7 +54,7 @@ def install_default_action(data):
     package_list = []
     for p in data.get('packages', []):
         if p.get('install_command'):
-            install_custom_action(data)
+            install_custom_action(p)
             continue
 
         cmd, path, pkg = p.get('command'), p.get('path'), p.get('package')
@@ -76,19 +76,19 @@ def install_default_action(data):
     run_command(args=shlex.split(data.get('install_command')) + package_list)
 
 
-def install_custom_action(data):
-    for p in data.get('packages', []):
-        cmd, path, install_cmd = (
-            p.get('command'), p.get('path'), p.get('install_command')
-        )
+def install_custom_action(package):
+    cmd, path, install_cmd = (
+        package.get('command'), package.get('path'),
+        package.get('install_command')
+    )
 
-        if not install_cmd:
-            continue
+    if not install_cmd:
+        return
 
-        if command_exists(cmd) or path_exists(path):
-            continue
+    if command_exists(cmd) or path_exists(path):
+        return
 
-        run_command(args=install_cmd, shell=True)
+    run_command(args=install_cmd, shell=True)
 
 
 def update_action(args):
@@ -105,7 +105,7 @@ def update_default_action(data):
     package_list = []
     for p in data.get('packages', []):
         if p.get('update_command'):
-            update_custom_action(data)
+            update_custom_action(p)
             continue
 
         pkg = p
@@ -126,9 +126,8 @@ def update_default_action(data):
     run_command(args=shlex.split(data.get('update_command')) + package_list)
 
 
-def update_custom_action(data):
-    for p in data['packages']:
-        run_command(args=p.get('update_command'), shell=True)
+def update_custom_action(package):
+    run_command(args=package.get('update_command'), shell=True)
 
 
 def main():
