@@ -45,6 +45,8 @@ def install_action(args):
 
     managers = configs.get('managers', [])
     for data in managers:
+        if data.get('ignore'):
+            continue
         install_default_action(data)
 
 
