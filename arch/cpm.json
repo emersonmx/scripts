@@ -32,7 +32,6 @@
                 { "command": "php72", "package": "php72" },
                 { "command": "phpmd", "package": "phpmd" },
                 { "command": "pylint", "package": "python-pylint" },
-                { "command": "pylint2", "package": "python2-pylint" },
                 { "command": "pyls", "package": "python-language-server" },
                 { "command": "ranger", "package": "ranger" },
                 { "command": "rg", "package": "ripgrep" },
@@ -44,6 +43,7 @@
                 { "command": "xclip", "package": "xclip" },
                 { "command": "xdotool", "package": "xdotool" },
                 { "command": "xsel", "package": "xsel" },
+                { "command": "yapf", "package": "yapf" },
                 { "command": "yarn", "package": "yarn" },
                 { "path": "/usr/lib/php/modules/gd.so", "package": "php-gd" },
                 { "path": "/usr/lib/php/modules/imagick.so", "package": "php-imagick" },
@@ -58,7 +58,8 @@
                 { "path": "/usr/lib/php72/modules/pgsql.so", "package": "php72-pgsql" },
                 { "path": "/usr/lib/php72/modules/sqlite3.so", "package": "php72-sqlite" },
                 { "path": "/usr/lib/php72/modules/tidy.so", "package": "php72-tidy" },
-                { "path": "/usr/lib/php72/modules/xsl.so", "package": "php72-xsl" }
+                { "path": "/usr/lib/php72/modules/xsl.so", "package": "php72-xsl" },
+                { "path": "/usr/share/doc/python-jedi", "package": "python-jedi" }
             ]
         },
         {
@@ -93,7 +94,7 @@
                 { "update_command": "zplugin self-update" },
                 { "update_command": "nvim +PlugInstall +PlugUpdate +UpdateRemotePlugins +qall" },
                 { "update_command": "nvim +CocUpdateSync +qall" },
-                { "update_command": "nvim +PythonSupportInitPython2 +PythonSupportInitPython3 +qall" },
+                { "update_command": "nvim +PythonSupportInitPython3 +qall" },
                 { "update_command": "$HOME/.config/tmux/plugins/tpm/scripts/update_plugin_prompt_handler.sh all" }
             ]
         }
