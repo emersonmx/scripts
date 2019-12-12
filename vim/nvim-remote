@@ -8,7 +8,7 @@ column=$4
 notify-send "Opening in vim..."
 
 wmctrl -s 0
-wmctrl -a kitty
+wmctrl -a ${TERMINAL:-xterm}
 tmux select-window -t 1
 
 nvr --nostart -s --remote $file_path
