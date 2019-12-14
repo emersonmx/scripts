@@ -16,8 +16,6 @@ then
     exit
 fi
 
-pid=$(printf %i $wid)
-
 wmctrl -ia $wid
 sleep 0.1
 wmctrl -i -a $wid
