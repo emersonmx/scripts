@@ -1,14 +1,23 @@
 #!/bin/bash
 
-id_regex="0x[a-f0-9]+"
-window=$(wmctrl -l \
+ignore_ids="0x[a-f0-9]+\s+"
+wid=$(wmctrl -l \
     | awk '{$2=$3=""; print $0}' \
     | sed -r \
-        -e '/^'$id_regex'\s+Área de trabalho$/Id' \
-        -e '/^'$id_regex'\s+Desktop$/Id' \
-        -e '/^'$id_regex'\s+FZF$/d' \
+        -e '/^'$ignore_ids'Área de trabalho$/Id' \
+        -e '/^'$ignore_ids'Desktop$/Id' \
+        -e '/^'$ignore_ids'FZF$/d' \
     | fzf --layout=reverse --with-nth 2.. \
     | awk '{print $1}' \
 )
 
-wmctrl -i -a $window
+if [[ -z $wid ]]
+then
+    exit
+fi
+
+pid=$(printf %i $wid)
+
+wmctrl -ia $wid
+sleep 0.1
+wmctrl -i -a $wid
