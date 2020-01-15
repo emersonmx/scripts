@@ -35,6 +35,7 @@
                 { "command": "pyls", "package": "python-language-server" },
                 { "command": "ranger", "package": "ranger" },
                 { "command": "rg", "package": "ripgrep" },
+                { "command": "rofi", "package": "rofi" },
                 { "command": "semver", "package": "semver" },
                 { "command": "svn", "package": "subversion" },
                 { "command": "w3m", "package": "w3m" },
