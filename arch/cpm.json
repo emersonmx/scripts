@@ -83,7 +83,10 @@
         {
             "install_command": "composer global require",
             "update_command": "composer global update",
-            "packages": [{ "command": "php-cs-fixer", "package": "friendsofphp/php-cs-fixer" }]
+            "packages": [
+                { "command": "php-cs-fixer", "package": "friendsofphp/php-cs-fixer" },
+                { "path": "$HOME/.config/composer/vendor/hirak/prestissimo/", "package": "hirak/prestissimo" }
+            ]
         },
         {
             "install_command": "go get -v",
