@@ -30,7 +30,6 @@
                 { "command": "pass", "package": "pass" },
                 { "command": "pear", "package": "php-pear" },
                 { "command": "php", "package": "php" },
-                { "command": "php72", "package": "php72" },
                 { "command": "phpmd", "package": "phpmd" },
                 { "command": "pyls", "package": "python-language-server" },
                 { "command": "ranger", "package": "ranger" },
@@ -53,13 +52,6 @@
                 { "path": "/usr/lib/php/modules/sqlite3.so", "package": "php-sqlite" },
                 { "path": "/usr/lib/php/modules/tidy.so", "package": "php-tidy" },
                 { "path": "/usr/lib/php/modules/xsl.so", "package": "php-xsl" },
-                { "path": "/usr/lib/php72/modules/gd.so", "package": "php72-gd" },
-                { "path": "/usr/lib/php72/modules/imagick.so", "package": "php72-imagick" },
-                { "path": "/usr/lib/php72/modules/intl.so", "package": "php72-intl" },
-                { "path": "/usr/lib/php72/modules/pgsql.so", "package": "php72-pgsql" },
-                { "path": "/usr/lib/php72/modules/sqlite3.so", "package": "php72-sqlite" },
-                { "path": "/usr/lib/php72/modules/tidy.so", "package": "php72-tidy" },
-                { "path": "/usr/lib/php72/modules/xsl.so", "package": "php72-xsl" },
                 { "path": "/usr/share/doc/python-jedi", "package": "python-jedi" }
             ]
         },
