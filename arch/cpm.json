@@ -1,6 +1,7 @@
 {
     "managers": [
         {
+            "name": "arch",
             "install_command": "yay -S",
             "update_command": "yay -Syu",
             "packages": [
@@ -56,6 +57,7 @@
             ]
         },
         {
+            "name": "yarn",
             "install_command": "yarn global add",
             "update_command": "yarn global upgrade",
             "packages": [
@@ -64,6 +66,7 @@
             ]
         },
         {
+            "name": "symfony",
             "packages": [
                 {
                     "command": "symfony",
@@ -73,6 +76,22 @@
             ]
         },
         {
+            "name": "composer",
+            "install_command": "composer global require",
+            "update_command": "composer global update",
+            "packages": [
+                { "command": "php-cs-fixer", "package": "friendsofphp/php-cs-fixer" },
+                { "path": "$HOME/.config/composer/vendor/hirak/prestissimo/", "package": "hirak/prestissimo" }
+            ]
+        },
+        {
+            "name": "go",
+            "install_command": "go get -v",
+            "update_command": "go get -u",
+            "packages": [{ "command": "golint", "package": "golang.org/x/lint/golint" }]
+        },
+        {
+            "name": "tools",
             "packages": [
                 {
                     "command": "diff-so-fancy",
@@ -82,19 +101,7 @@
             ]
         },
         {
-            "install_command": "composer global require",
-            "update_command": "composer global update",
-            "packages": [
-                { "command": "php-cs-fixer", "package": "friendsofphp/php-cs-fixer" },
-                { "path": "$HOME/.config/composer/vendor/hirak/prestissimo/", "package": "hirak/prestissimo" }
-            ]
-        },
-        {
-            "install_command": "go get -v",
-            "update_command": "go get -u",
-            "packages": [{ "command": "golint", "package": "golang.org/x/lint/golint" }]
-        },
-        {
+            "name": "misc",
             "packages": [
                 { "update_command": "zplugin self-update" },
                 { "update_command": "nvim +PlugInstall +PlugUpdate +UpdateRemotePlugins +qall" },
