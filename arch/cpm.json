@@ -91,6 +91,16 @@
             "packages": [{ "command": "golint", "package": "golang.org/x/lint/golint" }]
         },
         {
+            "name": "rust",
+            "packages": [
+                {
+                    "command": "rustup",
+                    "install_command": "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh",
+                    "update_command": "rustup update"
+                }
+            ]
+        },
+        {
             "name": "tools",
             "packages": [
                 {
