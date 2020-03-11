@@ -63,8 +63,9 @@
             "install_command": "yarn global add",
             "update_command": "yarn global upgrade",
             "packages": [
+                { "command": "nvim", "package": "neovim" },
                 { "path": "$YARN_HOME/global/node_modules/.bin/intelephense", "package": "intelephense" },
-                { "command": "nvim", "package": "neovim" }
+                { "path": "$YARN_HOME/global/node_modules/.bin/vue", "package": "@vue/cli" }
             ]
         },
         {
