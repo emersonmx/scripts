@@ -45,7 +45,7 @@ def install_action(args):
 
     managers = configs.get('managers', [])
     for data in managers:
-        if data.get('ignore'):
+        if args.managers and data.get('name') not in args.managers:
             continue
         install_default_action(data)
 
@@ -96,7 +96,7 @@ def update_action(args):
 
     managers = configs.get('managers', [])
     for data in managers:
-        if data.get('ignore'):
+        if args.managers and data.get('name') not in args.managers:
             continue
         update_default_action(data)
 
@@ -142,9 +142,17 @@ def main():
     actions_parser = parser.add_subparsers(title='commands')
     install_parser = actions_parser.add_parser(
         'install', help='Install packages')
+    install_parser.add_argument(
+        'managers', metavar='manager', type=str, nargs='*',
+        help='Managers to execute'
+    )
     install_parser.set_defaults(func=install_action)
     update_parse = actions_parser.add_parser(
         'update', help='Update packages')
+    update_parse.add_argument(
+        'managers', metavar='manager', type=str, nargs='*',
+        help='Managers to execute'
+    )
     update_parse.set_defaults(func=update_action)
 
     parser.set_defaults(file='cpm.json', func=lambda _: parser.print_help())
