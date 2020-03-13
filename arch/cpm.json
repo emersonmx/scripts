@@ -83,8 +83,6 @@
             "install_command": "composer global require",
             "update_command": "composer global update",
             "packages": [
-                { "command": "laravel", "package": "laravel/installer" },
-                { "command": "lumen", "package": "laravel/lumen-installer" },
                 { "command": "php-cs-fixer", "package": "friendsofphp/php-cs-fixer" },
                 { "path": "$HOME/.config/composer/vendor/hirak/prestissimo/", "package": "hirak/prestissimo" }
             ]
