@@ -40,13 +40,17 @@ def run_command(**kwargs):
         print(' '.join(args))
 
 
+def make_managers_list(managers):
+    return {o.get('name'): o for o in managers}
+
+
 def install_action(args):
     configs = load_config_file(args.file)
+    managers = make_managers_list(configs.get('managers', []))
+    input_managers = args.managers if args.managers else managers.keys()
 
-    managers = configs.get('managers', [])
-    for data in managers:
-        if args.managers and data.get('name') not in args.managers:
-            continue
+    for manager in input_managers:
+        data = managers.get(manager)
         install_default_action(data)
 
 
@@ -93,11 +97,11 @@ def install_custom_action(package):
 
 def update_action(args):
     configs = load_config_file(args.file)
+    managers = make_managers_list(configs.get('managers', []))
+    input_managers = args.managers if args.managers else managers.keys()
 
-    managers = configs.get('managers', [])
-    for data in managers:
-        if args.managers and data.get('name') not in args.managers:
-            continue
+    for manager in input_managers:
+        data = managers.get(manager)
         update_default_action(data)
 
 
