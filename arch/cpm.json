@@ -47,6 +47,7 @@
                 { "command": "xsel", "package": "xsel" },
                 { "command": "yapf", "package": "yapf" },
                 { "command": "yarn", "package": "yarn" },
+                { "command": "ytop", "package": "ytop" },
                 { "path": "/usr/lib/php/modules/gd.so", "package": "php-gd" },
                 { "path": "/usr/lib/php/modules/imagick.so", "package": "php-imagick" },
                 { "path": "/usr/lib/php/modules/intl.so", "package": "php-intl" },
