@@ -44,12 +44,6 @@ def get_cache_path():
     return cache_path
 
 
-def get_bin_path():
-    bin_path = os.path.join(get_current_dir, 'bin')
-    os.makedirs(bin_path, exist_ok=True)
-    return bin_path
-
-
 def get_versions():
     with open('packages.json') as f:
         return json.load(f)
