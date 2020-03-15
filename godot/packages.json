@@ -8,7 +8,7 @@
                 }
             }
         },
-        "osx": {
+        "macos": {
             "standard": {
                 "32": {
                     "url": "https://downloads.tuxfamily.org/godotengine/1.1/Godot_v1.1_stable_osx32.zip",
@@ -50,7 +50,7 @@
                 }
             }
         },
-        "osx": {
+        "macos": {
             "standard": {
                 "32": {
                     "url": "https://downloads.tuxfamily.org/godotengine/2.0/Godot_v2.0_stable_osx32.zip",
@@ -88,7 +88,7 @@
                 }
             }
         },
-        "osx": {
+        "macos": {
             "standard": {
                 "32": {
                     "url": "https://downloads.tuxfamily.org/godotengine/2.0.1/Godot_v2.0.1_stable_osx32.zip",
@@ -130,7 +130,7 @@
                 }
             }
         },
-        "osx": {
+        "macos": {
             "standard": {
                 "32": {
                     "url": "https://downloads.tuxfamily.org/godotengine/2.0.2/Godot_v2.0.2_stable_osx32.zip",
@@ -172,7 +172,7 @@
                 }
             }
         },
-        "osx": {
+        "macos": {
             "standard": {
                 "32": {
                     "url": "https://downloads.tuxfamily.org/godotengine/2.0.3/Godot_v2.0.3_stable_osx32.zip",
@@ -736,7 +736,7 @@
                 }
             }
         },
-        "osx": {
+        "macos": {
             "standard": {
                 "64": {
                     "url": "https://downloads.tuxfamily.org/godotengine/3.1/Godot_v3.1-stable_osx.64.zip",
@@ -786,7 +786,7 @@
                 }
             }
         },
-        "osx": {
+        "macos": {
             "standard": {
                 "64": {
                     "url": "https://downloads.tuxfamily.org/godotengine/3.1.1/Godot_v3.1.1-stable_osx.64.zip",
@@ -836,7 +836,7 @@
                 }
             }
         },
-        "osx": {
+        "macos": {
             "standard": {
                 "64": {
                     "url": "https://downloads.tuxfamily.org/godotengine/3.1.2/Godot_v3.1.2-stable_osx.64.zip",
@@ -886,7 +886,7 @@
                 }
             }
         },
-        "osx": {
+        "macos": {
             "standard": {
                 "64": {
                     "url": "https://downloads.tuxfamily.org/godotengine/3.2/Godot_v3.2-stable_osx.64.zip",
@@ -936,7 +936,7 @@
                 }
             }
         },
-        "osx": {
+        "macos": {
             "standard": {
                 "64": {
                     "url": "https://downloads.tuxfamily.org/godotengine/3.2.1/Godot_v3.2.1-stable_osx.64.zip",

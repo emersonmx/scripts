@@ -45,7 +45,7 @@ def get_package_info(filename):
     mappings = {
         'x11': 'linux',
         'linux_server': 'server',
-        'osx': 'osx',
+        'osx': 'macos',
         'win': 'windows',
         'linux_headless': 'headless',
     }
