@@ -5,6 +5,8 @@ import sys
 import json
 import argparse
 import hashlib
+import zipfile
+import stat
 
 
 def data_get(array, key, default=None):
@@ -74,7 +76,7 @@ def get_system():
     return system
 
 
-def default_query(version, platform, type, arch):
+def default_args(version, platform, type, arch):
     version = version if version else get_latest_stable_version()
     platform = platform if platform else get_system()
     type = type if type else 'standard'
@@ -83,7 +85,12 @@ def default_query(version, platform, type, arch):
     else:
         arch = '32'
 
-    return version, platform, type, arch
+    return {
+        'version': version,
+        'platform': platform,
+        'type': type,
+        'arch': arch
+    }
 
 
 def get_package_info(version, platform, type, arch):
@@ -156,20 +163,54 @@ def download_package(package):
 
 def install_action(args):
     version = args.version
+    input_args = default_args(version, args.platform, args.type, args.arch)
     package_info = get_package_info(
-        *default_query(
-            version,
-            args.platform,
-            args.type,
-            args.arch,
-        )
+        input_args.get('version'),
+        input_args.get('platform'),
+        input_args.get('type'),
+        input_args.get('arch'),
     )
     file_path = download_package(package_info)
     if args.download_only:
         return
 
     print('Instaling...'.format(version))
-    print(file_path)
+
+    with zipfile.ZipFile(file_path, 'r') as z:
+        files = z.namelist()
+        filename = files[0] if files else None
+        if not filename:
+            raise Exception('Corrupted zipfile')
+
+        version_path = os.path.join(get_versions_path(), version)
+        os.makedirs(version_path, exist_ok=True)
+        if 'server' in filename:
+            new_filename = 'godot_server'
+        elif 'headless' in filename:
+            new_filename = 'godot_headless'
+        else:
+            new_filename = 'godot'
+
+        make_executable = False
+        if input_args.get('platform') == 'windows':
+            new_filename += '.exe'
+        elif input_args.get('platform') == 'macos':
+            new_filename = new_filename.capitalize() + '.app'
+        else:
+            make_executable = True
+
+        new_file_path = os.path.join(version_path, new_filename)
+        with open(new_file_path, 'wb') as f:
+            f.write(z.read(filename))
+
+        if make_executable:
+            permissions = os.stat(new_file_path)
+            os.chmod(new_file_path, permissions.st_mode | stat.S_IEXEC)
+
+        old_path = os.getenv('GODOTENV_OLD_PATH', os.getenv('PATH'))
+        new_path = os.path.dirname(new_file_path) + os.pathsep + old_path
+        print('GODOTENV_OLD_PATH={}'.format(old_path))
+        print('PATH={}'.format(new_path))
 
 
 def list_action(args):
