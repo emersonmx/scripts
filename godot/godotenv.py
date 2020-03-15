@@ -139,7 +139,7 @@ def download(url):
     print('Downloading {}'.format(url))
     file_path = os.path.join(get_cache_path(), os.path.basename(url))
     result, _ = urllib.request.urlretrieve(url, file_path, reporthook)
-    print('\n')
+    print()
     return result
 
 
