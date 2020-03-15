@@ -27,6 +27,7 @@
                 { "command": "icat", "package": "icat" },
                 { "command": "ipython", "package": "ipython" },
                 { "command": "jq", "package": "jq" },
+                { "command": "lld", "package": "lld" },
                 { "command": "node", "package": "nodejs" },
                 { "command": "nvr", "package": "neovim-remote" },
                 { "command": "pass", "package": "pass" },
