@@ -1,16 +1,15 @@
-#!/bin/bash
-
-script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+script_dir="$(cd "$(dirname "$0")" && pwd)"
+godotenv_script=$script_dir/godotenv.py
 
 function godotenv() {
     if [[ $1 = 'install' ]]
     then
-        output=$($script_dir/godotenv.py $*)
+        output=$($godotenv_script $*)
         for v in $(echo $output | tail -n2)
         do
             eval "export $v"
         done
     else
-        $script_dir/godotenv.py $*
+        $godotenv_script $*
     fi
 }
