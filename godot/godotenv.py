@@ -44,6 +44,12 @@ def get_cache_path():
     return cache_path
 
 
+def get_versions_path():
+    versions_path = os.path.join(get_current_dir(), 'versions')
+    os.makedirs(versions_path, exist_ok=True)
+    return versions_path
+
+
 def get_packages():
     with open('packages.json') as f:
         return json.load(f)
@@ -87,16 +93,16 @@ def get_package_info(version, platform, type, arch):
     )
 
 
-def get_file_checksum(filename):
+def get_file_checksum(file_path):
     hash_md5 = hashlib.md5()
-    with open(filename, "rb") as f:
+    with open(file_path, "rb") as f:
         for chunk in iter(lambda: f.read(4096), b""):
             hash_md5.update(chunk)
     return hash_md5.hexdigest()
 
 
-def check_file(filename, checksum):
-    return get_file_checksum(filename).lower() == checksum.lower()
+def check_file(file_path, checksum):
+    return get_file_checksum(file_path).lower() == checksum.lower()
 
 
 def download(url):
@@ -131,8 +137,8 @@ def download(url):
         sys.stdout.flush()
 
     print('Downloading {}'.format(url))
-    filename = os.path.join(get_cache_path(), os.path.basename(url))
-    result, _ = urllib.request.urlretrieve(url, filename, reporthook)
+    file_path = os.path.join(get_cache_path(), os.path.basename(url))
+    result, _ = urllib.request.urlretrieve(url, file_path, reporthook)
     print('\n')
     return result
 
@@ -140,10 +146,10 @@ def download(url):
 def download_package(package):
     url = package.get('url')
     checksum = package.get('checksum')
-    filename = os.path.join(get_cache_path(), os.path.basename(url))
-    if os.path.exists(filename):
-        if get_file_checksum(filename).lower() == checksum.lower():
-            return filename
+    file_path = os.path.join(get_cache_path(), os.path.basename(url))
+    if os.path.exists(file_path):
+        if get_file_checksum(file_path).lower() == checksum.lower():
+            return file_path
 
     return download(url)
 
@@ -158,12 +164,12 @@ def install_action(args):
             args.arch,
         )
     )
-    filename = download_package(package_info)
+    file_path = download_package(package_info)
     if args.download_only:
         return
 
     print('Instaling...'.format(version))
-    print(filename)
+    print(file_path)
 
 
 def list_action(args):
