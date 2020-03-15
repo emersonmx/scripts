@@ -4,7 +4,7 @@ import os
 import subprocess
 import pathlib
 
-from godotenv import get_file_checksum, get_versions, get_cache_path
+from godotenv import get_file_checksum, get_packages, get_cache_path
 from godotenv import get_current_dir
 
 
@@ -20,7 +20,7 @@ def run_command(**kwargs):
 
 def main():
     cache_dir = get_cache_path()
-    versions = get_versions()
+    versions = get_packages()
 
     for version, platforms in versions.items():
         for platform, types in platforms.items():

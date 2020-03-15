@@ -44,7 +44,7 @@ def get_cache_path():
     return cache_path
 
 
-def get_versions():
+def get_packages():
     with open('packages.json') as f:
         return json.load(f)
 
@@ -53,12 +53,35 @@ def get_latest_stable_version():
     return '3.2.1-stable'
 
 
-def get_package_info(version, platform, type, arch):
-    versions = get_versions()
+def get_system():
+    mappings = {
+        'linux': 'linux',
+        'win32': 'windows',
+        'cygwin': 'windows',
+        'darwin': 'macos'
+    }
+
+    system = mappings.get(sys.platform)
+    if not system:
+        raise Exception("Couldn't detect OS type")
+
+    return system
+
+
+def default_query(version, platform, type, arch):
     version = version if version else get_latest_stable_version()
-    platform = platform if platform else 'linux'
+    platform = platform if platform else get_system()
     type = type if type else 'standard'
-    arch = arch if arch else '64'
+    if sys.maxsize > 2**32:
+        arch = '64'
+    else:
+        arch = '32'
+
+    return version, platform, type, arch
+
+
+def get_package_info(version, platform, type, arch):
+    versions = get_packages()
     return data_get(
         versions.get(version, {}), '{}.{}.{}'.format(platform, type, arch)
     )
@@ -128,10 +151,12 @@ def download_package(package):
 def install_action(args):
     version = args.version
     package_info = get_package_info(
-        version,
-        args.platform,
-        args.type,
-        args.arch,
+        *default_query(
+            version,
+            args.platform,
+            args.type,
+            args.arch,
+        )
     )
     filename = download_package(package_info)
     if args.download_only:
@@ -142,7 +167,7 @@ def install_action(args):
 
 
 def list_action(args):
-    for k in get_versions():
+    for k in get_packages():
         print(k)
 
 
