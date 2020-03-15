@@ -7,12 +7,23 @@ import argparse
 import hashlib
 
 
-def data_get(value, path, default=None):
-    aux = value
-    keys = path.split('.')
-    for key in keys[:-1]:
-        aux = aux.get(key, {})
-    return aux.get(keys[-1], default)
+def data_get(array, key, default=None):
+    if not isinstance(array, dict):
+        return default
+    if key is None:
+        return array
+    if key in array:
+        return array[key]
+    if '.' not in key:
+        return array[key] if key in array else default
+
+    for segment in key.split('.'):
+        if isinstance(array, dict) and segment in array:
+            array = array[segment]
+        else:
+            return default
+
+    return array
 
 
 class SubcommandHelpFormatter(argparse.RawDescriptionHelpFormatter):
