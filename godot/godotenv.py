@@ -193,13 +193,13 @@ def main():
     install_parser.add_argument(
         '--platform',
         type=str,
-        help='Download version for linux, windows, macos, ...'
+        help='Install version for linux, windows, macos, server and headless'
     )
     install_parser.add_argument(
-        '--type', type=str, help='Download version standard or mono'
+        '--type', type=str, help='Install version standard or mono'
     )
     install_parser.add_argument(
-        '--arch', type=str, help='Download version for architeture 32 or 64'
+        '--arch', type=str, help='Install version for architeture 32 or 64'
     )
     install_parser.add_argument(
         '--download-only', help='Download only', action='store_true'
