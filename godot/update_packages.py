@@ -56,7 +56,7 @@ def get_package_info(filename):
         'platform': mappings[server_type],
         'type': type,
         'arch': arch,
-        'url': make_url(version_name, filename)
+        'url': make_url(version, filename)
     }
 
 
