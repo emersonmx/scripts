@@ -28,7 +28,7 @@ def main():
                 for arch, info in archs.items():
                     command = (
                         ' '.join([
-                            './godotenv.py', 'install',
+                            './godotenv.py', 'install', '--download-only',
                             '--platform ' + platform, '--type ' + type,
                             '--arch ' + arch, version
                         ])

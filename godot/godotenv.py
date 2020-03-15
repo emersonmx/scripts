@@ -44,8 +44,16 @@ def get_versions():
         return json.load(f)
 
 
+def get_latest_stable_version():
+    return '3.2.1-stable'
+
+
 def get_package_info(version, platform, type, arch):
     versions = get_versions()
+    version = version if version else get_latest_stable_version()
+    platform = platform if platform else 'linux'
+    type = type if type else 'standard'
+    arch = arch if arch else '64'
     return data_get(
         versions.get(version, {}), '{}.{}.{}'.format(platform, type, arch)
     )
@@ -101,24 +109,28 @@ def download(url):
     return result
 
 
+def download_package(package):
+    url = package.get('url')
+    checksum = package.get('checksum')
+    filename = os.path.join(get_cache_path(), os.path.basename(url))
+    if os.path.exists(filename):
+        if get_file_checksum(filename).lower() == checksum.lower():
+            return filename
+
+    return download(url)
+
+
 def install_action(args):
     version = args.version
     package_info = get_package_info(
         version,
-        args.platform if args.platform else sys.platform,
-        args.type if args.type else 'standard',
-        args.arch if args.arch else '64',
+        args.platform,
+        args.type,
+        args.arch,
     )
-    url = package_info.get('url')
-    checksum = package_info.get('checksum')
-
-    filename = os.path.join(get_cache_path(), os.path.basename(url))
-    if os.path.exists(filename):
-        if get_file_checksum(filename).lower() != checksum.lower():
-            print(checksum, get_file_checksum(filename))
-            filename = download(url)
-    else:
-        filename = download(url)
+    filename = download_package(package_info)
+    if args.download_only:
+        return
 
     print('Instaling...'.format(version))
     print(filename)
@@ -158,6 +170,9 @@ def main():
     )
     install_parser.add_argument(
         '--arch', type=str, help='Download version for architeture 32 or 64'
+    )
+    install_parser.add_argument(
+        '--download-only', help='Download only', action='store_true'
     )
     install_parser.set_defaults(func=install_action)
 
