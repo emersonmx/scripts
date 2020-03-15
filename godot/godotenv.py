@@ -51,7 +51,7 @@ def get_bin_path():
 
 
 def get_versions():
-    with open('versions.json') as f:
+    with open('packages.json') as f:
         return json.load(f)
 
 

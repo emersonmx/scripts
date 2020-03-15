@@ -43,7 +43,7 @@ def main():
             files.append(filename)
             f.write('{}  {}\n'.format(get_file_checksum(path), filename))
 
-    versions_path = os.path.join(get_current_dir(), 'versions.json')
+    versions_path = os.path.join(get_current_dir(), 'packages.json')
     for f in files:
         print('Updating checksum for file {} ...'.format(f))
         run_command(
