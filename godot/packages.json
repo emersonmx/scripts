@@ -1,24 +1,930 @@
 {
-    "3.2.1-stable": {
+    "1.1-stable": {
+        "server": {
+            "standard": {
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/1.1/Godot_v1.1_stable_linux_server.64.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "osx": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/1.1/Godot_v1.1_stable_osx32.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "windows": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/1.1/Godot_v1.1_stable_win32.exe.zip",
+                    "checksum": ""
+                },
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/1.1/Godot_v1.1_stable_win64.exe.zip",
+                    "checksum": ""
+                }
+            }
+        },
         "linux": {
             "standard": {
                 "32": {
-                    "url": "https://downloads.tuxfamily.org/godotengine/3.2.1/Godot_v3.2.1-stable_x11.32.zip",
-                    "checksum": "f62f19dca654cd041b1757bab0f3495c"
+                    "url": "https://downloads.tuxfamily.org/godotengine/1.1/Godot_v1.1_stable_x11.32.zip",
+                    "checksum": ""
                 },
                 "64": {
-                    "url": "https://downloads.tuxfamily.org/godotengine/3.2.1/Godot_v3.2.1-stable_x11.64.zip",
-                    "checksum": "75c72bc1ede7cb5222154dfdcb1ccaa2"
+                    "url": "https://downloads.tuxfamily.org/godotengine/1.1/Godot_v1.1_stable_x11.64.zip",
+                    "checksum": ""
                 }
-            },
-            "mono": {
+            }
+        }
+    },
+    "2.0-stable": {
+        "server": {
+            "standard": {
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.0/Godot_v2.0_stable_linux_server.64.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "osx": {
+            "standard": {
                 "32": {
-                    "url": "https://downloads.tuxfamily.org/godotengine/3.2.1/mono/Godot_v3.2.1-stable_mono_x11_32.zip",
-                    "checksum": "d9679136d5a24f9bae6528dee56f2d59"
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.0/Godot_v2.0_stable_osx32.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "windows": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.0/Godot_v2.0_stable_win32.exe.zip",
+                    "checksum": ""
                 },
                 "64": {
-                    "url": "https://downloads.tuxfamily.org/godotengine/3.2.1/mono/Godot_v3.2.1-stable_mono_x11_64.zip",
-                    "checksum": "3502218b4f454da6bfa939beedf063ab"
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.0/Godot_v2.0_stable_win64.exe.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "linux": {
+            "standard": {
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.0/Godot_v2.0_stable_x11.64.zip",
+                    "checksum": ""
+                }
+            }
+        }
+    },
+    "2.0.1-stable": {
+        "server": {
+            "standard": {
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.0.1/Godot_v2.0.1_stable_linux_server.64.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "osx": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.0.1/Godot_v2.0.1_stable_osx32.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "windows": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.0.1/Godot_v2.0.1_stable_win32.exe.zip",
+                    "checksum": ""
+                },
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.0.1/Godot_v2.0.1_stable_win64.exe.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "linux": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.0.1/Godot_v2.0.1_stable_x11.32.zip",
+                    "checksum": ""
+                },
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.0.1/Godot_v2.0.1_stable_x11.64.zip",
+                    "checksum": ""
+                }
+            }
+        }
+    },
+    "2.0.2-stable": {
+        "server": {
+            "standard": {
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.0.2/Godot_v2.0.2_stable_linux_server.64.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "osx": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.0.2/Godot_v2.0.2_stable_osx32.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "windows": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.0.2/Godot_v2.0.2_stable_win32.exe.zip",
+                    "checksum": ""
+                },
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.0.2/Godot_v2.0.2_stable_win64.exe.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "linux": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.0.2/Godot_v2.0.2_stable_x11.32.zip",
+                    "checksum": ""
+                },
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.0.2/Godot_v2.0.2_stable_x11.64.zip",
+                    "checksum": ""
+                }
+            }
+        }
+    },
+    "2.0.3-stable": {
+        "server": {
+            "standard": {
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.0.3/Godot_v2.0.3_stable_linux_server.64.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "osx": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.0.3/Godot_v2.0.3_stable_osx32.zip",
+                    "checksum": ""
+                },
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.0.3/Godot_v2.0.3_stable_osx64.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "windows": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.0.3/Godot_v2.0.3_stable_win32.exe.zip",
+                    "checksum": ""
+                },
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.0.3/Godot_v2.0.3_stable_win64.exe.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "linux": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.0.3/Godot_v2.0.3_stable_x11.32.zip",
+                    "checksum": ""
+                },
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.0.3/Godot_v2.0.3_stable_x11.64.zip",
+                    "checksum": ""
+                }
+            }
+        }
+    },
+    "2.0.4.1-stable": {
+        "server": {
+            "standard": {
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.0.4.1/Godot_v2.0.4.1_stable_linux_server.64.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "windows": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.0.4.1/Godot_v2.0.4.1_stable_win32.exe.zip",
+                    "checksum": ""
+                },
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.0.4.1/Godot_v2.0.4.1_stable_win64.exe.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "linux": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.0.4.1/Godot_v2.0.4.1_stable_x11.32.zip",
+                    "checksum": ""
+                },
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.0.4.1/Godot_v2.0.4.1_stable_x11.64.zip",
+                    "checksum": ""
+                }
+            }
+        }
+    },
+    "2.1-stable": {
+        "server": {
+            "standard": {
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.1/Godot_v2.1-stable_linux_server.64.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "windows": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.1/Godot_v2.1-stable_win32.exe.zip",
+                    "checksum": ""
+                },
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.1/Godot_v2.1-stable_win64.exe.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "linux": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.1/Godot_v2.1-stable_x11.32.zip",
+                    "checksum": ""
+                },
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.1/Godot_v2.1-stable_x11.64.zip",
+                    "checksum": ""
+                }
+            }
+        }
+    },
+    "2.1.1-stable": {
+        "server": {
+            "standard": {
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.1.1/Godot_v2.1.1-stable_linux_server.64.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "windows": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.1.1/Godot_v2.1.1-stable_win32.exe.zip",
+                    "checksum": ""
+                },
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.1.1/Godot_v2.1.1-stable_win64.exe.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "linux": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.1.1/Godot_v2.1.1-stable_x11.32.zip",
+                    "checksum": ""
+                },
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.1.1/Godot_v2.1.1-stable_x11.64.zip",
+                    "checksum": ""
+                }
+            }
+        }
+    },
+    "2.1.2-stable": {
+        "server": {
+            "standard": {
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.1.2/Godot_v2.1.2-stable_linux_server.64.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "windows": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.1.2/Godot_v2.1.2-stable_win32.exe.zip",
+                    "checksum": ""
+                },
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.1.2/Godot_v2.1.2-stable_win64.exe.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "linux": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.1.2/Godot_v2.1.2-stable_x11.32.zip",
+                    "checksum": ""
+                },
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.1.2/Godot_v2.1.2-stable_x11.64.zip",
+                    "checksum": ""
+                }
+            }
+        }
+    },
+    "2.1.3-stable": {
+        "server": {
+            "standard": {
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.1.3/Godot_v2.1.3-stable_linux_server.64.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "windows": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.1.3/Godot_v2.1.3-stable_win32.exe.zip",
+                    "checksum": ""
+                },
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.1.3/Godot_v2.1.3-stable_win64.exe.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "linux": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.1.3/Godot_v2.1.3-stable_x11.32.zip",
+                    "checksum": ""
+                },
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.1.3/Godot_v2.1.3-stable_x11.64.zip",
+                    "checksum": ""
+                }
+            }
+        }
+    },
+    "2.1.4-stable": {
+        "server": {
+            "standard": {
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.1.4/Godot_v2.1.4-stable_linux_server.64.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "windows": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.1.4/Godot_v2.1.4-stable_win32.exe.zip",
+                    "checksum": ""
+                },
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.1.4/Godot_v2.1.4-stable_win64.exe.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "linux": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.1.4/Godot_v2.1.4-stable_x11.32.zip",
+                    "checksum": ""
+                },
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.1.4/Godot_v2.1.4-stable_x11.64.zip",
+                    "checksum": ""
+                }
+            }
+        }
+    },
+    "2.1.5-stable": {
+        "server": {
+            "standard": {
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.1.5/Godot_v2.1.5-stable_linux_server.64.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "windows": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.1.5/Godot_v2.1.5-stable_win32.exe.zip",
+                    "checksum": ""
+                },
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.1.5/Godot_v2.1.5-stable_win64.exe.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "linux": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.1.5/Godot_v2.1.5-stable_x11.32.zip",
+                    "checksum": ""
+                },
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.1.5/Godot_v2.1.5-stable_x11.64.zip",
+                    "checksum": ""
+                }
+            }
+        }
+    },
+    "2.1.6-stable": {
+        "server": {
+            "standard": {
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.1.6/Godot_v2.1.6-stable_linux_server.64.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "windows": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.1.6/Godot_v2.1.6-stable_win32.exe.zip",
+                    "checksum": ""
+                },
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.1.6/Godot_v2.1.6-stable_win64.exe.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "linux": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.1.6/Godot_v2.1.6-stable_x11.32.zip",
+                    "checksum": ""
+                },
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/2.1.6/Godot_v2.1.6-stable_x11.64.zip",
+                    "checksum": ""
+                }
+            }
+        }
+    },
+    "3.0-stable": {
+        "windows": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.0/Godot_v3.0-stable_win32.exe.zip",
+                    "checksum": ""
+                },
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.0/Godot_v3.0-stable_win64.exe.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "linux": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.0/Godot_v3.0-stable_x11.32.zip",
+                    "checksum": ""
+                },
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.0/Godot_v3.0-stable_x11.64.zip",
+                    "checksum": ""
+                }
+            }
+        }
+    },
+    "3.0.1-stable": {
+        "server": {
+            "standard": {
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.0.1/Godot_v3.0.1-stable_linux_server.64.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "windows": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.0.1/Godot_v3.0.1-stable_win32.exe.zip",
+                    "checksum": ""
+                },
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.0.1/Godot_v3.0.1-stable_win64.exe.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "linux": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.0.1/Godot_v3.0.1-stable_x11.32.zip",
+                    "checksum": ""
+                },
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.0.1/Godot_v3.0.1-stable_x11.64.zip",
+                    "checksum": ""
+                }
+            }
+        }
+    },
+    "3.0.2-stable": {
+        "server": {
+            "standard": {
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.0.2/Godot_v3.0.2-stable_linux_server.64.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "windows": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.0.2/Godot_v3.0.2-stable_win32.exe.zip",
+                    "checksum": ""
+                },
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.0.2/Godot_v3.0.2-stable_win64.exe.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "linux": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.0.2/Godot_v3.0.2-stable_x11.32.zip",
+                    "checksum": ""
+                },
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.0.2/Godot_v3.0.2-stable_x11.64.zip",
+                    "checksum": ""
+                }
+            }
+        }
+    },
+    "3.0.3-stable": {
+        "server": {
+            "standard": {
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.0.3/Godot_v3.0.3-stable_linux_server.64.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "windows": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.0.3/Godot_v3.0.3-stable_win32.exe.zip",
+                    "checksum": ""
+                },
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.0.3/Godot_v3.0.3-stable_win64.exe.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "linux": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.0.3/Godot_v3.0.3-stable_x11.32.zip",
+                    "checksum": ""
+                },
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.0.3/Godot_v3.0.3-stable_x11.64.zip",
+                    "checksum": ""
+                }
+            }
+        }
+    },
+    "3.0.4-stable": {
+        "server": {
+            "standard": {
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.0.4/Godot_v3.0.4-stable_linux_server.64.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "windows": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.0.4/Godot_v3.0.4-stable_win32.exe.zip",
+                    "checksum": ""
+                },
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.0.4/Godot_v3.0.4-stable_win64.exe.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "linux": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.0.4/Godot_v3.0.4-stable_x11.32.zip",
+                    "checksum": ""
+                },
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.0.4/Godot_v3.0.4-stable_x11.64.zip",
+                    "checksum": ""
+                }
+            }
+        }
+    },
+    "3.0.5-stable": {
+        "server": {
+            "standard": {
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.0.5/Godot_v3.0.5-stable_linux_server.64.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "windows": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.0.5/Godot_v3.0.5-stable_win32.exe.zip",
+                    "checksum": ""
+                },
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.0.5/Godot_v3.0.5-stable_win64.exe.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "linux": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.0.5/Godot_v3.0.5-stable_x11.32.zip",
+                    "checksum": ""
+                },
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.0.5/Godot_v3.0.5-stable_x11.64.zip",
+                    "checksum": ""
+                }
+            }
+        }
+    },
+    "3.0.6-stable": {
+        "headless": {
+            "standard": {
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.0.6/Godot_v3.0.6-stable_linux_headless.64.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "server": {
+            "standard": {
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.0.6/Godot_v3.0.6-stable_linux_server.64.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "windows": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.0.6/Godot_v3.0.6-stable_win32.exe.zip",
+                    "checksum": ""
+                },
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.0.6/Godot_v3.0.6-stable_win64.exe.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "linux": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.0.6/Godot_v3.0.6-stable_x11.32.zip",
+                    "checksum": ""
+                },
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.0.6/Godot_v3.0.6-stable_x11.64.zip",
+                    "checksum": ""
+                }
+            }
+        }
+    },
+    "3.1-stable": {
+        "headless": {
+            "standard": {
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.1/Godot_v3.1-stable_linux_headless.64.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "server": {
+            "standard": {
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.1/Godot_v3.1-stable_linux_server.64.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "osx": {
+            "standard": {
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.1/Godot_v3.1-stable_osx.64.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "windows": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.1/Godot_v3.1-stable_win32.exe.zip",
+                    "checksum": ""
+                },
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.1/Godot_v3.1-stable_win64.exe.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "linux": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.1/Godot_v3.1-stable_x11.32.zip",
+                    "checksum": ""
+                },
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.1/Godot_v3.1-stable_x11.64.zip",
+                    "checksum": ""
+                }
+            }
+        }
+    },
+    "3.1.1-stable": {
+        "headless": {
+            "standard": {
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.1.1/Godot_v3.1.1-stable_linux_headless.64.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "server": {
+            "standard": {
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.1.1/Godot_v3.1.1-stable_linux_server.64.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "osx": {
+            "standard": {
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.1.1/Godot_v3.1.1-stable_osx.64.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "windows": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.1.1/Godot_v3.1.1-stable_win32.exe.zip",
+                    "checksum": ""
+                },
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.1.1/Godot_v3.1.1-stable_win64.exe.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "linux": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.1.1/Godot_v3.1.1-stable_x11.32.zip",
+                    "checksum": ""
+                },
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.1.1/Godot_v3.1.1-stable_x11.64.zip",
+                    "checksum": ""
+                }
+            }
+        }
+    },
+    "3.1.2-stable": {
+        "headless": {
+            "standard": {
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.1.2/Godot_v3.1.2-stable_linux_headless.64.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "server": {
+            "standard": {
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.1.2/Godot_v3.1.2-stable_linux_server.64.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "osx": {
+            "standard": {
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.1.2/Godot_v3.1.2-stable_osx.64.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "windows": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.1.2/Godot_v3.1.2-stable_win32.exe.zip",
+                    "checksum": ""
+                },
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.1.2/Godot_v3.1.2-stable_win64.exe.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "linux": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.1.2/Godot_v3.1.2-stable_x11.32.zip",
+                    "checksum": ""
+                },
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.1.2/Godot_v3.1.2-stable_x11.64.zip",
+                    "checksum": ""
+                }
+            }
+        }
+    },
+    "3.2-stable": {
+        "headless": {
+            "standard": {
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.2/Godot_v3.2-stable_linux_headless.64.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "server": {
+            "standard": {
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.2/Godot_v3.2-stable_linux_server.64.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "osx": {
+            "standard": {
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.2/Godot_v3.2-stable_osx.64.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "windows": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.2/Godot_v3.2-stable_win32.exe.zip",
+                    "checksum": ""
+                },
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.2/Godot_v3.2-stable_win64.exe.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "linux": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.2/Godot_v3.2-stable_x11.32.zip",
+                    "checksum": ""
+                },
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.2/Godot_v3.2-stable_x11.64.zip",
+                    "checksum": ""
+                }
+            }
+        }
+    },
+    "3.2.1-stable": {
+        "headless": {
+            "standard": {
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.2.1/Godot_v3.2.1-stable_linux_headless.64.zip",
+                    "checksum": ""
                 }
             }
         },
@@ -26,27 +932,39 @@
             "standard": {
                 "64": {
                     "url": "https://downloads.tuxfamily.org/godotengine/3.2.1/Godot_v3.2.1-stable_linux_server.64.zip",
-                    "checksum": "4129f430a4face79dc823a479495ecab"
-                }
-            },
-            "mono": {
-                "64": {
-                    "url": "https://downloads.tuxfamily.org/godotengine/3.2.1/mono/Godot_v3.2.1-stable_mono_linux_server_64.zip",
-                    "checksum": "15e37774afaf6856acbd33b0efa83a90"
+                    "checksum": ""
                 }
             }
         },
-        "headless": {
+        "osx": {
             "standard": {
                 "64": {
-                    "url": "https://downloads.tuxfamily.org/godotengine/3.2.1/Godot_v3.2.1-stable_linux_headless.64.zip",
-                    "checksum": "945d500c09af9d9882c14c41f70db925"
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.2.1/Godot_v3.2.1-stable_osx.64.zip",
+                    "checksum": ""
                 }
-            },
-            "mono": {
+            }
+        },
+        "windows": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.2.1/Godot_v3.2.1-stable_win32.exe.zip",
+                    "checksum": ""
+                },
                 "64": {
-                    "url": "https://downloads.tuxfamily.org/godotengine/3.2.1/mono/Godot_v3.2.1-stable_mono_linux_headless_64.zip",
-                    "checksum": "f4ab580a770ae08296e3d296d9087027"
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.2.1/Godot_v3.2.1-stable_win64.exe.zip",
+                    "checksum": ""
+                }
+            }
+        },
+        "linux": {
+            "standard": {
+                "32": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.2.1/Godot_v3.2.1-stable_x11.32.zip",
+                    "checksum": ""
+                },
+                "64": {
+                    "url": "https://downloads.tuxfamily.org/godotengine/3.2.1/Godot_v3.2.1-stable_x11.64.zip",
+                    "checksum": ""
                 }
             }
         }
