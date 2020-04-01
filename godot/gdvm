@@ -1,0 +1,74 @@
+#!/bin/bash
+
+if [[ $# < 1 ]]
+then
+    echo "Usage: $0 <version>"
+    exit 1
+fi
+
+version="$1"
+
+godot_config_path="${XDG_CONFIG_HOME:-$HOME/.config}/godot"
+godot_versions_path="$godot_config_path/versions"
+local_bin_path="$HOME/.local/bin"
+version_path="$godot_versions_path/$version"
+
+mkdir -p $godot_config_path
+mkdir -p $godot_versions_path
+mkdir -p $local_bin_path
+mkdir -p $version_path
+
+function download_binary()
+{
+    binary_name=$1
+    godot_download_url="https://downloads.tuxfamily.org/godotengine/$version"
+
+    zipfile_name="Godot_v$version-stable"
+    case $binary_name in
+        godot )
+            zipfile_name="${zipfile_name}_x11.64.zip"
+            ;;
+        godot_server )
+            zipfile_name="${zipfile_name}_linux_server.64.zip"
+            ;;
+        godot_headless )
+            zipfile_name="${zipfile_name}_linux_headless.64.zip"
+            ;;
+        * )
+            echo "Invalid binary_name \"$binary_name\""
+            exit 1
+            ;;
+    esac
+
+    binary_path="$version_path/$binary_name"
+    zipfile_path="$version_path/$zipfile_name"
+
+    rm -f $zipfile_path
+    curl -L -o $zipfile_path "$godot_download_url/$zipfile_name"
+    unzip $zipfile_path -d $version_path
+
+    rm -f $binary_path
+    rm -f $zipfile_path
+    mv -f "$version_path/$(basename $zipfile_name .zip)" "$binary_path"
+}
+
+function install_binary()
+{
+    binary_path="$version_path/$1"
+    binary_name=$(basename $binary_path)
+    if [[ -f $binary_path ]]
+    then
+        echo "Installing $binary_name ..."
+        ln -sf $binary_path "$local_bin_path/$binary_name"
+    else
+        echo "Downloading..."
+        download_binary $binary_name
+        install_binary $binary_name
+    fi
+}
+
+echo "Installing Godot $version ..."
+install_binary godot
+install_binary godot_server
+install_binary godot_headless
+echo "Done."
