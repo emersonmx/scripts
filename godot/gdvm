@@ -1,12 +1,29 @@
 #!/bin/bash
 
-if [[ $# < 1 ]]
-then
-    echo "Usage: $0 <version>"
-    exit 1
-fi
+godot_download_url='https://downloads.tuxfamily.org/godotengine'
 
-version="$1"
+function get_versions()
+{
+    curl -s -L $godot_download_url \
+        | sed -r -e '/href="([0-9]\.?)+\/"/!d' -e 's#.*href="(.*)/".*#\1#' \
+        | sort -u
+}
+
+function get_packages_by_version()
+{
+    version="$1"
+    [[ $2 == 'mono' ]] && version_type='mono/' || version_type=''
+
+    url="$godot_download_url/$version/$version_type"
+    curl -s -L $url \
+        | sed -r \
+            -e '/href="Godot_.*\.zip"/!d' \
+            -e 's#.*href="(.*\.zip)">.*#\1#'
+}
+
+[[ -z $1 ]] && version="$(get_versions | tail -n1)" || version="$1"
+[[ -z $2 ]] && version_type='normal' || version_type="$2"
+[[ -z $3 ]] && arch_version='64' || arch_version="$3"
 
 godot_config_path="${XDG_CONFIG_HOME:-$HOME/.config}/godot"
 godot_versions_path="$godot_config_path/versions"
@@ -18,57 +35,79 @@ mkdir -p $godot_versions_path
 mkdir -p $local_bin_path
 mkdir -p $version_path
 
-function download_binary()
+function get_binary_name()
 {
-    binary_name=$1
-    godot_download_url="https://downloads.tuxfamily.org/godotengine/$version"
-
-    zipfile_name="Godot_v$version-stable"
-    case $binary_name in
-        godot )
-            zipfile_name="${zipfile_name}_x11.64.zip"
+    case $1 in
+        *'x11'* )
+            echo 'godot'
             ;;
-        godot_server )
-            zipfile_name="${zipfile_name}_linux_server.64.zip"
+        *'linux_server'* )
+            echo 'godot_server'
             ;;
-        godot_headless )
-            zipfile_name="${zipfile_name}_linux_headless.64.zip"
-            ;;
-        * )
-            echo "Invalid binary_name \"$binary_name\""
-            exit 1
+        *'linux_headless'* )
+            echo 'godot_headless'
             ;;
     esac
+}
 
+function get_binary_arch()
+{
+    case $1 in
+        *'32'* )
+            echo '32'
+            ;;
+        *'64'* )
+            echo '64'
+            ;;
+    esac
+}
+
+function download_package()
+{
+    download_url="$godot_download_url/$version"
+    [[ $version_type == 'mono' ]] \
+        && download_url="$download_url/mono"
+        download_url="$download_url/"
+
+    package_name="$1"
+    package_path="$version_path/$package_name"
+    binary_name="$2"
     binary_path="$version_path/$binary_name"
-    zipfile_path="$version_path/$zipfile_name"
 
-    rm -f $zipfile_path
-    curl -L -o $zipfile_path "$godot_download_url/$zipfile_name"
-    unzip $zipfile_path -d $version_path
+    rm -f $package_path
+    curl -L -o $package_path "$download_url/$package_name"
+    unzip $package_path -d "$version_path/"
 
     rm -f $binary_path
-    rm -f $zipfile_path
-    mv -f "$version_path/$(basename $zipfile_name .zip)" "$binary_path"
+    rm -f $package_path
+    mv -f "$version_path/$(basename $package_name .zip)" "$binary_path"
 }
 
 function install_binary()
 {
-    binary_path="$version_path/$1"
-    binary_name=$(basename $binary_path)
+    package_name="$1"
+    binary_name=$(get_binary_name $package_name)
+    binary_path="$version_path/$binary_name"
+
     if [[ -f $binary_path ]]
     then
         echo "Installing $binary_name ..."
         ln -sf $binary_path "$local_bin_path/$binary_name"
+        printf "Done.\n\n"
     else
-        echo "Downloading..."
-        download_binary $binary_name
-        install_binary $binary_name
+        echo "Downloading $package_name ..."
+        download_package $package_name $binary_name
+        install_binary $package_name
     fi
 }
 
-echo "Installing Godot $version ..."
-install_binary godot
-install_binary godot_server
-install_binary godot_headless
-echo "Done."
+for package in $(get_packages_by_version $version $version_type)
+do
+    case $package in
+        *'linux'*|*'x11'* )
+            [[ $package == *$arch_version* ]] && install_binary $package
+            ;;
+        * )
+            ;;
+    esac
+done
