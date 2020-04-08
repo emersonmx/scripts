@@ -114,6 +114,11 @@
                     "command": "diff-so-fancy",
                     "install_command": "wget https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy -P $HOME/.local/bin && chmod +x $HOME/.local/bin/diff-so-fancy",
                     "update_command": "wget https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy -P $HOME/.local/bin && chmod +x $HOME/.local/bin/diff-so-fancy"
+                },
+                {
+                    "command": "tmplt",
+                    "install_command": "curl -L 'https://raw.githubusercontent.com/emersonmx/tmplt/master/tmplt' > $HOME/.local/bin/tmplt && chmod +x $HOME/.local/bin/tmplt",
+                    "update_command": "curl -L 'https://raw.githubusercontent.com/emersonmx/tmplt/master/tmplt' > $HOME/.local/bin/tmplt && chmod +x $HOME/.local/bin/tmplt"
                 }
             ]
         },
