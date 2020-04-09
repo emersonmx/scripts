@@ -40,6 +40,7 @@
                 { "command": "rofi", "package": "rofi" },
                 { "command": "semver", "package": "semver" },
                 { "command": "svn", "package": "subversion" },
+                { "command": "vint", "package": "vint" },
                 { "command": "w3m", "package": "w3m" },
                 { "command": "watchman", "package": "watchman" },
                 { "command": "wmctrl", "package": "wmctrl" },
@@ -95,7 +96,10 @@
             "name": "go",
             "install_command": "go get -v",
             "update_command": "go get -u",
-            "packages": [{ "command": "golint", "package": "golang.org/x/lint/golint" }]
+            "packages": [
+                { "command": "efm-langserver", "package": "github.com/mattn/efm-langserver" },
+                { "command": "golint", "package": "golang.org/x/lint/golint" }
+            ]
         },
         {
             "name": "rust",
