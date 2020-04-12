@@ -134,6 +134,14 @@ def update_custom_action(package):
     run_command(args=package.get('update_command'), shell=True)
 
 
+def list_action(args):
+    configs = load_config_file(args.file)
+    managers = make_managers_list(configs.get('managers', []))
+    print('Available managers')
+    for manager in managers:
+        print(f'- {manager}')
+
+
 def main():
     parser = argparse.ArgumentParser(
         prog='cpm',
@@ -145,19 +153,29 @@ def main():
 
     actions_parser = parser.add_subparsers(title='commands')
     install_parser = actions_parser.add_parser(
-        'install', help='Install packages')
+        'install', help='Install packages'
+    )
     install_parser.add_argument(
-        'managers', metavar='manager', type=str, nargs='*',
+        'managers',
+        metavar='manager',
+        type=str,
+        nargs='*',
         help='Managers to execute'
     )
     install_parser.set_defaults(func=install_action)
-    update_parse = actions_parser.add_parser(
-        'update', help='Update packages')
+
+    update_parse = actions_parser.add_parser('update', help='Update packages')
     update_parse.add_argument(
-        'managers', metavar='manager', type=str, nargs='*',
+        'managers',
+        metavar='manager',
+        type=str,
+        nargs='*',
         help='Managers to execute'
     )
     update_parse.set_defaults(func=update_action)
+
+    list_parse = actions_parser.add_parser('list', help='List packages')
+    list_parse.set_defaults(func=list_action)
 
     parser.set_defaults(file='cpm.json', func=lambda _: parser.print_help())
 
