@@ -7,7 +7,6 @@
             "packages": [
                 { "command": "alacritty", "package": "alacritty" },
                 { "command": "bat", "package": "bat" },
-                { "command": "bear", "package": "bear" },
                 { "command": "ccls", "package": "ccls" },
                 { "command": "chwb", "package": "wmutils-git" },
                 { "command": "cmake", "package": "cmake" },
