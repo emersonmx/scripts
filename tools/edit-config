@@ -1,0 +1,50 @@
+#!/bin/bash
+
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+declare options=("alacritty
+bspwm
+dunst
+polybar
+sxhkd
+nvim
+zsh
+tmux
+ssh")
+
+choice=$(echo -e "${options[@]}" | fzf)
+
+case "$choice" in
+    alacritty)
+        choice="$HOME/.config/alacritty/alacritty.yml"
+        ;;
+    bspwm)
+        choice="$HOME/.config/bspwm/bspwmrc"
+        ;;
+    dunst)
+        choice="$HOME/.config/dunst/dunstrc"
+        ;;
+    polybar)
+        choice="$HOME/.config/polybar/config"
+        ;;
+    sxhkd)
+        choice="$HOME/.config/sxhkd/sxhkdrc"
+        ;;
+    nvim)
+        choice="$HOME/.config/nvim/init.vim"
+        ;;
+    zsh)
+        choice="$HOME/.zshrc"
+        ;;
+    tmux)
+        choice="$HOME/.tmux.conf"
+        ;;
+    ssh)
+        choice="$HOME/.ssh/config"
+        ;;
+    *)
+        exit 1
+        ;;
+esac
+
+$EDITOR $choice
