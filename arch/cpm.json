@@ -120,13 +120,13 @@
                 },
                 {
                     "command": "tmplt",
-                    "install_command": "curl -L 'https://raw.githubusercontent.com/emersonmx/tmplt/master/tmplt' > $HOME/.local/bin/tmplt && chmod +x $HOME/.local/bin/tmplt",
-                    "update_command": "curl -L 'https://raw.githubusercontent.com/emersonmx/tmplt/master/tmplt' > $HOME/.local/bin/tmplt && chmod +x $HOME/.local/bin/tmplt"
+                    "install_command": "wget 'https://raw.githubusercontent.com/emersonmx/tmplt/master/tmplt' -P $HOME/.local/bin && chmod +x $HOME/.local/bin/tmplt",
+                    "update_command": "wget 'https://raw.githubusercontent.com/emersonmx/tmplt/master/tmplt' -P $HOME/.local/bin && chmod +x $HOME/.local/bin/tmplt"
                 },
                 {
                     "command": "edit-config",
-                    "install_command": "curl -L 'https://raw.githubusercontent.com/emersonmx/scripts/master/tools/edit-config' > $HOME/.local/bin/edit-config && chmod +x $HOME/.local/bin/edit-config",
-                    "update_command": "curl -L 'https://raw.githubusercontent.com/emersonmx/scripts/master/tools/edit-config' > $HOME/.local/bin/edit-config && chmod +x $HOME/.local/bin/edit-config"
+                    "install_command": "wget 'https://raw.githubusercontent.com/emersonmx/scripts/master/tools/edit-config' -P $HOME/.local/bin && chmod +x $HOME/.local/bin/edit-config",
+                    "update_command": "wget 'https://raw.githubusercontent.com/emersonmx/scripts/master/tools/edit-config' -P $HOME/.local/bin && chmod +x $HOME/.local/bin/edit-config"
                 }
             ]
         },
