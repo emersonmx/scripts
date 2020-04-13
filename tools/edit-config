@@ -4,6 +4,7 @@ script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 declare options=("alacritty
 bspwm
+cpm
 dunst
 polybar
 sxhkd
@@ -20,6 +21,9 @@ case "$choice" in
         ;;
     bspwm)
         choice="$HOME/.config/bspwm/bspwmrc"
+        ;;
+    cpm)
+        choice="$HOME/.config/cpm/config.json"
         ;;
     dunst)
         choice="$HOME/.config/dunst/dunstrc"
