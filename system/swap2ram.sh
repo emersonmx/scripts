@@ -8,5 +8,7 @@ if [ $mem -lt $swap ]; then
     exit 1
 fi
 
-swapoff -a &&
-swapon -a
+free -h
+sudo swapoff -a
+sudo swapon -a
+free -h
