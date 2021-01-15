@@ -1,6 +1,6 @@
 #!/bin/bash
-set -euo pipefail
-IFS=$'\n\t'
+# set -euo pipefail
+# IFS=$'\n\t'
 
 stylus_device=$(xsetwacom list devices | grep "type: STYLUS" | sed -r 's/.*id: ([0-9]+).*/\1/g')
 prop_ctm_id=$(xinput list-props 22 | grep 'Coordinate Transformation Matrix' | sed -r 's/.*\(([0-9]+)\).*/\1/')
@@ -8,7 +8,7 @@ monitors=$(xrandr --listmonitors | sed '1 d' | awk '{print $4}' | head -n2)
 primary_monitor=$(echo $monitors | cut -d' ' -f1)
 secondary_monitor=$(echo $monitors | cut -d' ' -f2)
 
-option=$(printf "Primary\nSecondary\nBoth" | dmenu -p "How monitor to map the tablet? " -i)
+option=$(printf "Primary\nSecondary\nBoth" | rofi -dmenu -p "How monitor to map the tablet? " -i)
 
 case $option in
     Primary)
