@@ -19,6 +19,6 @@ case $option in
         xsetwacom set $stylus_device MapToOutput $secondary_monitor
         ;;
     Both)
-        xinput set-prop $stylus_device $prop_ctm_id 1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000
+        xinput set-prop $stylus_device $prop_ctm_id 1.000304 0 0 0 1 0 0 0 1
         ;;
 esac
