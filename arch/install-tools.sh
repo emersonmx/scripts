@@ -148,6 +148,8 @@ then
         https://raw.githubusercontent.com/emersonmx/tmplt/master/tmplt \
         $HOME/.local/bin/tmplt
 
+    tldr --update
+
     zsh -i -c 'zinit self-update'
     zsh -i -c 'zinit update'
 
