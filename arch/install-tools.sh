@@ -1,6 +1,6 @@
 #!/bin/bash
 
-MANAGERS=${MANAGERS:-"arch flatpak rust cargo golang pip yarn misc"}
+MANAGERS=${MANAGERS:-"arch flatpak rustup cargo golang pip nvm node yarn misc"}
 FORCE_INSTALL=${FORCE_INSTALL:-}
 
 echo "Managers enabled: $MANAGERS"
@@ -86,7 +86,7 @@ then
 fi
 
 
-if [[ "$MANAGERS" == *"rust"* ]]
+if [[ "$MANAGERS" == *"rustup"* ]]
 then
     if [[ ! $(command -v rustup) || ! -z "$FORCE_INSTALL" ]]
     then
@@ -128,6 +128,25 @@ then
         gdtoolkit
 fi
 
+if [[ "$MANAGERS" == *"nvm"* ]]
+then
+    latest_nvm_version=$( \
+        curl --silent \
+            'https://api.github.com/repos/nvm-sh/nvm/releases/latest' \
+            -H 'Accept: application/vnd.github.v3+json' \
+        | grep '"tag_name"' \
+        | sed -E 's/.*"([^"]+)".*/\1/' \
+    )
+    curl -o- \
+        "https://raw.githubusercontent.com/nvm-sh/nvm/$latest_nvm_version/install.sh" \
+        | PROFILE=/dev/null bash
+fi
+
+if [[ "$MANAGERS" == *"node"* ]]
+then
+    [[ -s "$NVM_DIR/nvm.sh" ]] && \. "$NVM_DIR/nvm.sh"
+    nvm install --lts
+fi
 
 if [[ "$MANAGERS" == *"yarn"* ]]
 then
