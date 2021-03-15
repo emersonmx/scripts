@@ -12,7 +12,9 @@ repos=
 
 for repo in $repos
 do
-    pushd "$repo"
-    $@
-    popd
+    [[ -d "$repo" ]] && (
+        cd "$repo"
+        echo "$repo"
+        $@
+    ) || echo "$repo not found"
 done
