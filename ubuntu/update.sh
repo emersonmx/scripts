@@ -37,7 +37,8 @@ zsh -i -c 'zinit update'
 
 nvim +PlugInstall +PlugUpdate +UpdateRemotePlugins +qall
 nvim +CocUpdateSync +qall
-$HOME/.tmux/plugins/tpm/scripts/update_plugin_prompt_handler.sh all
 
 python3 -m pip install --user --upgrade pynvim
 python2 -m pip install --user --upgrade pynvim
+
+~/.tmux/plugins/tpm/bindings/update_plugins
