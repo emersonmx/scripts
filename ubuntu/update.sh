@@ -3,6 +3,8 @@
 sudo apt-get update -y
 sudo apt-get upgrade -y
 
+sudo -k
+
 go get -v -u \
     github.com/kisielk/errcheck \
     github.com/mattn/efm-langserver \

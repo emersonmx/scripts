@@ -2,6 +2,8 @@
 
 yay -Syu
 
+sudo -k
+
 rustup self update
 rustup update
 
