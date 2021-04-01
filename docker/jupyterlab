@@ -1,0 +1,36 @@
+#!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
+
+JUPYTER_PATH="$HOME/Documents/Jupyter"
+NB_USER=jovyan
+NB_USER_HOME="/home/$NB_USER"
+NB_UID="$(id -u)"
+NB_GID="$(id -g)"
+PORT=8888
+
+mkdir -p "$JUPYTER_PATH"
+
+container_id=$(docker run \
+    --rm \
+    -d \
+    --user "$NB_UID:$NB_GID" \
+    -p "$PORT:8888" \
+    -e JUPYTER_ENABLE_LAB=yes \
+    -v $JUPYTER_PATH:"$NB_USER_HOME/work" \
+    jupyter/scipy-notebook:latest
+)
+
+echo $container_id
+
+json=""
+while [[ -z "$json" ]]
+do
+    json=$(docker exec $container_id jupyter server list --json)
+    sleep 0.1
+done
+
+url=$(echo "$json" | jq -r '.url')
+token=$(echo "$json" | jq -r '.token')
+
+xdg-open "$url?token=$token" 2>&1 > /dev/null
