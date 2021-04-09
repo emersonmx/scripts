@@ -1,5 +1,9 @@
 #!/bin/bash
 
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+sudo $script_dir/reflector.sh
+
 yay -Syu
 
 sudo -k
