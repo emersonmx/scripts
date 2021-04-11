@@ -6,25 +6,15 @@ GAME_DIR="$SCRIPT_DIR/Game"
 # cd "$GAME_DIR"
 # wine "$GAME_DIR/Game.exe" -w $@
 
-cd "$GAME_DIR/Mod PlugY/"
-wine "$GAME_DIR/Mod PlugY/PlugY.exe" $@
+cd "$GAME_DIR/ModPlugY/"
+wine "$GAME_DIR/ModPlugY/PlugY.exe" $@
 
-windows=
-for i in $(seq 1 5)
+while [[ ! $(pgrep 'Game.exe') ]]
 do
-    sleep $i
-    if  pgrep 'Game.exe' > /dev/null
-    then
-        windows=$(wmctrl -l | sed -r '/Diablo II/!d' | cut -d' ' -f1 | tac)
-        break
-    fi
+    sleep 1
 done
 
-for w in $windows
-do
-    if xprop -id $w WM_CLASS | grep game.exe
-    then
-        wmctrl -i -a "$w"
-        break
-    fi
-done
+sleep 1
+wmctrl -a "Diablo II"
+sleep 1
+wmctrl -a "Diablo II"
