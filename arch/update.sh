@@ -5,15 +5,19 @@ script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 _old_path="$PATH"
 export PATH=$(echo $PATH | sed "s#$USER_LOCAL/bin:##")
 
-[[ ${RUN_REFLECTOR:-1} == 1 ]] && sudo $script_dir/reflector.sh
+[[ ${UPDATE_MIRRORLIST:-1} == 1 ]] \
+    && sudo $script_dir/reflector.sh
 
-[[ ${UPDATE_SYSTEM:-1} == 1 ]] && yay -Syu
+[[ ${UPDATE_SYSTEM:-1} == 1 ]] \
+    && yay -Syu
 
 sudo -k
 
 export PATH="$_old_path"
 
-[[ ${UPDATE_RUST:-1} == 1 ]] && rustup self update && rustup update
+[[ ${UPDATE_RUST:-1} == 1 ]] \
+    && rustup self update \
+    && rustup update
 
 [[ ${UPDATE_CARGO:-1} == 1 ]] \
     && cargo install --force \
@@ -37,9 +41,11 @@ PIP=pip3
         | cut -d = -f 1 \
         | xargs -n1 $PIP install --upgrade
 
-[[ ${UPDATE_FLATPAK:-1} == 1 ]] && flatpak update -y
+[[ ${UPDATE_FLATPAK:-1} == 1 ]] \
+    && flatpak update -y
 
-[[ ${UPDATE_TLDR:-1} == 1 ]] && tldr --update
+[[ ${UPDATE_TLDR:-1} == 1 ]] \
+    && tldr --update
 
 [[ ${UPDATE_ZINIT:-1} == 1 ]] \
     && zsh -i -c 'zinit self-update' \
