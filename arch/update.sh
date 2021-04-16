@@ -2,6 +2,8 @@
 
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+export PATH=$(echo $PATH | sed "s#$USER_LOCAL/bin:##")
+
 sudo $script_dir/reflector.sh
 
 yay -Syu
