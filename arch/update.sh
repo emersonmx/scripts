@@ -2,46 +2,56 @@
 
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+_old_path="$PATH"
 export PATH=$(echo $PATH | sed "s#$USER_LOCAL/bin:##")
 
-sudo $script_dir/reflector.sh
+[[ ${RUN_REFLECTOR:-1} == 1 ]] && sudo $script_dir/reflector.sh
 
-yay -Syu
+[[ ${UPDATE_SYSTEM:-1} == 1 ]] && yay -Syu
 
 sudo -k
 
-rustup self update
-rustup update
+export PATH="$_old_path"
 
-cargo install --force \
-    cargo-watch \
-    tealdeer
+[[ ${UPDATE_RUST:-1} == 1 ]] && rustup self update && rustup update
 
-go get -v -u \
-    github.com/sourcegraph/go-langserver \
-    github.com/mattn/efm-langserver \
-    github.com/kisielk/errcheck \
-    golang.org/x/lint/golint
+[[ ${UPDATE_CARGO:-1} == 1 ]] \
+    && cargo install --force \
+        cargo-watch \
+        tealdeer
 
-npm update -g
+[[ ${UPDATE_GO:-1} == 1 ]] \
+    && go get -v -u \
+        github.com/sourcegraph/go-langserver \
+        github.com/mattn/efm-langserver \
+        github.com/kisielk/errcheck \
+        golang.org/x/lint/golint
+
+[[ ${UPDATE_NPM:-1} == 1 ]] \
+    && npm update -g
 
 PIP=pip3
-$PIP list --user --outdated --format=freeze \
-    | grep -v '^\-e' \
-    | cut -d = -f 1 \
-    | xargs -n1 $PIP install --upgrade
+[[ ${UPDATE_PIP:-1} == 1 ]] \
+    && $PIP list --user --outdated --format=freeze \
+        | grep -v '^\-e' \
+        | cut -d = -f 1 \
+        | xargs -n1 $PIP install --upgrade
 
-flatpak update -y
+[[ ${UPDATE_FLATPAK:-1} == 1 ]] && flatpak update -y
 
-tldr --update
+[[ ${UPDATE_TLDR:-1} == 1 ]] && tldr --update
 
-zsh -i -c 'zinit self-update'
-zsh -i -c 'zinit update'
+[[ ${UPDATE_ZINIT:-1} == 1 ]] \
+    && zsh -i -c 'zinit self-update' \
+    && zsh -i -c 'zinit update'
 
-nvim +PlugInstall +PlugUpdate +UpdateRemotePlugins +qall
-nvim +CocUpdateSync +qall
+[[ ${UPDATE_NVIM:-1} == 1 ]] \
+    && nvim +PlugInstall +PlugUpdate +UpdateRemotePlugins +qall \
+    && nvim +CocUpdateSync +qall
 
-python3 -m pip install --user --upgrade pynvim
-python2 -m pip install --user --upgrade pynvim
+[[ ${INSTALL_PYNVIM:-1} == 1 ]] \
+    && python3 -m pip install --user --upgrade pynvim \
+    && python2 -m pip install --user --upgrade pynvim
 
-~/.tmux/plugins/tpm/bindings/update_plugins
+[[ ${UPDATE_TMUX_PLUGINS:-1} == 1 ]] \
+    && ~/.tmux/plugins/tpm/bindings/update_plugins
