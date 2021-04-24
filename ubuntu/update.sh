@@ -29,6 +29,8 @@ sudo -k
         golang.org/x/tools/cmd/...
 
 [[ ${UPDATE_NPM:-1} == 1 ]] \
+    && [[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh" \
+    && nvm use default \
     && npm update -g
 
 PIP=pip3

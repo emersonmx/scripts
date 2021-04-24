@@ -32,6 +32,8 @@ export PATH="$_old_path"
         golang.org/x/lint/golint
 
 [[ ${UPDATE_NPM:-1} == 1 ]] \
+    && [[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh" \
+    && nvm use default \
     && npm update -g
 
 PIP=pip3
