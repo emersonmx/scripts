@@ -40,12 +40,19 @@ function get_python_version() {
     semver -r $1 $(pyenv install --list) | tail -n1
 }
 
-DEFAULT_PYTHON_VERSION="$(get_python_version '~3.9')"
+DEFAULT_PYTHON_VERSION="~3.9"
+PYTHON_VERSIONS=('~2.7' $DEFAULT_PYTHON_VERSION)
 [[ ${UPDATE_PYENV:-1} == 1 ]] \
     && (cd $PYENV_ROOT && git pull) \
-    && pyenv install -s $(get_python_version '~2.7') \
-    && pyenv install -s $DEFAULT_PYTHON_VERSION \
-    && (cd $HOME && pyenv local $DEFAULT_PYTHON_VERSION)
+    && for v in ${PYTHON_VERSIONS[@]}
+       do
+           full_version=$(get_python_version $v)
+           pyenv install -s $full_version
+           if [[ $full_version == "$DEFAULT_PYTHON_VERSION" ]]
+           then
+               (cd $HOME && pyenv local $full_version)
+           fi
+       done
 
 PIP=pip3
 [[ ${UPDATE_PIP:-1} == 1 ]] \
