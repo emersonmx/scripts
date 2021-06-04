@@ -18,7 +18,6 @@ sudo -k
 export PATH="$_old_path"
 
 [[ ${UPDATE_RUST:-$UPDATE_ALL} == 1 ]] \
-    && rustup self update \
     && rustup update
 
 [[ ${UPDATE_CARGO:-$UPDATE_ALL} == 1 ]] \

@@ -9,7 +9,6 @@ UPDATE_ALL=${UPDATE_ALL:-1}
 sudo -k
 
 [[ ${UPDATE_RUST:-$UPDATE_ALL} == 1 ]] \
-    && rustup self update \
     && rustup update
 
 [[ ${UPDATE_CARGO:-$UPDATE_ALL} == 1 ]] \
