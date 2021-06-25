@@ -7,7 +7,7 @@ GAME_DIR="$SCRIPT_DIR/Game"
 # wine "$GAME_DIR/Game.exe" -w $@
 
 cd "$GAME_DIR/ModPlugY/"
-wine "$GAME_DIR/ModPlugY/PlugY.exe" $@
+wine "$GAME_DIR/ModPlugY/PlugY.exe" -direct -txt $@
 
 while [[ ! $(pgrep 'Game.exe') ]]
 do
