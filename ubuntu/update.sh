@@ -39,6 +39,7 @@ function get_python_version() {
 }
 
 DEFAULT_PYTHON_VERSION="~3.9"
+DEFAULT_PYTHON_FULL_VERSION=$(get_python_version "$DEFAULT_PYTHON_VERSION")
 PYTHON_VERSIONS=('~2.7' '~3.8' $DEFAULT_PYTHON_VERSION)
 [[ ${UPDATE_PYENV:-$UPDATE_ALL} == 1 ]] \
     && (cd $PYENV_ROOT && git pull) \
@@ -46,7 +47,7 @@ PYTHON_VERSIONS=('~2.7' '~3.8' $DEFAULT_PYTHON_VERSION)
        do
            full_version=$(get_python_version $v)
            pyenv install -s $full_version
-           if [[ $full_version == "$DEFAULT_PYTHON_VERSION" ]]
+           if [[ $full_version == "$DEFAULT_PYTHON_FULL_VERSION" ]]
            then
                (cd $HOME && pyenv local $full_version)
            fi
