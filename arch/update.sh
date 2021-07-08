@@ -63,6 +63,16 @@ PIP=pip3
         | cut -d = -f 1 \
         | xargs -n1 $PIP install --upgrade
 
+[[ ${UPDATE_VIRTUALENV:-$UPDATE_ALL} == 1 ]] \
+    && ( \
+        tmp_bin="$(mktemp)" \
+        && virtualenv_path="$USER_LOCAL/bin/virtualenv" \
+        && curl --location --output "$tmp_bin" https://bootstrap.pypa.io/virtualenv.pyz  \
+        && echo '#!/usr/bin/env python' > "$virtualenv_path" \
+        && cat "$tmp_bin" >> "$virtualenv_path" \
+        && chmod +x "$virtualenv_path" \
+    )
+
 [[ ${UPDATE_FLATPAK:-$UPDATE_ALL} == 1 ]] \
     && flatpak update -y
 
