@@ -26,7 +26,8 @@ else
 fi
 
 i3lock \
-    --image "$TMPBG" \
+    --image="$TMPBG" \
+    --color="00000000" \
     --insidever-color=$color1$alpha \
     --insidewrong-color=$color1$alpha \
     --inside-color=$color1$alpha \
