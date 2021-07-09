@@ -9,7 +9,7 @@ then
 fi
 
 PID=$(pgrep xfce4-session)
-export DBUS_SESSION_BUS_ADDRESS=$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/$PID/environ | cut -d= -f2-)
+export DBUS_SESSION_BUS_ADDRESS="$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/$PID/environ | tr -d '\0' |cut -d= -f2-)"
 
 UPTIME_TIMESTAMP="$(uptime -s | sed 's/[^0-9]//g')"
 WALLPAPER_IMAGE="/tmp/wallpaper_$UPTIME_TIMESTAMP.jpg"
