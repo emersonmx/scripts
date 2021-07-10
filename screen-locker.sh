@@ -48,7 +48,7 @@ i3lock \
     --clock \
     --indicator \
     --time-str="%R" \
-    --date-str="%A, %d %B %Y" \
+    --date-str="%a., %_d de %b." \
     --verif-text="Verifying..." \
     --wrong-text="Auth Failed" \
     --noinput="No Input" \
