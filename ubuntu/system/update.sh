@@ -53,12 +53,12 @@ PYTHON_VERSIONS=('~2.7' '~3.8' $DEFAULT_PYTHON_VERSION)
            fi
        done
 
-PIP=pip3
+PYTHON=python3
 [[ ${UPDATE_PIP:-$UPDATE_ALL} == 1 ]] \
-    && $PIP list --user --outdated --format=freeze \
+    && $PYTHON -m pip list --user --outdated --format=freeze \
         | grep -v '^\-e' \
         | cut -d = -f 1 \
-        | xargs -n1 $PIP install --upgrade
+        | xargs -n1 $PYTHON -m pip install --upgrade
 
 [[ ${UPDATE_VIRTUALENV:-$UPDATE_ALL} == 1 ]] \
     && ( \
