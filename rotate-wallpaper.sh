@@ -17,6 +17,10 @@ SCREEN_SIZE="$1"
 IMAGE_TAGS="${2:-}"
 FETCH_IMAGE_TIMEOUT=5
 
+[[ ! -f "$WALLPAPER_IMAGE" ]] \
+    && convert -size "$SCREEN_SIZE" xc:#000000 "$WALLPAPER_IMAGE" \
+    && feh --bg-fill "$WALLPAPER_IMAGE"
+
 curl \
     --location \
     --output "$WALLPAPER_IMAGE" \
