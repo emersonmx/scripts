@@ -8,7 +8,7 @@ then
     exit 1
 fi
 
-PID=$(pgrep xfce4-session)
+PID=$(pgrep bspwm)
 export DBUS_SESSION_BUS_ADDRESS="$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/$PID/environ | tr -d '\0' |cut -d= -f2-)"
 
 UPTIME_TIMESTAMP="$(uptime -s | sed 's/[^0-9]//g')"
@@ -24,7 +24,5 @@ curl \
     "https://source.unsplash.com/$SCREEN_SIZE/?$IMAGE_TAGS" \
     || true
 
-xfconf-query --channel xfce4-desktop --list | grep last-image | while read path
-do
-    xfconf-query --channel xfce4-desktop --property $path --set "$WALLPAPER_IMAGE"
-done
+
+feh --bg-fill "$WALLPAPER_IMAGE"
