@@ -84,6 +84,7 @@ PYTHON=python3
     && zsh -i -c 'zinit update'
 
 [[ ${UPDATE_NVIM:-$UPDATE_ALL} == 1 ]] \
+    && yarn global add neovim \
     && nvim +PlugInstall +PlugUpdate +UpdateRemotePlugins +qall \
     && nvim +CocUpdateSync +qall
 

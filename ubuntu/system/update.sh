@@ -82,6 +82,7 @@ PYTHON=python3
     && nvim +CocUpdateSync +qall
 
 [[ ${INSTALL_PYNVIM:-$UPDATE_ALL} == 1 ]] \
+    && yarn global add neovim \
     && python3 -m pip install --user --upgrade pynvim \
     && python2 -m pip install --user --upgrade pynvim
 
