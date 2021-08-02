@@ -2,19 +2,19 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-if [[ $# < 1 ]]
-then
-    echo "Usage: $0 WIDTHxHEIGHT [tags]"
-    exit 1
-fi
-
 PID=$(pgrep bspwm)
 export DBUS_SESSION_BUS_ADDRESS="$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/$PID/environ | tr -d '\0' |cut -d= -f2-)"
 
 UPTIME_TIMESTAMP="$(uptime -s | sed 's/[^0-9]//g')"
 WALLPAPER_IMAGE="/tmp/wallpaper_$UPTIME_TIMESTAMP.jpg"
-SCREEN_SIZE="$1"
-IMAGE_TAGS="${2:-}"
+SCREEN_SIZE="$(xdpyinfo | grep dimensions | awk '{print $2}')"
+IMAGE_TAGS="${1:-}"
+if [[ $# == 2 ]]
+then
+    SCREEN_SIZE="$1"
+    IMAGE_TAGS="$2"
+fi
+
 FETCH_IMAGE_TIMEOUT=5
 
 [[ ! -f "$WALLPAPER_IMAGE" ]] \
