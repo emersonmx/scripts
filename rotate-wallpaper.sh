@@ -1,6 +1,4 @@
 #!/bin/bash
-set -euo pipefail
-IFS=$'\n\t'
 
 PID=$(pgrep bspwm)
 export DBUS_SESSION_BUS_ADDRESS="$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/$PID/environ | tr -d '\0' | cut -d= -f2-)"
@@ -26,8 +24,6 @@ curl \
     --location \
     --output "$WALLPAPER_IMAGE" \
     --max-time $FETCH_IMAGE_TIMEOUT \
-    "https://source.unsplash.com/$SCREEN_SIZE/?$IMAGE_TAGS" \
-    || true
-
+    "https://source.unsplash.com/$SCREEN_SIZE/?$IMAGE_TAGS"
 
 feh --bg-fill "$WALLPAPER_IMAGE"
