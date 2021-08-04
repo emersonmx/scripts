@@ -73,6 +73,9 @@ PYTHON=python3
 [[ ${UPDATE_TLDR:-$UPDATE_ALL} == 1 ]] \
     && tldr --update
 
+[[ ${UPDATE_CHEZMOI:-$UPDATE_ALL} == 1 ]] \
+    && chezmoi upgrade
+
 [[ ${UPDATE_ZINIT:-$UPDATE_ALL} == 1 ]] \
     && zsh -i -c 'zinit self-update' \
     && zsh -i -c 'zinit update'
