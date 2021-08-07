@@ -4,7 +4,6 @@ IFS=$'\n\t'
 
 UPTIME_TIMESTAMP="$(uptime -s | sed 's/[^0-9]//g')"
 TMPBG="/tmp/screen_$UPTIME_TIMESTAMP.png"
-WALLPAPER_IMAGE="/tmp/wallpaper_$UPTIME_TIMESTAMP.jpg"
 
 alpha='dd'
 color1='#1d2021'
@@ -16,14 +15,7 @@ color6='#9D9E9E'
 color7='#B6B7B7'
 color8='#d0d0d0'
 
-REMOVE_TMPBG=1
-if [[ -f "$WALLPAPER_IMAGE" ]]
-then
-    TMPBG="$WALLPAPER_IMAGE"
-    REMOVE_TMPBG=0
-else
-    scrot $TMPBG && convert $TMPBG -scale 5% -scale 2000% $TMPBG
-fi
+scrot $TMPBG && convert $TMPBG -scale 5% -scale 2000% $TMPBG
 
 i3lock \
     --image="$TMPBG" \
@@ -65,4 +57,4 @@ i3lock \
     --pass-screen-keys \
     --pass-volume-keys
 
-[[ $REMOVE_TMPBG == 1 ]] && rm "$TMPBG"
+rm -f "$TMPBG"
