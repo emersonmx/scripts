@@ -73,9 +73,6 @@ PYTHON=python3
         && chmod +x "$virtualenv_path" \
     )
 
-[[ ${UPDATE_FLATPAK:-$UPDATE_ALL} == 1 ]] \
-    && flatpak update -y
-
 [[ ${UPDATE_TLDR:-$UPDATE_ALL} == 1 ]] \
     && tldr --update
 
