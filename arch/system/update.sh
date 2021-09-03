@@ -37,25 +37,6 @@ export PATH="$_old_path"
     && nvm use default \
     && npm update -g
 
-function get_python_version() {
-    semver -r $1 $(pyenv install --list) | tail -n1
-}
-
-DEFAULT_PYTHON_VERSION="~3.9"
-DEFAULT_PYTHON_FULL_VERSION=$(get_python_version "$DEFAULT_PYTHON_VERSION")
-PYTHON_VERSIONS=('~2.7' $DEFAULT_PYTHON_VERSION)
-[[ ${UPDATE_PYENV:-$UPDATE_ALL} == 1 ]] \
-    && (cd $PYENV_ROOT && git pull) \
-    && for v in ${PYTHON_VERSIONS[@]}
-       do
-           full_version=$(get_python_version $v)
-           pyenv install -s $full_version
-           if [[ $full_version == "$DEFAULT_PYTHON_FULL_VERSION" ]]
-           then
-               (cd $HOME && pyenv local $full_version)
-           fi
-       done
-
 PYTHON=python3
 [[ ${UPDATE_PIP:-$UPDATE_ALL} == 1 ]] \
     && $PYTHON -m pip list --user --outdated --format=freeze \
