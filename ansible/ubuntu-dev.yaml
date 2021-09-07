@@ -1,0 +1,12 @@
+---
+  - hosts: localhost
+    become: true
+    tasks:
+      - name: Install base packages
+        apt:
+          pkg:
+            - curl
+            - wget
+            - git
+            - subversion
+          state: present
