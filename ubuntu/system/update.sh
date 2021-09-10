@@ -8,6 +8,10 @@ UPDATE_ALL=${UPDATE_ALL:-1}
 
 sudo -k
 
+[[ ${UPDATE_ASDF:-$UPDATE_ALL} == 1 ]] \
+    && asdf update \
+    && asdf plugin update --all
+
 [[ ${UPDATE_RUST:-$UPDATE_ALL} == 1 ]] \
     && rustup update
 

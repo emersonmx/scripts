@@ -17,6 +17,10 @@ sudo -k
 
 export PATH="$_old_path"
 
+[[ ${UPDATE_ASDF:-$UPDATE_ALL} == 1 ]] \
+    && asdf update \
+    && asdf plugin update --all
+
 [[ ${UPDATE_RUST:-$UPDATE_ALL} == 1 ]] \
     && rustup update
 
@@ -63,11 +67,11 @@ PYTHON=python3
     && zsh -i -c 'zinit update'
 
 [[ ${UPDATE_NVIM:-$UPDATE_ALL} == 1 ]] \
-    && yarn global add neovim \
     && nvim +PlugInstall +PlugUpdate +UpdateRemotePlugins +qall \
     && nvim +CocUpdateSync +qall
 
 [[ ${INSTALL_PYNVIM:-$UPDATE_ALL} == 1 ]] \
+    && yarn global add neovim \
     && python3 -m pip install --user --upgrade pynvim \
     && python2 -m pip install --user --upgrade pynvim
 
