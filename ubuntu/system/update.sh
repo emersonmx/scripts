@@ -10,7 +10,9 @@ sudo -k
 
 [[ ${UPDATE_ASDF:-$UPDATE_ALL} == 1 ]] \
     && asdf update \
-    && asdf plugin update --all
+    && asdf plugin update --all \
+    && cat ~/.tool-versions | cut -d' ' -f1 | xargs -I _ asdf install _ latest \
+    && cat ~/.tool-versions | cut -d' ' -f1 | xargs -I _ asdf global _ latest
 
 [[ ${UPDATE_RUST:-$UPDATE_ALL} == 1 ]] \
     && rustup update
