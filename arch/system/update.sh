@@ -7,9 +7,6 @@ UPDATE_ALL=${UPDATE_ALL:-1}
 _old_path="$PATH"
 export PATH=$(echo $PATH | sed "s#$USER_LOCAL/bin:##")
 
-[[ ${UPDATE_MIRRORLIST:-$UPDATE_ALL} == 1 ]] \
-    && sudo $script_dir/reflector.sh
-
 [[ ${UPDATE_SYSTEM:-$UPDATE_ALL} == 1 ]] \
     && yay -Syu
 
