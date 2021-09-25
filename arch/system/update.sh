@@ -29,11 +29,11 @@ export PATH="$_old_path"
         tealdeer
 
 [[ ${UPDATE_GO:-$UPDATE_ALL} == 1 ]] \
-    && go get -v -u \
-        github.com/sourcegraph/go-langserver \
-        github.com/mattn/efm-langserver \
-        github.com/kisielk/errcheck \
-        golang.org/x/lint/golint
+    && go install \
+        github.com/sourcegraph/go-langserver@latest \
+        github.com/mattn/efm-langserver@latest \
+        github.com/kisielk/errcheck@latest \
+        golang.org/x/lint/golint@latest
 
 [[ ${UPDATE_NPM:-$UPDATE_ALL} == 1 ]] \
     && npm update -g

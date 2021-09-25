@@ -27,13 +27,13 @@ sudo -k
         fd-find
 
 [[ ${UPDATE_GO:-$UPDATE_ALL} == 1 ]] \
-    && go get -v -u \
-        github.com/kisielk/errcheck \
-        github.com/mattn/efm-langserver \
-        github.com/sourcegraph/go-langserver \
-        golang.org/x/lint/golint \
-        mvdan.cc/sh/v3/cmd/shfmt \
-        golang.org/x/tools/cmd/...
+    && go install \
+        github.com/kisielk/errcheck@latest \
+        github.com/mattn/efm-langserver@latest \
+        github.com/sourcegraph/go-langserver@latest \
+        golang.org/x/lint/golint@latest \
+        mvdan.cc/sh/v3/cmd/shfmt@latest \
+        golang.org/x/tools/cmd/...@latest
 
 [[ ${UPDATE_NPM:-$UPDATE_ALL} == 1 ]] \
     && npm update -g
