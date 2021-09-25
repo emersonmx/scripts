@@ -45,6 +45,9 @@ PYTHON=python3
         | cut -d = -f 1 \
         | xargs -n1 $PYTHON -m pip install --upgrade
 
+[[ ${UPDATE_POETRY:-$UPDATE_ALL} == 1 ]] \
+    && poetry self update
+
 [[ ${UPDATE_VIRTUALENV:-$UPDATE_ALL} == 1 ]] \
     && ( \
         tmp_bin="$(mktemp)" \
