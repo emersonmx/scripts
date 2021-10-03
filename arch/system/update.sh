@@ -20,13 +20,9 @@ export PATH="$_old_path"
     && cat ~/.tool-versions | cut -d' ' -f1 | xargs -I _ asdf install _ latest \
     && cat ~/.tool-versions | cut -d' ' -f1 | xargs -I _ asdf global _ latest
 
-[[ ${UPDATE_RUST:-$UPDATE_ALL} == 1 ]] \
-    && rustup update
-
 [[ ${UPDATE_CARGO:-$UPDATE_ALL} == 1 ]] \
     && cargo install --force \
-        cargo-watch \
-        tealdeer
+        $(cat ~/.default-cargo-crates)
 
 [[ ${UPDATE_GO:-$UPDATE_ALL} == 1 ]] \
     && go install \
