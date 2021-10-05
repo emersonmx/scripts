@@ -44,16 +44,6 @@ PYTHON=python3
 [[ ${UPDATE_POETRY:-$UPDATE_ALL} == 1 ]] \
     && poetry self update
 
-[[ ${UPDATE_VIRTUALENV:-$UPDATE_ALL} == 1 ]] \
-    && ( \
-        tmp_bin="$(mktemp)" \
-        && virtualenv_path="$USER_LOCAL/bin/virtualenv" \
-        && curl --location --output "$tmp_bin" https://bootstrap.pypa.io/virtualenv.pyz  \
-        && echo '#!/usr/bin/env python' > "$virtualenv_path" \
-        && cat "$tmp_bin" >> "$virtualenv_path" \
-        && chmod +x "$virtualenv_path" \
-    )
-
 [[ ${UPDATE_TLDR:-$UPDATE_ALL} == 1 ]] \
     && tldr --update
 
