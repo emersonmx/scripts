@@ -46,7 +46,10 @@ asdf_reshim_tool nodejs
 # direnv
 install_tool direnv
 
-# TODO: Go
+# Golang
+install_tool golang
+go install $(cat ~/.default-golang-pkgs)
+asdf_reshim_tool golang
 
 # Rust
 install_tool rust stable
