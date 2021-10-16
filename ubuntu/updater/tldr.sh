@@ -1,5 +1,1 @@
-#!/bin/bash
-set -euo pipefail
-IFS=$'\n\t'
-
-tldr --update
+../../arch/updater/tldr.sh
