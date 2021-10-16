@@ -1,6 +1,4 @@
 #!/bin/bash
-set -euo pipefail
-IFS=$'\n\t'
 
 asdf_install_tool() {
     name="$1"

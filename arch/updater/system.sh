@@ -1,6 +1,4 @@
 #!/bin/bash
-set -euo pipefail
-IFS=$'\n\t'
 
 _old_path="$PATH"
 export PATH=$(echo $PATH | sed "s#$USER_LOCAL/bin:##")
