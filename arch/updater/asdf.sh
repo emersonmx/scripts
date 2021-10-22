@@ -6,6 +6,12 @@ asdf_install_tool() {
     asdf install $name $version
 }
 
+asdf_uninstall_tool() {
+    name="$1"
+    version="$2"
+    asdf uninstall $name $version
+}
+
 asdf_global_tool() {
     name="$1"
     version="${2:-latest}"
@@ -25,6 +31,9 @@ install_tool() {
     asdf_global_tool $name $version
     asdf_reshim_tool $name $version
 }
+
+_old_path="$PATH"
+export PATH=$(echo $PATH | sed "s#$USER_LOCAL/bin:##")
 
 # ASDF
 asdf update
@@ -50,6 +59,7 @@ go install $(cat ~/.default-golang-pkgs)
 asdf_reshim_tool golang
 
 # Rust
+asdf_uninstall_tool rust stable
 install_tool rust stable
-cargo install --force $(cat ~/.default-cargo-crates)
-asdf_reshim_tool rust stable
+
+export PATH="$_old_path"
