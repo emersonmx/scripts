@@ -1,1 +1,0 @@
-../../arch/updater/poetry.sh
