@@ -1,4 +1,16 @@
 #!/bin/bash
 
-nvim +PlugInstall +PlugUpdate +UpdateRemotePlugins +qall
-nvim +CocUpdateSync +qall
+interval=3
+
+nvim \
+    +PlugInstall \
+    +"sleep $interval" \
+    +PlugUpdate \
+    +"sleep $interval" \
+    +UpdateRemotePlugins \
+    +"sleep $interval" \
+    +qall
+nvim \
+    +CocUpdateSync \
+    +"sleep $interval" \
+    +qall
