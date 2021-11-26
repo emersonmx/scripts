@@ -7,8 +7,6 @@ nvim \
     +"sleep $interval" \
     +PlugUpdate \
     +"sleep $interval" \
-    +UpdateRemotePlugins \
-    +"sleep $interval" \
     +qall
 nvim \
     +CocUpdateSync \
