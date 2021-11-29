@@ -47,6 +47,7 @@ asdf_reshim_tool python
 
 # NodeJS
 install_tool nodejs
+cat ~/.default-npm-packages | xargs -I _ npm install -g _
 npm update -g
 asdf_reshim_tool nodejs
 
@@ -55,7 +56,7 @@ install_tool direnv
 
 # Golang
 install_tool golang
-go install $(cat ~/.default-golang-pkgs)
+cat ~/.default-golang-pkgs | xargs -I _ go install _
 asdf_reshim_tool golang
 
 # Rust
