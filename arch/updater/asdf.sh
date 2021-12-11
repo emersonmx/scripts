@@ -51,9 +51,6 @@ cat ~/.default-npm-packages | xargs -I _ npm install -g _
 npm update -g
 asdf_reshim_tool nodejs
 
-# direnv
-install_tool direnv
-
 # Golang
 install_tool golang
 cat ~/.default-golang-pkgs | xargs -I _ go install _
@@ -62,5 +59,11 @@ asdf_reshim_tool golang
 # Rust
 asdf_uninstall_tool rust stable
 install_tool rust stable
+
+# Lua
+install_tool lua
+
+# direnv
+install_tool direnv
 
 export PATH="$_old_path"
