@@ -62,6 +62,8 @@ install_tool rust stable
 
 # Lua
 install_tool lua
+cat ~/.default-lua-packages | xargs -I _ bash -c "luarocks install _"
+asdf_reshim_tool lua
 
 # direnv
 install_tool direnv
