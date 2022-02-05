@@ -31,7 +31,7 @@ def main() -> int:
         print(f"{input_languages} languages are invalid.")
         return 1
 
-    print(get_gitignore(list(languages)))
+    print(get_gitignore(list(languages)), end="")
 
     return 0
 
