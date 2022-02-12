@@ -2,5 +2,5 @@
 
 interval=3
 
-nvim +PackerSync
-nvim +CocUpdateSync
+nvim +PackerSync +qall
+nvim +CocUpdateSync +qall
