@@ -58,8 +58,9 @@ cat ~/.default-golang-pkgs | xargs -I _ go install _
 asdf_reshim_tool golang
 
 ## Rust
-asdf_uninstall_tool rust stable
-install_tool rust stable
+install_tool rust
+cat ~/.default-cargo-crates | xargs -I _ cargo install -f _
+asdf_reshim_tool rust
 
 ## Lua
 install_tool lua
