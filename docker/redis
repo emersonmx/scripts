@@ -1,0 +1,24 @@
+#!/bin/bash
+
+container_name="redis"
+volume_name="redis-data"
+
+docker volume inspect "$volume_name" > /dev/null
+if [[ $? != 0 ]]
+then
+    docker volume create "$volume_name"
+fi
+
+docker container inspect "$container_name" > /dev/null
+if [[ $? == 0 ]]
+then
+    docker start "$container_name"
+else
+    docker run \
+        --name "$container_name" \
+        --restart=always \
+        -v "$volume_name:/data" \
+        -p '6379:6379' \
+        -d \
+        redis
+fi
