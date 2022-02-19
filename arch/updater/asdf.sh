@@ -58,6 +58,7 @@ cat ~/.default-golang-pkgs | xargs -I _ go install _
 asdf_reshim_tool golang
 
 ## Rust
+export ASDF_CRATE_DEFAULT_PACKAGES_FILE="/dev/null"
 install_tool rust
 cat ~/.default-cargo-crates | xargs -I _ cargo install -f _
 asdf_reshim_tool rust
