@@ -112,6 +112,7 @@ def update_misc_tools() -> None:
         "direnv",
         "k3d",
         "kubectl",
+        "sccache",
     ]
     for tool in tools:
         install_tool(tool)
