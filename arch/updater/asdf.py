@@ -99,12 +99,12 @@ def update_python() -> None:
 
 def update_rust() -> None:
     env["ASDF_CRATE_DEFAULT_PACKAGES_FILE"] = devnull
-    install_tool("rust", "stable")
+    install_tool("rust")
 
     packages = get_packages_by_language("rust")
     run(["cargo", "install", "-f", *packages])
 
-    asdf("reshim", "rust", "stable")
+    asdf("reshim", "rust")
 
 
 def update_misc_tools() -> None:
