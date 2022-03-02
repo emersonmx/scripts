@@ -2,7 +2,7 @@ FROM archlinux
 
 RUN : \
     && pacman -Syu --noconfirm \
-    && pacman -S --noconfirm --needed git base-devel sudo \
+    && pacman -S --noconfirm sudo \
     && :
 
 RUN : \
@@ -14,12 +14,5 @@ RUN : \
     && :
 
 USER testuser
-
-RUN : \
-    && whoami \
-    && git clone https://aur.archlinux.org/yay-bin.git /tmp/yay-bin \
-    && cd /tmp/yay-bin \
-    && makepkg --noconfirm -si \
-    && :
 
 WORKDIR /home/testuser

@@ -4,6 +4,6 @@ script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 ansible-playbook \
     -K \
-    --connection=local \
-    -i "$script_dir/inverntory.yaml" \
+    --connection=docker \
+    -i "$script_dir/inventory.yaml" \
     $1
