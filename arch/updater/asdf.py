@@ -24,7 +24,6 @@ def main() -> int:
     update_nodejs()
     update_python()
     update_rust()
-    update_misc_tools()
 
     return 0
 
@@ -105,17 +104,6 @@ def update_rust() -> None:
     run(["cargo", "install", "-f", *packages])
 
     asdf("reshim", "rust")
-
-
-def update_misc_tools() -> None:
-    tools = [
-        "direnv",
-        "k3d",
-        "kubectl",
-        "sccache",
-    ]
-    for tool in tools:
-        install_tool(tool)
 
 
 if __name__ == "__main__":
