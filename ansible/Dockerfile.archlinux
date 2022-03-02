@@ -2,17 +2,15 @@ FROM archlinux
 
 RUN : \
     && pacman -Syu --noconfirm \
-    && pacman -S --noconfirm sudo \
+    && pacman -S --noconfirm ansible sudo \
     && :
 
 RUN : \
     && useradd -s /usr/bin/bash --create-home -G wheel testuser \
     && printf "123\n123\n" | passwd testuser \
-    && sed \
-        's/# %wheel ALL=(ALL) NOPASSWD: ALL/%wheel ALL=(ALL) NOPASSWD: ALL/g' \
-        -i /etc/sudoers \
+    && echo "%wheel ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/wheel \
     && :
 
 USER testuser
 
-WORKDIR /home/testuser
+WORKDIR /home/testuser/ansible
