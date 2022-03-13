@@ -1,4 +1,5 @@
 import sys
+
 import requests
 
 URL = "https://www.toptal.com/developers/gitignore/api"
