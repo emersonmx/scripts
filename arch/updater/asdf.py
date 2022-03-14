@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import argparse
 import json
 from functools import cache
 from os import environ as env
@@ -18,14 +19,23 @@ def main() -> int:
         }
     )
 
-    update_asdf()
-    update_golang()
-    update_lua()
-    update_nodejs()
-    update_python()
-    update_rust()
+    languages = get_languages()
+
+    parser = argparse.ArgumentParser(description="asdf updater")
+    parser.add_argument("-l", "--languages", nargs="+", choices=languages)
+    args = parser.parse_args()
+
+    g = globals()
+    for language in args.languages or languages:
+        update_cmd = g.get(f"update_{language}", lambda: None)
+        update_cmd()
 
     return 0
+
+
+@cache
+def get_languages() -> list[str]:
+    return ["asdf"] + [p for p in get_packages().keys()]
 
 
 @cache
@@ -59,8 +69,9 @@ def update_golang() -> None:
     env["ASDF_GOLANG_DEFAULT_PACKAGES_FILE"] = devnull
     install_tool("golang")
 
-    packages = get_packages_by_language("golang")
-    run(["go", "install", *packages])
+    packages: list = get_packages_by_language("golang")
+    for package in packages:
+        run(["go", "install", package])
 
     asdf("reshim", "golang")
 
