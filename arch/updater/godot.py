@@ -52,8 +52,7 @@ def update_godot_editor() -> None:
         run(["curl", "-fSL", "-o", godot_tmp_file, "-C", "-", url])
         run(["unzip", godot_tmp_file, "-d", godot_tmp_dir])
         run(["rm", godot_tmp_file])
-        run(["mv", "-f", godot_tmp_dir / filename, godot_path])
-        godot_path.chmod(0o775)
+        run(["install", "-Dm775", godot_tmp_dir / filename, godot_path])
 
     run(
         [
