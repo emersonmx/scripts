@@ -21,7 +21,7 @@ def update_godot_editor() -> None:
     print("Installing Godot Editor...")
 
     repo_url = "https://github.com/godotengine/godot"
-    version = "v" + (
+    version = (
         run(
             " | ".join(
                 [
@@ -40,13 +40,13 @@ def update_godot_editor() -> None:
     )
 
     platform = "x11.64"
-    filename = f"Godot_{version}_{platform}"
-    url = f"{repo_url}/releases/download/{version[1:]}/{filename}.zip"
+    filename = f"Godot_v{version}_{platform}"
+    url = f"{repo_url}/releases/download/{version}/{filename}.zip"
 
     godot_path = USER_LOCAL_BIN / "godot"
     godot_tmp_dir = Path(tempfile.mkdtemp())
     godot_tmp_file = godot_tmp_dir / "godot.zip"
-    run(["curl", "-fsSL", "-o", godot_tmp_file, "-C", "-", url])
+    run(["curl", "-fSL", "-o", godot_tmp_file, "-C", "-", url])
     run(["unzip", godot_tmp_file, "-d", godot_tmp_dir])
     run(["rm", godot_tmp_file])
     run(["mv", "-f", godot_tmp_dir / filename, godot_path])
