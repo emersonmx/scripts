@@ -44,13 +44,14 @@ def update_godot_editor() -> None:
     url = f"{repo_url}/releases/download/{version}/{filename}.zip"
 
     godot_path = USER_LOCAL_BIN / "godot"
-    godot_tmp_dir = Path(tempfile.mkdtemp())
-    godot_tmp_file = godot_tmp_dir / "godot.zip"
-    run(["curl", "-fSL", "-o", godot_tmp_file, "-C", "-", url])
-    run(["unzip", godot_tmp_file, "-d", godot_tmp_dir])
-    run(["rm", godot_tmp_file])
-    run(["mv", "-f", godot_tmp_dir / filename, godot_path])
-    godot_path.chmod(0o775)
+    with tempfile.TemporaryDirectory() as f:
+        godot_tmp_dir = Path(f)
+        godot_tmp_file = godot_tmp_dir / "godot.zip"
+        run(["curl", "-fSL", "-o", godot_tmp_file, "-C", "-", url])
+        run(["unzip", godot_tmp_file, "-d", godot_tmp_dir])
+        run(["rm", godot_tmp_file])
+        run(["mv", "-f", godot_tmp_dir / filename, godot_path])
+        godot_path.chmod(0o775)
 
     print("Done.\n")
 
