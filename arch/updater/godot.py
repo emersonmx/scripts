@@ -42,6 +42,8 @@ def update_godot_editor() -> None:
     platform = "x11.64"
     filename = f"Godot_v{version}_{platform}"
     url = f"{repo_url}/releases/download/{version}/{filename}.zip"
+    desktop_file_url = "https://raw.githubusercontent.com/godotengine/godot/master/misc/dist/linux/org.godotengine.Godot.desktop"
+    shortcuts_dir = USER_LOCAL / "share" / "applications"
 
     godot_path = USER_LOCAL_BIN / "godot"
     with tempfile.TemporaryDirectory() as f:
@@ -52,6 +54,18 @@ def update_godot_editor() -> None:
         run(["rm", godot_tmp_file])
         run(["mv", "-f", godot_tmp_dir / filename, godot_path])
         godot_path.chmod(0o775)
+
+    run(
+        [
+            "curl",
+            "-fSL",
+            "--create-dirs",
+            "-O",
+            "--output-dir",
+            shortcuts_dir,
+            desktop_file_url,
+        ]
+    )
 
     print("Done.\n")
 
