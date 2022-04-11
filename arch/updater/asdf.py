@@ -56,7 +56,7 @@ def asdf(cmd: str, *args: str) -> None:
 
 def install_tool(name: str, version: str = "latest") -> None:
     asdf("install", name, version)
-    asdf("global", name, version)
+    asdf("global", name, version, "system")
     asdf("reshim", name, version)
 
 
