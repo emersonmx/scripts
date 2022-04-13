@@ -1,0 +1,26 @@
+#!/bin/bash
+
+container_name="mongo"
+volume_name="mongo-data"
+
+docker volume inspect "$volume_name" > /dev/null
+if [[ $? != 0 ]]
+then
+    docker volume create "$volume_name"
+fi
+
+docker container inspect "$container_name" > /dev/null
+if [[ $? == 0 ]]
+then
+    docker start "$container_name"
+else
+    docker run \
+        --name "$container_name" \
+        --restart=always \
+        -e MONGO_INITDB_ROOT_USERNAME=root \
+        -e MONGO_INITDB_ROOT_PASSWORD=secret \
+        -v "$volume_name:/data/db" \
+        -p '27017:27017' \
+        -d \
+        mongo
+fi
