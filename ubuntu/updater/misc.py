@@ -6,8 +6,8 @@ from pathlib import Path
 from subprocess import run
 
 HOMEDIR = Path.home()
-USER_LOCAL = HOMEDIR / ".local"
-USER_LOCAL_BIN = USER_LOCAL / "bin"
+HOME_LOCAL = HOMEDIR / ".local"
+HOME_LOCAL_BIN = HOME_LOCAL / "bin"
 
 
 def main() -> int:
@@ -23,7 +23,7 @@ def main() -> int:
 def update_direnv() -> None:
     print("Installing direnv...")
 
-    env["bin_path"] = str(USER_LOCAL_BIN)
+    env["bin_path"] = str(HOME_LOCAL_BIN)
     run("curl -sfL https://direnv.net/install.sh | bash", shell=True)
 
     print("Done.\n")
@@ -32,7 +32,7 @@ def update_direnv() -> None:
 def update_k3d() -> None:
     print("Installing k3d...")
 
-    env["K3D_INSTALL_DIR"] = str(USER_LOCAL_BIN)
+    env["K3D_INSTALL_DIR"] = str(HOME_LOCAL_BIN)
     env["USE_SUDO"] = "false"
     run(
         """
@@ -57,7 +57,7 @@ def update_kubectl() -> None:
         .stdout.decode()
         .strip()
     )
-    kubectl_path = USER_LOCAL_BIN / "kubectl"
+    kubectl_path = HOME_LOCAL_BIN / "kubectl"
     run(
         [
             "curl",
@@ -108,7 +108,7 @@ def update_sccache() -> None:
         f"{version}/sccache-{version}-{platform}.tar.gz"
     )
 
-    sccache_path = USER_LOCAL_BIN / "sccache"
+    sccache_path = HOME_LOCAL_BIN / "sccache"
     sccache_tmp_dir = Path(tempfile.mkdtemp())
     sccache_tmp_file = sccache_tmp_dir / "sccache.tar.gz"
     run(["curl", "-fsSL", "-o", sccache_tmp_file, "-C", "-", url])
