@@ -1,1 +1,3 @@
-../../arch/updater/chezmoi.sh
+#!/bin/bash
+
+chezmoi upgrade
