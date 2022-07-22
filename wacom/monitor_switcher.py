@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 
 
+from __future__ import annotations
+
 import re
 import subprocess
 from dataclasses import dataclass
 from functools import lru_cache, partial
 from itertools import cycle
-from typing import List
 
 run = partial(subprocess.run, check=True)
 
@@ -65,7 +66,7 @@ def get_next_monitor() -> Monitor:
 
 
 @lru_cache(maxsize=None)
-def get_available_monitors() -> List[Monitor]:
+def get_available_monitors() -> list[Monitor]:
     pattern = re.compile(
         r"^(.*) connected ?(primary)? (\d+)x(\d+)\+(\d+)\+(\d+).*",
         re.MULTILINE,
