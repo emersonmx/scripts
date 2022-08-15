@@ -17,10 +17,10 @@ else
     docker run \
         --name "$container_name" \
         --restart=always \
-        -e MONGO_INITDB_ROOT_USERNAME=root \
-        -e MONGO_INITDB_ROOT_PASSWORD=secret \
-        -v "$volume_name:/data/db" \
-        -p '27017:27017' \
-        -d \
+        --env MONGO_INITDB_ROOT_USERNAME=root \
+        --env MONGO_INITDB_ROOT_PASSWORD=secret \
+        --volume "$volume_name:/data/db" \
+        --publish "27017:27017" \
+        --detach \
         mongo
 fi

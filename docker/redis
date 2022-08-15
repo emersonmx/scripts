@@ -17,8 +17,8 @@ else
     docker run \
         --name "$container_name" \
         --restart=always \
-        -v "$volume_name:/data" \
-        -p '6379:6379' \
-        -d \
+        --volume "$volume_name:/data" \
+        --publish "6379:6379" \
+        --detach \
         redis
 fi

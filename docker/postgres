@@ -17,9 +17,9 @@ else
     docker run \
         --name "$container_name" \
         --restart=always \
-        -e POSTGRES_PASSWORD=secret \
-        -v "$volume_name:/var/lib/postgresql/data" \
-        -p '5432:5432' \
-        -d \
+        --env POSTGRES_PASSWORD=secret \
+        --volume "$volume_name:/var/lib/postgresql/data" \
+        --publish "5432:5432" \
+        --detach \
         postgres
 fi

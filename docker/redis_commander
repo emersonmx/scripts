@@ -1,0 +1,17 @@
+#!/bin/bash
+
+container_name="redis-commander"
+
+docker container inspect "$container_name" > /dev/null
+if [[ $? == 0 ]]
+then
+    docker start "$container_name"
+else
+    docker run \
+        --name "$container_name" \
+        --restart=always \
+        --env REDIS_HOSTS=local:172.17.0.1:6379 \
+        --publish "8081:8081" \
+        --detach \
+        rediscommander/redis-commander
+fi
