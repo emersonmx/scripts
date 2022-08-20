@@ -2,10 +2,13 @@
 
 import argparse
 import json
-from functools import cache
+import re
+import subprocess
+from functools import cache, partial
 from os import environ as env
 from os.path import devnull
-from subprocess import run
+
+run = partial(subprocess.run, check=True)
 
 HOMEDIR = env["HOME"]
 
@@ -50,11 +53,39 @@ def get_packages_by_language(language: str) -> list[str] | list[list[str]]:
     return packages[language]
 
 
+@cache
+def get_language_versions(language: str) -> list[str]:
+    version_pattern = re.compile(r"^\d+(\.\d+)*$")
+    output = run(
+        ["asdf", "list", "all", language],
+        capture_output=True,
+    ).stdout.decode()  # type: ignore
+    versions = []
+    for line in output.splitlines():
+        if version_pattern.match(line):
+            raw_version = [int(e) for e in line.split(".")]
+            padded_version = [0] * 3
+            version = tuple(raw_version + padded_version)[:3]
+            original_version = line
+            versions.append((version, original_version))
+
+    return [version for _, version in sorted(versions, key=lambda i: i[0])]
+
+
+@cache
+def get_latest_version_by_language(language: str) -> str:
+    version = get_language_versions(language)
+    return version[-1]
+
+
 def asdf(cmd: str, *args: str) -> None:
     run(["asdf", cmd, *args])
 
 
 def install_tool(name: str, version: str = "latest") -> None:
+    if version == "latest":
+        version = get_latest_version_by_language(name)
+
     asdf("install", name, version)
     asdf("global", name, version, "system")
     asdf("reshim", name, version)
