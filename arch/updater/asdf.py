@@ -15,12 +15,6 @@ HOMEDIR = env["HOME"]
 
 def main() -> int:
     env["PATH"] = env["PATH"].replace(f'{env["HOME_LOCAL"]}/bin:', "")
-    env.update(
-        {
-            "CMAKE_C_COMPILER_LAUNCHER": "sccache",
-            "CMAKE_CXX_COMPILER_LAUNCHER": "sccache",
-        }
-    )
 
     languages = get_languages()
 
