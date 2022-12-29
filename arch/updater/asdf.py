@@ -140,7 +140,6 @@ def update_rust() -> None:
     run(["cargo", "install", "-f", *packages])
 
     asdf("reshim", "rust")
-    run(["rustup", "toolchain", "install", "nightly"])
 
 
 if __name__ == "__main__":
