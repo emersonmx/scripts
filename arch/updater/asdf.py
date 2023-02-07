@@ -115,7 +115,8 @@ def update_nodejs() -> None:
     install_tool("nodejs")
 
     packages = get_packages_by_language("nodejs")
-    run(["npm", "install", "-g", *packages])
+    if packages:
+        run(["npm", "install", "-g", *packages])
     run(["npm", "update", "-g"])
 
     asdf("reshim", "nodejs")
