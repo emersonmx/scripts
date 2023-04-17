@@ -11,6 +11,7 @@ from os.path import devnull
 run = partial(subprocess.run, check=True)
 
 HOMEDIR = env["HOME"]
+LATEST_TAG = "latest"
 
 
 def main() -> int:
@@ -67,6 +68,26 @@ def get_language_versions(language: str) -> list[str]:
 
 
 @cache
+def get_installed_language_versions(language: str) -> list[str]:
+    version_pattern = re.compile(r"^\d+(\.\d+)*$")
+    output = run(
+        ["asdf", "list", language],
+        capture_output=True,
+    ).stdout.decode()  # type: ignore
+    versions = []
+    for line in output.splitlines():
+        line = line.strip()
+        if version_pattern.match(line):
+            raw_version = [int(e) for e in line.split(".")]
+            padded_version = [0] * 3
+            version = tuple(raw_version + padded_version)[:3]
+            original_version = line
+            versions.append((version, original_version))
+
+    return [version for _, version in sorted(versions, key=lambda i: i[0])]
+
+
+@cache
 def get_latest_version_by_language(language: str) -> str:
     version = get_language_versions(language)
     return version[-1]
@@ -76,8 +97,8 @@ def asdf(cmd: str, *args: str) -> None:
     run(["asdf", cmd, *args])
 
 
-def install_tool(name: str, version: str = "latest") -> None:
-    if version == "latest":
+def install_tool(name: str, version: str = LATEST_TAG) -> None:
+    if version == LATEST_TAG:
         version = get_latest_version_by_language(name)
 
     asdf("install", name, version)
@@ -124,13 +145,24 @@ def update_nodejs() -> None:
 
 def update_python() -> None:
     env["ASDF_PYTHON_DEFAULT_PACKAGES_FILE"] = devnull
-    install_tool("python")
 
-    packages = get_packages_by_language("python")
-    run(["python", "-m", "pip", "install", "--upgrade", "pip"])
-    run(["python", "-m", "pip", "install", "--upgrade", *packages])
+    installed_versions = set(get_installed_language_versions("python"))
+    installed_versions = {
+        "latest:" + ".".join(v.split(".")[:2]) for v in installed_versions
+    }
+    versions = {LATEST_TAG} | installed_versions
+    for version in versions:
+        update_python_version(version)
 
+    asdf("global", "python", LATEST_TAG, "system")
     asdf("reshim", "python")
+
+
+def update_python_version(version: str) -> None:
+    asdf("install", "python", version)
+    run(["python", "-m", "pip", "install", "--upgrade", "pip"])
+    packages = get_packages_by_language("python")
+    run(["python", "-m", "pip", "install", "--upgrade", *packages])
 
 
 def update_rust() -> None:
