@@ -12,6 +12,17 @@ services:
     ports:
       - "5432:5432"
 
+  mariadb:
+    container_name: mariadb
+    image: mariadb:latest
+    restart: always
+    environment:
+      - MARIADB_ROOT_PASSWORD=secret
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
   mongo:
     container_name: mongo
     image: mongo:latest
@@ -47,6 +58,8 @@ services:
 volumes:
   postgres_data:
     name: postgres-data
+  mariadb_data:
+    name: mariadb-data
   mongo_data:
     name: mongo-data
   redis_data:
