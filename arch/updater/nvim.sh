@@ -7,3 +7,4 @@ nvim \
 
 nvim --headless -c "MasonUpdate" -c "qall"
 nvim --headless -c "TSUpdateSync" -c "qall"
+nvim -c "Mason"
