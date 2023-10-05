@@ -1,12 +1,11 @@
 #!/usr/bin/env python
 
 import argparse
-import json
-import re
 import subprocess
 from functools import cache, partial
 from os import environ as env
 from os.path import devnull
+from pathlib import Path
 
 run = partial(subprocess.run, check=True)
 
@@ -20,11 +19,17 @@ def main() -> int:
     languages = get_languages()
 
     parser = argparse.ArgumentParser(description="asdf updater")
-    parser.add_argument("-l", "--languages", nargs="+", choices=languages)
+    parser.add_argument(
+        "-l",
+        "--languages",
+        nargs="+",
+        choices=languages,
+        default=languages,
+    )
     args = parser.parse_args()
 
     g = globals()
-    for language in args.languages or languages:
+    for language in args.languages:
         update_cmd = g.get(f"update_{language}", lambda: None)
         update_cmd()
 
@@ -37,73 +42,40 @@ def get_languages() -> list[str]:
 
 
 @cache
-def get_packages() -> dict:
-    with open(f"{HOMEDIR}/.config/asdf/default-packages.json") as f:
-        return json.load(f)
+def get_packages() -> dict[str, list[str]]:
+    packages = {}
+    languages = (
+        p for p in Path(f"{HOMEDIR}/.config/asdf/packages").iterdir() if p.is_file()
+    )
+    for language_path in languages:
+        language = language_path.name
+        with language_path.open() as f:
+            packages[language] = f.read().splitlines()
+    return packages
 
 
 @cache
-def get_packages_by_language(language: str) -> list[str] | list[list[str]]:
+def get_packages_by_language(language: str) -> list[str]:
     packages = get_packages()
     return packages[language]
-
-
-@cache
-def get_language_versions(language: str) -> list[str]:
-    version_pattern = re.compile(r"^\d+(\.\d+)*$")
-    output = run(
-        ["asdf", "list", "all", language],
-        capture_output=True,
-    ).stdout.decode()  # type: ignore
-    versions = []
-    for line in output.splitlines():
-        if version_pattern.match(line):
-            raw_version = [int(e) for e in line.split(".")]
-            padded_version = [0] * 3
-            version = tuple(raw_version + padded_version)[:3]
-            original_version = line
-            versions.append((version, original_version))
-
-    return [version for _, version in sorted(versions, key=lambda i: i[0])]
-
-
-@cache
-def get_installed_language_versions(language: str) -> list[str]:
-    version_pattern = re.compile(r"^\d+(\.\d+)*$")
-    output = run(
-        ["asdf", "list", language],
-        capture_output=True,
-    ).stdout.decode()  # type: ignore
-    versions = []
-    for line in output.splitlines():
-        line = line.strip()
-        if version_pattern.match(line):
-            raw_version = [int(e) for e in line.split(".")]
-            padded_version = [0] * 3
-            version = tuple(raw_version + padded_version)[:3]
-            original_version = line
-            versions.append((version, original_version))
-
-    return [version for _, version in sorted(versions, key=lambda i: i[0])]
-
-
-@cache
-def get_latest_version_by_language(language: str) -> str:
-    version = get_language_versions(language)
-    return version[-1]
 
 
 def asdf(cmd: str, *args: str) -> None:
     run(["asdf", cmd, *args])
 
 
-def install_tool(name: str, version: str = LATEST_TAG) -> None:
-    if version == LATEST_TAG:
-        version = get_latest_version_by_language(name)
+def install_tool(name: str) -> None:
+    asdf("install", name, LATEST_TAG)
+    make_tool_global(name)
+    reshim_tool(name)
 
-    asdf("install", name, version)
-    asdf("global", name, version, "system")
-    asdf("reshim", name, version)
+
+def make_tool_global(name: str) -> None:
+    asdf("global", name, LATEST_TAG, "system")
+
+
+def reshim_tool(name: str) -> None:
+    asdf("reshim", name, LATEST_TAG)
 
 
 def update_asdf() -> None:
@@ -119,7 +91,7 @@ def update_golang() -> None:
     for package in packages:
         run(["go", "install", package])
 
-    asdf("reshim", "golang")
+    reshim_tool("golang")
 
 
 def update_lua() -> None:
@@ -128,7 +100,7 @@ def update_lua() -> None:
     for *opts, package in get_packages_by_language("lua"):  # type: ignore
         run(["luarocks", "install", *opts, package])
 
-    asdf("reshim", "lua")
+    reshim_tool("lua")
 
 
 def update_nodejs() -> None:
@@ -140,29 +112,19 @@ def update_nodejs() -> None:
         run(["npm", "install", "-g", *packages])
     run(["npm", "update", "-g"])
 
-    asdf("reshim", "nodejs")
+    reshim_tool("nodejs")
 
 
 def update_python() -> None:
     env["ASDF_PYTHON_DEFAULT_PACKAGES_FILE"] = devnull
+    install_tool("python")
 
-    installed_versions = set(get_installed_language_versions("python"))
-    installed_versions = {
-        "latest:" + ".".join(v.split(".")[:2]) for v in installed_versions
-    }
-    versions = {LATEST_TAG} | installed_versions
-    for version in versions:
-        update_python_version(version)
-
-    asdf("global", "python", LATEST_TAG, "system")
-    asdf("reshim", "python")
-
-
-def update_python_version(version: str) -> None:
-    asdf("install", "python", version)
     run(["python", "-m", "pip", "install", "--upgrade", "pip"])
     packages = get_packages_by_language("python")
-    run(["python", "-m", "pip", "install", "--upgrade", *packages])
+    if packages:
+        run(["python", "-m", "pip", "install", "--upgrade", *packages])
+
+    reshim_tool("python")
 
 
 def update_rust() -> None:
@@ -172,7 +134,7 @@ def update_rust() -> None:
     packages = get_packages_by_language("rust")
     run(["cargo", "install", "-f", *packages])
 
-    asdf("reshim", "rust")
+    reshim_tool("rust")
 
 
 if __name__ == "__main__":
