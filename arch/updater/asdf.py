@@ -131,9 +131,14 @@ def update_rust() -> None:
     env["ASDF_CRATE_DEFAULT_PACKAGES_FILE"] = devnull
     install_tool("rust")
 
-    packages = get_packages_by_language("rust")
-    run(["cargo", "install", "-f", *packages])
+    run(["cargo", "install", "cargo-binstall"])
+    reshim_tool("rust")
 
+    packages = get_packages_by_language("rust")
+    run(["cargo", "binstall", *packages], input=b"yes")
+    reshim_tool("rust")
+
+    run(["cargo", "install-update", "-a"])
     reshim_tool("rust")
 
 
