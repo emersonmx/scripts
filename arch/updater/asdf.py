@@ -64,18 +64,18 @@ def asdf(cmd: str, *args: str) -> None:
     run(["asdf", cmd, *args])
 
 
-def install_tool(name: str) -> None:
-    asdf("install", name, LATEST_TAG)
-    make_tool_global(name)
-    reshim_tool(name)
+def install_tool(name: str, version: str = LATEST_TAG) -> None:
+    asdf("install", name, version)
+    make_tool_global(name, version)
+    reshim_tool(name, version)
 
 
-def make_tool_global(name: str) -> None:
-    asdf("global", name, LATEST_TAG, "system")
+def make_tool_global(name: str, version: str = LATEST_TAG) -> None:
+    asdf("global", name, version, "system")
 
 
-def reshim_tool(name: str) -> None:
-    asdf("reshim", name, LATEST_TAG)
+def reshim_tool(name: str, version: str = LATEST_TAG) -> None:
+    asdf("reshim", name, version)
 
 
 def update_asdf() -> None:
@@ -116,15 +116,16 @@ def update_nodejs() -> None:
 
 
 def update_python() -> None:
+    latest_stable_version = f"{LATEST_TAG}:3.11"
     env["ASDF_PYTHON_DEFAULT_PACKAGES_FILE"] = devnull
-    install_tool("python")
+    install_tool("python", latest_stable_version)
 
     run(["python", "-m", "pip", "install", "--upgrade", "pip"])
     packages = get_packages_by_language("python")
     if packages:
         run(["python", "-m", "pip", "install", "--upgrade", *packages])
 
-    reshim_tool("python")
+    reshim_tool("python", latest_stable_version)
 
 
 def update_rust() -> None:
