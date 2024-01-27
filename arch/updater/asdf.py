@@ -116,16 +116,15 @@ def update_nodejs() -> None:
 
 
 def update_python() -> None:
-    latest_stable_version = f"{LATEST_TAG}:3.11"
     env["ASDF_PYTHON_DEFAULT_PACKAGES_FILE"] = devnull
-    install_tool("python", latest_stable_version)
+    install_tool("python")
 
     run(["python", "-m", "pip", "install", "--upgrade", "pip"])
     packages = get_packages_by_language("python")
     if packages:
         run(["python", "-m", "pip", "install", "--upgrade", *packages])
 
-    reshim_tool("python", latest_stable_version)
+    reshim_tool("python")
 
 
 def update_rust() -> None:
