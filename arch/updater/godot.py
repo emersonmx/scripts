@@ -18,14 +18,13 @@ run = partial(subprocess.run, check=True)
 
 def main() -> int:
     update_godot_editor()
-    update_godot_headless()
     return 0
 
 
 def update_godot_editor() -> None:
     print("Installing Godot Editor...")
 
-    install_package("godot", "x11.64")
+    install_package("godot", "linux.x86_64")
 
     desktop_file_url = "https://raw.githubusercontent.com/godotengine/godot/master/misc/dist/linux/org.godotengine.Godot.desktop"
     run(
@@ -86,12 +85,6 @@ def install_package(binary_name: str, platform: str) -> None:
         run(["unzip", tmp_file, "-d", tmp_dir])
         run(["rm", tmp_file])
         run(["install", "-Dm775", tmp_dir / filename, binary_path])
-
-
-def update_godot_headless() -> None:
-    print("Installing Godot Headless...")
-    install_package("godot_headless", "linux_headless.64")
-    print("Done.\n")
 
 
 if __name__ == "__main__":
