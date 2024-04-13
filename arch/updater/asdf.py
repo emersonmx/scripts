@@ -97,22 +97,36 @@ def update_golang() -> None:
 def update_lua() -> None:
     install_tool("lua")
 
-    for *opts, package in get_packages_by_language("lua"):  # type: ignore
-        run(["luarocks", "install", *opts, package])
+    for package in get_packages_by_language("lua"):  # type: ignore
+        run(["luarocks", "install", package])
 
     reshim_tool("lua")
 
 
 def update_nodejs() -> None:
     env["ASDF_NPM_DEFAULT_PACKAGES_FILE"] = devnull
-    install_tool("nodejs")
+    version: str = (
+        run(  # type: ignore
+            [
+                "asdf",
+                "nodejs",
+                "resolve",
+                "lts",
+            ],
+            capture_output=True,
+        )
+        .stdout.decode()
+        .strip()
+    )
+    version = f"latest:{version}"
+    install_tool("nodejs", version)
 
     packages = get_packages_by_language("nodejs")
     if packages:
         run(["npm", "install", "-g", *packages])
     run(["npm", "update", "-g"])
 
-    reshim_tool("nodejs")
+    reshim_tool("nodejs", version)
 
 
 def update_python() -> None:
