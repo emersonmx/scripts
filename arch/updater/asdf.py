@@ -36,9 +36,17 @@ def main() -> int:
     return 0
 
 
-@cache
 def get_languages() -> list[str]:
-    return ["asdf"] + [p for p in get_packages().keys()]
+    return [
+        "asdf",
+        "golang",
+        "java",
+        "kotlin",
+        "lua",
+        "nodejs",
+        "python",
+        "rust",
+    ]
 
 
 @cache
@@ -57,7 +65,7 @@ def get_packages() -> dict[str, list[str]]:
 @cache
 def get_packages_by_language(language: str) -> list[str]:
     packages = get_packages()
-    return packages[language]
+    return packages.get(language, [])
 
 
 def asdf(cmd: str, *args: str) -> None:
@@ -65,6 +73,7 @@ def asdf(cmd: str, *args: str) -> None:
 
 
 def install_tool(name: str, version: str = LATEST_TAG) -> None:
+    add_plugin(name)
     asdf("install", name, version)
     make_tool_global(name, version)
     reshim_tool(name, version)
@@ -76,6 +85,10 @@ def make_tool_global(name: str, version: str = LATEST_TAG) -> None:
 
 def reshim_tool(name: str, version: str = LATEST_TAG) -> None:
     asdf("reshim", name, version)
+
+
+def add_plugin(name: str) -> None:
+    asdf("plugin", "add", name)
 
 
 def update_asdf() -> None:
@@ -154,6 +167,15 @@ def update_rust() -> None:
 
     run(["cargo", "install-update", "-a"])
     reshim_tool("rust")
+
+
+def update_java() -> None:
+    version = "latest:temurin-21"
+    install_tool("java", version)
+
+
+def update_kotlin() -> None:
+    install_tool("kotlin")
 
 
 if __name__ == "__main__":
