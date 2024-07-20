@@ -33,6 +33,8 @@ def main() -> int:
         update_cmd = g.get(f"update_{language}", lambda: None)
         update_cmd()
 
+    asdf("reshim")
+
     return 0
 
 
