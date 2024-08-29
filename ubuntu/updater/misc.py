@@ -14,7 +14,6 @@ def main() -> int:
     update_direnv()
     update_k3d()
     update_kubectl()
-    update_lf()
     update_sccache()
 
     return 0
@@ -67,16 +66,6 @@ def update_kubectl() -> None:
         ]
     )
     kubectl_path.chmod(0o775)
-
-    print("Done.\n")
-
-
-def update_lf() -> None:
-    print("Installing lf...")
-
-    base_url = "https://github.com/gokcehan/lf/releases/latest/download"
-    url = f"{base_url}/lf-linux-amd64.tar.gz"
-    run(f"curl -L {url} | tar xzC ~/.local/bin", shell=True)
 
     print("Done.\n")
 
