@@ -138,8 +138,8 @@ def update_nodejs() -> None:
 
     packages = get_packages_by_language("nodejs")
     if packages:
-        run(["npm", "install", "-g", *packages])
-    run(["npm", "update", "-g"])
+        run(["npm", "install", "-g", *packages], check=False)
+    run(["npx", "npm-check-updates", "-gu"])
 
     reshim_tool("nodejs", version)
 
