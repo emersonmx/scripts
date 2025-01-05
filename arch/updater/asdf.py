@@ -144,7 +144,15 @@ def update_nodejs() -> None:
 
 def update_python() -> None:
     env["ASDF_PYTHON_DEFAULT_PACKAGES_FILE"] = devnull
-    install_tool("python")
+    version = (
+        run(
+            ["asdf", "latest", "python"],
+            capture_output=True,
+        )
+        .stdout.decode()
+        .strip()
+    ).rstrip("t")
+    install_tool("python", version)
 
     run(["python", "-m", "pip", "install", "--upgrade", "pip"])
     packages = get_packages_by_language("python")
