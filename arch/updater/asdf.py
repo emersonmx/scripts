@@ -40,7 +40,6 @@ def main() -> int:
 
 def get_languages() -> list[str]:
     return [
-        "asdf",
         "golang",
         "java",
         "kotlin",
@@ -94,7 +93,6 @@ def add_plugin(name: str) -> None:
 
 
 def update_asdf() -> None:
-    asdf("update")
     asdf("plugin", "update", "--all")
 
 
