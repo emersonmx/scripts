@@ -28,6 +28,9 @@ def main() -> int:
     )
     args = parser.parse_args()
 
+    for language in args.languages:
+        add_plugin(language)
+
     g = globals()
     for language in args.languages:
         update_cmd = g.get(f"update_{language}", lambda: None)
@@ -73,7 +76,6 @@ def asdf(cmd: str, *args: str) -> None:
 
 
 def install_tool(name: str, version: str = LATEST_TAG) -> None:
-    add_plugin(name)
     asdf("install", name, version)
     use_as_default_tool(name, version)
     reshim_tool(name, version)
@@ -117,20 +119,15 @@ def update_lua() -> None:
 
 def update_nodejs() -> None:
     env["ASDF_NPM_DEFAULT_PACKAGES_FILE"] = devnull
-    version: str = (
-        run(  # type: ignore
-            [
-                "asdf",
-                "nodejs",
-                "resolve",
-                "lts",
-            ],
+    lts_version = "22"
+    version = (
+        run(
+            ["asdf", "latest", "nodejs", lts_version],
             capture_output=True,
         )
         .stdout.decode()
         .strip()
     )
-    version = f"latest:{version}"
     install_tool("nodejs", version)
 
     packages = get_packages_from_file("nodejs")
@@ -145,7 +142,7 @@ def update_python() -> None:
     env["ASDF_PYTHON_DEFAULT_PACKAGES_FILE"] = devnull
     version = (
         run(
-            ["asdf", "latest", "python"],
+            ["asdf", "latest", "python", "3"],
             capture_output=True,
         )
         .stdout.decode()
