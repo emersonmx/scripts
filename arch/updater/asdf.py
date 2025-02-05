@@ -74,7 +74,8 @@ def asdf(*args: str) -> None:
     run(["asdf", *args], check=False)
 
 
-def latest_version(name: str, version: str = "") -> str:
+def latest_version(name: str, version: str = LATEST_TAG) -> str:
+    version = "" if version == LATEST_TAG else version
     return (
         run(  # type: ignore
             ["asdf", "latest", name, version],
@@ -116,11 +117,13 @@ def update_golang() -> None:
 
 def update_lua() -> None:
     add_plugin("lua")
-    version = latest_version("lua", "5.1")
-    install_tool("lua", version)
+    versions = ["5.1", LATEST_TAG]
+    for v in versions:
+        version = latest_version("lua", v)
+        install_tool("lua", version)
 
-    for package in get_packages_from_file("lua"):
-        asdf("exec", "luarocks", "install", package)
+        for package in get_packages_from_file("lua"):
+            asdf("exec", "luarocks", "install", package)
 
     reshim_tool("lua")
 
