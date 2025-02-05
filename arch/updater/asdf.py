@@ -15,6 +15,7 @@ LATEST_TAG = "latest"
 
 def main() -> int:
     env["PATH"] = env["PATH"].replace(f"{env['HOME_LOCAL']}/bin:", "")
+    env["PATH"] = env["PATH"].replace(f"{env['ASDF_DATA_DIR']}/shims:", "")
 
     languages = get_languages()
 
@@ -26,17 +27,15 @@ def main() -> int:
         choices=languages,
         default=languages,
     )
+
     args = parser.parse_args()
+    g = globals()
 
     for language in args.languages:
-        add_plugin(language)
+        update_cmd = g.get(f"update_{language}", lambda: None)
+        update_cmd()
 
-    # g = globals()
-    # for language in args.languages:
-    #     update_cmd = g.get(f"update_{language}", lambda: None)
-    #     update_cmd()
-    #
-    # asdf("reshim")
+    asdf("reshim")
 
     return 0
 
@@ -44,8 +43,8 @@ def main() -> int:
 def get_languages() -> list[str]:
     return [
         "golang",
-        "java",
-        "kotlin",
+        # "java",
+        # "kotlin",
         "lua",
         "nodejs",
         "python",
@@ -71,14 +70,17 @@ def get_packages_from_file(filename: str) -> list[str]:
     return packages.get(filename, [])
 
 
-def asdf(cmd: str, *args: str) -> None:
-    run(["asdf", cmd, *args], check=False)
+def asdf(*args: str) -> None:
+    run(["asdf", *args], check=False)
 
 
 def install_tool(name: str, version: str = LATEST_TAG) -> None:
     asdf("install", name, version)
     use_as_default_tool(name, version)
-    reshim_tool(name, version)
+
+
+def add_plugin(name: str) -> None:
+    asdf("plugin", "add", name)
 
 
 def use_as_default_tool(name: str, version: str = LATEST_TAG) -> None:
@@ -89,36 +91,32 @@ def reshim_tool(name: str, version: str = LATEST_TAG) -> None:
     asdf("reshim", name, version)
 
 
-def add_plugin(name: str) -> None:
-    asdf("plugin", "add", name)
-
-
-def update_asdf() -> None:
-    asdf("plugin", "update", "--all")
-
-
 def update_golang() -> None:
     env["ASDF_GOLANG_DEFAULT_PACKAGES_FILE"] = devnull
+    add_plugin("golang")
     install_tool("golang")
 
     packages: list = get_packages_from_file("golang")
     for package in packages:
-        run(["go", "install", package])
+        asdf("exec", "go", "install", package)
 
     reshim_tool("golang")
 
 
 def update_lua() -> None:
+    add_plugin("lua")
     install_tool("lua")
 
-    for package in get_packages_from_file("lua"):  # type: ignore
-        run(["luarocks", "install", package])
+    for package in get_packages_from_file("lua"):
+        asdf("exec", "luarocks", "install", package)
 
     reshim_tool("lua")
 
 
 def update_nodejs() -> None:
     env["ASDF_NPM_DEFAULT_PACKAGES_FILE"] = devnull
+    add_plugin("nodejs")
+
     lts_version = "22"
     version = (
         run(
@@ -132,56 +130,54 @@ def update_nodejs() -> None:
 
     packages = get_packages_from_file("nodejs")
     if packages:
-        run(["npm", "install", "-g", *packages], check=False)
-    run(["npx", "npm-check-updates", "-gu"])
+        asdf("exec", "npm", "install", "-g", *packages)
 
     reshim_tool("nodejs", version)
 
 
 def update_python() -> None:
     env["ASDF_PYTHON_DEFAULT_PACKAGES_FILE"] = devnull
-    version = (
-        run(
-            ["asdf", "latest", "python", "3"],
-            capture_output=True,
-        )
-        .stdout.decode()
-        .strip()
-    ).rstrip("t")
-    install_tool("python", version)
+    add_plugin("python")
 
-    run(["python", "-m", "pip", "install", "--upgrade", "pip"])
-    packages = get_packages_from_file("python")
-    if packages:
-        run(["python", "-m", "pip", "install", "--upgrade", *packages])
+    versions = ["3.12.9", "3.13.2"]
+    for version in versions:
+        install_tool("python", version)
+
+        asdf("exec", "python", "-m", "pip", "install", "--upgrade", "pip")
+        packages = get_packages_from_file("python")
+        if packages:
+            asdf("exec", "python", "-m", "pip", "install", "--upgrade", *packages)
 
     reshim_tool("python")
 
 
 def update_rust() -> None:
     env["ASDF_CRATE_DEFAULT_PACKAGES_FILE"] = devnull
-    install_tool("rust")
+    add_plugin("rust")
 
-    packages = get_packages_from_file("rustup")
-    run(["rustup", "target", "install", *packages])
+    version = "1.84.1"
+    install_tool("rust", version)
 
-    run(["cargo", "install", "cargo-binstall"])
-    reshim_tool("rust")
+    targets = get_packages_from_file("rustup")
+    asdf("exec", "rustup", "target", "install", *targets)
+
+    asdf("exec", "cargo", "install", "cargo-binstall")
 
     packages = get_packages_from_file("rust")
-    run(["cargo", "binstall", *packages], input=b"yes")
-    reshim_tool("rust")
+    run(["asdf", "exec", "cargo", "binstall", *packages], input=b"yes")
 
-    run(["cargo", "install-update", "-a"])
+    asdf("exec", "cargo", "install-update", "--all")
     reshim_tool("rust")
 
 
 def update_java() -> None:
-    version = "latest:temurin-21"
+    version = "temurin-21.0.6+7.0.LTS"
+    add_plugin("java")
     install_tool("java", version)
 
 
 def update_kotlin() -> None:
+    add_plugin("kotlin")
     install_tool("kotlin")
 
 
