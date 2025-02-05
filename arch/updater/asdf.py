@@ -69,18 +69,18 @@ def get_packages_from_file(filename: str) -> list[str]:
 
 
 def asdf(cmd: str, *args: str) -> None:
-    run(["asdf", cmd, *args])
+    run(["asdf", cmd, *args], check=False)
 
 
 def install_tool(name: str, version: str = LATEST_TAG) -> None:
     add_plugin(name)
     asdf("install", name, version)
-    make_tool_global(name, version)
+    use_as_default_tool(name, version)
     reshim_tool(name, version)
 
 
-def make_tool_global(name: str, version: str = LATEST_TAG) -> None:
-    asdf("global", name, version, "system")
+def use_as_default_tool(name: str, version: str = LATEST_TAG) -> None:
+    asdf("set", "--home", name, version, "system")
 
 
 def reshim_tool(name: str, version: str = LATEST_TAG) -> None:
