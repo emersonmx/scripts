@@ -105,7 +105,15 @@ def update_golang() -> None:
 
 def update_lua() -> None:
     add_plugin("lua")
-    install_tool("lua")
+    version = (
+        run(  # type: ignore
+            ["asdf", "latest", "lua", "5.1"],
+            capture_output=True,
+        )
+        .stdout.decode()
+        .strip()
+    )
+    install_tool("lua", version)
 
     for package in get_packages_from_file("lua"):
         asdf("exec", "luarocks", "install", package)
@@ -117,10 +125,9 @@ def update_nodejs() -> None:
     env["ASDF_NPM_DEFAULT_PACKAGES_FILE"] = devnull
     add_plugin("nodejs")
 
-    lts_version = "22"
     version = (
-        run(
-            ["asdf", "latest", "nodejs", lts_version],
+        run(  # type: ignore
+            ["asdf", "latest", "nodejs", "22"],
             capture_output=True,
         )
         .stdout.decode()
