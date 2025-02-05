@@ -74,6 +74,17 @@ def asdf(*args: str) -> None:
     run(["asdf", *args], check=False)
 
 
+def latest_version(name: str, version: str = "") -> str:
+    return (
+        run(  # type: ignore
+            ["asdf", "latest", name, version],
+            capture_output=True,
+        )
+        .stdout.decode()
+        .strip()
+    )
+
+
 def install_tool(name: str, version: str = LATEST_TAG) -> None:
     asdf("install", name, version)
     use_as_default_tool(name, version)
@@ -105,14 +116,7 @@ def update_golang() -> None:
 
 def update_lua() -> None:
     add_plugin("lua")
-    version = (
-        run(  # type: ignore
-            ["asdf", "latest", "lua", "5.1"],
-            capture_output=True,
-        )
-        .stdout.decode()
-        .strip()
-    )
+    version = latest_version("lua", "5.1")
     install_tool("lua", version)
 
     for package in get_packages_from_file("lua"):
@@ -125,14 +129,7 @@ def update_nodejs() -> None:
     env["ASDF_NPM_DEFAULT_PACKAGES_FILE"] = devnull
     add_plugin("nodejs")
 
-    version = (
-        run(  # type: ignore
-            ["asdf", "latest", "nodejs", "22"],
-            capture_output=True,
-        )
-        .stdout.decode()
-        .strip()
-    )
+    version = latest_version("nodejs", "22")
     install_tool("nodejs", version)
 
     packages = get_packages_from_file("nodejs")
@@ -146,8 +143,9 @@ def update_python() -> None:
     env["ASDF_PYTHON_DEFAULT_PACKAGES_FILE"] = devnull
     add_plugin("python")
 
-    versions = ["3.12.9", "3.13.2"]
-    for version in versions:
+    versions = ["3.12", "3.13"]
+    for v in versions:
+        version = latest_version("python", v).rstrip("t")
         install_tool("python", version)
 
         asdf("exec", "python", "-m", "pip", "install", "--upgrade", "pip")
@@ -162,7 +160,7 @@ def update_rust() -> None:
     env["ASDF_CRATE_DEFAULT_PACKAGES_FILE"] = devnull
     add_plugin("rust")
 
-    version = "1.84.1"
+    version = latest_version("rust")
     install_tool("rust", version)
 
     targets = get_packages_from_file("rustup")
