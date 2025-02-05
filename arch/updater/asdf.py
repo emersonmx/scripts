@@ -31,12 +31,12 @@ def main() -> int:
     for language in args.languages:
         add_plugin(language)
 
-    g = globals()
-    for language in args.languages:
-        update_cmd = g.get(f"update_{language}", lambda: None)
-        update_cmd()
-
-    asdf("reshim")
+    # g = globals()
+    # for language in args.languages:
+    #     update_cmd = g.get(f"update_{language}", lambda: None)
+    #     update_cmd()
+    #
+    # asdf("reshim")
 
     return 0
 
