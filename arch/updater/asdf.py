@@ -14,7 +14,7 @@ LATEST_TAG = "latest"
 
 
 def main() -> int:
-    env["PATH"] = env["PATH"].replace(f'{env["HOME_LOCAL"]}/bin:', "")
+    env["PATH"] = env["PATH"].replace(f"{env['HOME_LOCAL']}/bin:", "")
 
     languages = get_languages()
 
@@ -53,20 +53,19 @@ def get_languages() -> list[str]:
 @cache
 def get_packages() -> dict[str, list[str]]:
     packages = {}
-    languages = (
+    files = (
         p for p in Path(f"{HOMEDIR}/.config/asdf/packages").iterdir() if p.is_file()
     )
-    for language_path in languages:
-        language = language_path.name
-        with language_path.open() as f:
-            packages[language] = f.read().splitlines()
+    for file in files:
+        with file.open() as f:
+            packages[file.name] = f.read().splitlines()
     return packages
 
 
 @cache
-def get_packages_by_language(language: str) -> list[str]:
+def get_packages_from_file(filename: str) -> list[str]:
     packages = get_packages()
-    return packages.get(language, [])
+    return packages.get(filename, [])
 
 
 def asdf(cmd: str, *args: str) -> None:
@@ -100,7 +99,7 @@ def update_golang() -> None:
     env["ASDF_GOLANG_DEFAULT_PACKAGES_FILE"] = devnull
     install_tool("golang")
 
-    packages: list = get_packages_by_language("golang")
+    packages: list = get_packages_from_file("golang")
     for package in packages:
         run(["go", "install", package])
 
@@ -110,7 +109,7 @@ def update_golang() -> None:
 def update_lua() -> None:
     install_tool("lua")
 
-    for package in get_packages_by_language("lua"):  # type: ignore
+    for package in get_packages_from_file("lua"):  # type: ignore
         run(["luarocks", "install", package])
 
     reshim_tool("lua")
@@ -134,7 +133,7 @@ def update_nodejs() -> None:
     version = f"latest:{version}"
     install_tool("nodejs", version)
 
-    packages = get_packages_by_language("nodejs")
+    packages = get_packages_from_file("nodejs")
     if packages:
         run(["npm", "install", "-g", *packages], check=False)
     run(["npx", "npm-check-updates", "-gu"])
@@ -155,7 +154,7 @@ def update_python() -> None:
     install_tool("python", version)
 
     run(["python", "-m", "pip", "install", "--upgrade", "pip"])
-    packages = get_packages_by_language("python")
+    packages = get_packages_from_file("python")
     if packages:
         run(["python", "-m", "pip", "install", "--upgrade", *packages])
 
@@ -166,10 +165,13 @@ def update_rust() -> None:
     env["ASDF_CRATE_DEFAULT_PACKAGES_FILE"] = devnull
     install_tool("rust")
 
+    packages = get_packages_from_file("rustup")
+    run(["rustup", "target", "install", *packages])
+
     run(["cargo", "install", "cargo-binstall"])
     reshim_tool("rust")
 
-    packages = get_packages_by_language("rust")
+    packages = get_packages_from_file("rust")
     run(["cargo", "binstall", *packages], input=b"yes")
     reshim_tool("rust")
 
