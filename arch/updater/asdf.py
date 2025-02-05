@@ -43,8 +43,8 @@ def main() -> int:
 def get_languages() -> list[str]:
     return [
         "golang",
-        # "java",
-        # "kotlin",
+        "java",
+        "kotlin",
         "lua",
         "nodejs",
         "python",
@@ -179,8 +179,8 @@ def update_rust() -> None:
 
 
 def update_java() -> None:
-    version = "temurin-21.0.6+7.0.LTS"
     add_plugin("java")
+    version = latest_version("java", "temurin-21")
     install_tool("java", version)
 
 
