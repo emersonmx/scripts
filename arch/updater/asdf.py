@@ -2,6 +2,7 @@
 
 import argparse
 import subprocess
+import os
 from functools import cache, partial
 from os import environ as env
 from os.path import devnull
@@ -11,11 +12,11 @@ run = partial(subprocess.run, check=True)
 
 HOMEDIR = env["HOME"]
 LATEST_TAG = "latest"
+COMPLETIONS_PATH = Path(HOMEDIR) / ".cache" / "zsh" / "completions"
 
 
 def main() -> int:
-    env["PATH"] = env["PATH"].replace(f"{env['HOME_LOCAL']}/bin:", "")
-    env["PATH"] = env["PATH"].replace(f"{env['ASDF_DATA_DIR']}/shims:", "")
+    setup()
 
     languages = get_languages()
 
@@ -38,6 +39,13 @@ def main() -> int:
     asdf("reshim")
 
     return 0
+
+
+def setup() -> None:
+    env["PATH"] = env["PATH"].replace(f"{env['HOME_LOCAL']}/bin:", "")
+    env["PATH"] = env["PATH"].replace(f"{env['ASDF_DATA_DIR']}/shims:", "")
+
+    os.makedirs(COMPLETIONS_PATH, exist_ok=True)
 
 
 def get_languages() -> list[str]:
@@ -175,6 +183,10 @@ def update_rust() -> None:
     run(["asdf", "exec", "cargo", "binstall", *packages], input=b"yes")
 
     asdf("exec", "cargo", "install-update", "--all")
+
+    with open(COMPLETIONS_PATH / "_just", "w") as f:
+        run(["asdf", "exec", "just", "--completions", "zsh"], check=False, stdout=f)
+
     reshim_tool("rust")
 
 
