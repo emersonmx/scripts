@@ -164,6 +164,20 @@ def update_python() -> None:
         if packages:
             asdf("exec", "python", "-m", "pip", "install", "--upgrade", *packages)
 
+    with open(COMPLETIONS_PATH / "_uv", "w") as f:
+        run(
+            ["asdf", "exec", "uv", "generate-shell-completion", "zsh"],
+            check=False,
+            stdout=f,
+        )
+
+    with open(COMPLETIONS_PATH / "_uvx", "w") as f:
+        run(
+            ["asdf", "exec", "uvx", "--generate-shell-completion", "zsh"],
+            check=False,
+            stdout=f,
+        )
+
     reshim_tool("python")
 
 
