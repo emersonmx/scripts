@@ -1,7 +1,7 @@
 #!/bin/bash
 
 _old_path="$PATH"
-export PATH=$(echo $PATH | sed "s#$USER_LOCAL/bin:##")
+export PATH=$(echo $PATH | sed -e "s#$HOME_LOCAL/bin:##" -e "s#$HOME_LOCAL/share/asdf/shims:##g")
 
 yay -Syu
 
