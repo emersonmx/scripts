@@ -1,0 +1,42 @@
+services:
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib
+    ports:
+      - 1888:1888 # pprof extension
+      - 8888:8888 # Prometheus metrics exposed by the Collector
+      - 8889:8889 # Prometheus exporter metrics
+      - 13133:13133 # health_check extension
+      - 4317:4317 # OTLP gRPC receiver
+      - 4318:4318 # OTLP http receiver
+      - 55679:55679 # zpages extension
+    volumes:
+      - ./otel-collector-config.yaml:/etc/otelcol-contrib/config.yaml
+    depends_on:
+      jaeger:
+        condition: service_healthy
+      prometheus:
+        condition: service_healthy
+
+  jaeger:
+    image: jaegertracing/jaeger
+    ports:
+      - 16686:16686
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "--quiet", "http://localhost:16686"]
+      interval: 5s
+      retries: 3
+      timeout: 3s
+      start_period: 5s
+
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - 9090:9090
+    volumes:
+      - ./prometheus.yaml:/etc/prometheus/prometheus.yml
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "--quiet", "http://localhost:9090"]
+      interval: 5s
+      retries: 3
+      timeout: 3s
+      start_period: 5s
