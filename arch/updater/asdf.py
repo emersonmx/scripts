@@ -84,14 +84,15 @@ def asdf(*args: str) -> None:
 
 def latest_version(name: str, version: str = LATEST_TAG) -> str:
     version = "" if version == LATEST_TAG else version
-    return (
+    versions = (
         run(  # type: ignore
-            ["asdf", "latest", name, version],
+            ["asdf", "list", "all", name, version],
             capture_output=True,
         )
         .stdout.decode()
         .strip()
-    )
+    ).splitlines()
+    return versions[-1]
 
 
 def install_tool(name: str, version: str = LATEST_TAG) -> None:
