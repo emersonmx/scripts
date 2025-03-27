@@ -155,7 +155,7 @@ def update_python() -> None:
     env["ASDF_PYTHON_DEFAULT_PACKAGES_FILE"] = devnull
     add_plugin("python")
 
-    versions = ["3.12", "3.13"]
+    versions = ["3.13"]
     for v in versions:
         version = latest_version("python", v).rstrip("t")
         install_tool("python", version)
