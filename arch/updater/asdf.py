@@ -126,7 +126,7 @@ def update_golang() -> None:
 
 def update_lua() -> None:
     add_plugin("lua")
-    versions = ["5.1", LATEST_TAG]
+    versions = [LATEST_TAG, "5.1"]
     for v in versions:
         version = latest_version("lua", v)
         install_tool("lua", version)
