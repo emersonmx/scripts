@@ -192,9 +192,13 @@ def update_rust() -> None:
     targets = get_packages_from_file("rustup")
     asdf("exec", "rustup", "target", "install", *targets)
 
-    asdf("exec", "cargo", "install", "cargo-binstall")
+    for package in get_packages_from_file("rust-install"):
+        if "//github.com/" in package:
+            asdf("exec", "cargo", "install", "--git", package)
+        else:
+            asdf("exec", "cargo", "install", package)
 
-    packages = get_packages_from_file("rust")
+    packages = get_packages_from_file("rust-binstall")
     run(["asdf", "exec", "cargo", "binstall", *packages], input=b"yes")
 
     asdf("exec", "cargo", "install-update", "--all")
