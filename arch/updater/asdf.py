@@ -201,7 +201,7 @@ def update_rust() -> None:
     packages = get_packages_from_file("rust-binstall")
     run(["asdf", "exec", "cargo", "binstall", *packages], input=b"yes")
 
-    asdf("exec", "cargo", "install-update", "--all")
+    asdf("exec", "cargo", "install-update", "--all", "--git")
 
     with open(COMPLETIONS_PATH / "_just", "w") as f:
         run(["asdf", "exec", "just", "--completions", "zsh"], check=False, stdout=f)
