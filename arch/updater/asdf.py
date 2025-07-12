@@ -10,6 +10,7 @@ from pathlib import Path
 
 run = partial(subprocess.run, check=True)
 
+OLD_PATH = env["PATH"]
 HOMEDIR = env["HOME"]
 LATEST_TAG = "latest"
 COMPLETIONS_PATH = Path(HOMEDIR) / ".cache" / "zsh" / "completions"
@@ -138,6 +139,8 @@ def update_lua() -> None:
 
 
 def update_nodejs() -> None:
+    clean_path = env["PATH"]
+    env["PATH"] = OLD_PATH
     env["ASDF_NPM_DEFAULT_PACKAGES_FILE"] = devnull
     add_plugin("nodejs")
 
@@ -149,6 +152,7 @@ def update_nodejs() -> None:
         asdf("exec", "npm", "install", "-g", *packages)
 
     reshim_tool("nodejs", version)
+    env["PATH"] = clean_path
 
 
 def update_python() -> None:
