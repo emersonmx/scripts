@@ -118,8 +118,7 @@ def update_golang() -> None:
     add_plugin("golang")
     install_tool("golang")
 
-    packages: list = get_packages_from_file("golang")
-    for package in packages:
+    for package in get_packages_from_file("golang"):
         asdf("exec", "go", "install", package)
 
     reshim_tool("golang")
