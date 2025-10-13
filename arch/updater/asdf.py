@@ -182,7 +182,7 @@ def update_python() -> None:
 
     versions = get_runtime_versions("python")
     for v in versions:
-        version = latest_version("python", v, ["t", "dev"])
+        version = latest_version("python", v, ["t", "-"])
         install_tool("python", version)
 
         asdf("exec", "python", "-m", "pip", "install", "--upgrade", "pip")
