@@ -47,6 +47,7 @@ services:
   redis-commander:
     container_name: redis-commander
     image: rediscommander/redis-commander:latest
+    network_mode: host
     environment:
       - REDIS_HOSTS=local:redis:6379
     ports:
