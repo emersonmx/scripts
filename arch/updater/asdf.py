@@ -3,10 +3,12 @@
 import argparse
 import subprocess
 import os
+import re
 from functools import cache, partial
 from os import environ as env
 from os.path import devnull
 from pathlib import Path
+from typing import Callable
 
 run = partial(subprocess.run, check=True)
 
@@ -14,6 +16,7 @@ OLD_PATH = env["PATH"]
 HOMEDIR = env["HOME"]
 LATEST_TAG = "latest"
 COMPLETIONS_PATH = Path(HOMEDIR) / ".cache" / "zsh" / "completions"
+VERSION_PATTERN = re.compile(r"^\d+(\.\d+)*$")
 
 
 def main() -> int:
@@ -87,6 +90,10 @@ def get_packages_from_file(filename: str) -> list[str]:
     return packages.get(filename, [])
 
 
+def valid_version(version: str) -> bool:
+    return bool(VERSION_PATTERN.match(version))
+
+
 def asdf(*args: str) -> None:
     run(["asdf", *args], check=False)
 
@@ -94,7 +101,7 @@ def asdf(*args: str) -> None:
 def latest_version(
     name: str,
     version: str = LATEST_TAG,
-    filter: list[str] | None = None,
+    filter_fn: Callable[[str], bool] | None = None,
 ) -> str:
     version = "" if version == LATEST_TAG else version
     versions = (
@@ -105,8 +112,8 @@ def latest_version(
         .stdout.decode()
         .strip()
     ).splitlines()
-    if filter:
-        versions = [v for v in versions if not any(f in v for f in filter)]
+    if filter_fn:
+        versions = [v for v in versions if filter_fn(v)]
     return versions[-1] if version else LATEST_TAG
 
 
@@ -182,7 +189,7 @@ def update_python() -> None:
 
     versions = get_runtime_versions("python")
     for v in versions:
-        version = latest_version("python", v, ["t", "-"])
+        version = latest_version("python", v, valid_version)
         install_tool("python", version)
 
         asdf("exec", "python", "-m", "pip", "install", "--upgrade", "pip")
@@ -250,7 +257,7 @@ def update_kotlin() -> None:
 
     versions = get_runtime_versions("kotlin")
     for v in versions:
-        version = latest_version("kotlin", v, ["-"])
+        version = latest_version("kotlin", v, valid_version)
         install_tool("kotlin", version)
 
 
