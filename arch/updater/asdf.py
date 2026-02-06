@@ -76,7 +76,9 @@ def get_runtime_versions(runtime: str) -> list[str]:
 def get_packages() -> dict[str, list[str]]:
     packages = {}
     files = (
-        p for p in Path(f"{HOMEDIR}/.config/asdf/packages").iterdir() if p.is_file()
+        p
+        for p in Path(f"{HOMEDIR}/.config/asdf").iterdir()
+        if p.is_file() and p.name != "runtimes"
     )
     for file in files:
         with file.open() as f:
