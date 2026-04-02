@@ -42,6 +42,10 @@ def main() -> int:
 
     asdf("reshim")
 
+    print()
+    print("Installed versions:")
+    asdf("list")
+
     return 0
 
 
@@ -53,23 +57,23 @@ def setup() -> None:
 
 
 @cache
-def get_runtimes() -> dict[str, list[str]]:
-    runtimes = {}
-    with Path(f"{HOMEDIR}/.config/asdf/runtimes").open() as f:
+def get_tools() -> dict[str, list[str]]:
+    tools = {}
+    with Path(f"{HOMEDIR}/.config/asdf/tools").open() as f:
         for line in f.read().splitlines():
-            runtime, *versions = line.split(" ")
+            tool, *versions = line.split(" ")
             if versions:
-                runtimes[runtime] = versions
-    return runtimes
+                tools[tool] = versions
+    return tools
 
 
 def get_languages() -> list[str]:
-    return list(get_runtimes())
+    return list(get_tools())
 
 
-def get_runtime_versions(runtime: str) -> list[str]:
-    runtimes = get_runtimes()
-    return runtimes.get(runtime, [])
+def get_tool_versions(tool: str) -> list[str]:
+    tools = get_tools()
+    return tools.get(tool, [])
 
 
 @cache
@@ -78,7 +82,7 @@ def get_packages() -> dict[str, list[str]]:
     files = (
         p
         for p in Path(f"{HOMEDIR}/.config/asdf").iterdir()
-        if p.is_file() and p.name != "runtimes"
+        if p.is_file() and p.name != "tools"
     )
     for file in files:
         with file.open() as f:
@@ -140,7 +144,7 @@ def update_golang() -> None:
     env["ASDF_GOLANG_DEFAULT_PACKAGES_FILE"] = devnull
     add_plugin("golang")
 
-    versions = get_runtime_versions("golang")
+    versions = get_tool_versions("golang")
     for v in versions:
         version = latest_version("golang", v)
         install_tool("golang", version)
@@ -154,7 +158,7 @@ def update_golang() -> None:
 def update_lua() -> None:
     add_plugin("lua")
 
-    versions = get_runtime_versions("lua")
+    versions = get_tool_versions("lua")
     for v in versions:
         version = latest_version("lua", v)
         install_tool("lua", version)
@@ -171,7 +175,7 @@ def update_nodejs() -> None:
     env["ASDF_NPM_DEFAULT_PACKAGES_FILE"] = devnull
     add_plugin("nodejs")
 
-    versions = get_runtime_versions("nodejs")
+    versions = get_tool_versions("nodejs")
     for v in versions:
         version = latest_version("nodejs", v)
         install_tool("nodejs", version)
@@ -189,7 +193,7 @@ def update_python() -> None:
     env["ASDF_PYTHON_DEFAULT_PACKAGES_FILE"] = devnull
     add_plugin("python")
 
-    versions = get_runtime_versions("python")
+    versions = get_tool_versions("python")
     for v in versions:
         version = latest_version("python", v, valid_version)
         install_tool("python", version)
@@ -220,7 +224,7 @@ def update_rust() -> None:
     env["ASDF_CRATE_DEFAULT_PACKAGES_FILE"] = devnull
     add_plugin("rust")
 
-    versions = get_runtime_versions("rust")
+    versions = get_tool_versions("rust")
     for v in versions:
         version = latest_version("rust", v)
         install_tool("rust", version)
@@ -248,7 +252,7 @@ def update_rust() -> None:
 def update_java() -> None:
     add_plugin("java")
 
-    versions = get_runtime_versions("java")
+    versions = get_tool_versions("java")
     for v in versions:
         version = latest_version("java", v)
         install_tool("java", version)
@@ -257,7 +261,7 @@ def update_java() -> None:
 def update_kotlin() -> None:
     add_plugin("kotlin")
 
-    versions = get_runtime_versions("kotlin")
+    versions = get_tool_versions("kotlin")
     for v in versions:
         version = latest_version("kotlin", v, valid_version)
         install_tool("kotlin", version)
