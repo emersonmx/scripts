@@ -233,7 +233,7 @@ def update_rust() -> None:
         asdf("exec", "rustup", "target", "install", *targets)
 
         for package in get_packages_from_file("rust-install"):
-            if "//github.com/" in package:
+            if package.startswith("https://"):
                 asdf("exec", "cargo", "install", "--git", package)
             else:
                 asdf("exec", "cargo", "install", package)
