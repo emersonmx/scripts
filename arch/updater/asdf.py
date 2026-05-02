@@ -234,9 +234,9 @@ def update_rust() -> None:
 
         for package in get_packages_from_file("rust-install"):
             if package.startswith("https://"):
-                asdf("exec", "cargo", "install", "--git", package)
+                asdf("exec", "cargo", "install", "--locked", "--git", package)
             else:
-                asdf("exec", "cargo", "install", package)
+                asdf("exec", "cargo", "install", "--locked", package)
 
         packages = get_packages_from_file("rust-binstall")
         run(["asdf", "exec", "cargo", "binstall", *packages], input=b"yes")
