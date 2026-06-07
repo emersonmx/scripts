@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-import os
 from dataclasses import dataclass, field
 from pathlib import Path
 import subprocess
@@ -14,6 +13,7 @@ class Language:
     location: Path | None = None
     revision: str | None = None
     requires: list[str] = field(default_factory=list)
+    inject_deps: list[str] = field(default_factory=list)
 
 
 tmp_directory = Path(tempfile.mkdtemp())
@@ -22,18 +22,18 @@ nvim_config_directory = Path.home() / ".config" / "nvim"
 parser_directory = nvim_config_directory / "parser"
 queries_directory = nvim_config_directory / "queries"
 
-tree_sitter_manager_url = "https://github.com/romus204/tree-sitter-manager.nvim"
-tree_sitter_manager_directory = tmp_directory / "tree-sitter-manager"
-tree_sitter_manager_queries_directory = (
-    tree_sitter_manager_directory / "runtime" / "queries"
-)
+nvim_treesitter_url = "https://github.com/neovim-treesitter/nvim-treesitter"
+nvim_treesitter_directory = tmp_directory / "nvim-treesitter"
+nvim_treesitter_queries_directory = nvim_treesitter_directory / "runtime" / "queries"
 
 languages: list[Language] = [
     Language(name="bash", url="https://github.com/tree-sitter/tree-sitter-bash"),
     Language(name="c", url="https://github.com/tree-sitter/tree-sitter-c"),
     Language(name="css", url="https://github.com/tree-sitter/tree-sitter-css"),
     Language(
-        name="dockerfile", url="https://github.com/camdencheek/tree-sitter-dockerfile"
+        name="dockerfile",
+        url="https://github.com/camdencheek/tree-sitter-dockerfile",
+        inject_deps=["bash"],
     ),
     Language(name="gitcommit", url="https://github.com/gbprod/tree-sitter-gitcommit"),
     Language(
@@ -45,20 +45,28 @@ languages: list[Language] = [
         name="helm",
         url="https://github.com/ngalaiko/tree-sitter-go-template",
         location=Path("dialects/helm"),
+        requires=["gotmpl"],
     ),
     Language(
         name="html",
         url="https://github.com/tree-sitter/tree-sitter-html",
         requires=["html_tags"],
+        inject_deps=["css", "graphql", "javascript", "json", "markdown", "typescript"],
     ),
-    Language(name="html_tags"),
+    Language(
+        name="html_tags",
+        inject_deps=["css", "javascript", "json", "regex"],
+    ),
     Language(
         name="javascript",
         url="https://github.com/tree-sitter/tree-sitter-javascript",
         requires=["ecma", "jsx"],
     ),
-    Language(name="ecma"),
-    Language(name="jsx"),
+    Language(
+        name="ecma",
+        inject_deps=["html"],
+    ),
+    Language(name="jsx", inject_deps=["css"]),
     Language(name="json", url="https://github.com/tree-sitter/tree-sitter-json"),
     Language(name="lua", url="https://github.com/tree-sitter-grammars/tree-sitter-lua"),
     Language(
@@ -79,6 +87,10 @@ languages: list[Language] = [
         name="python",
         url="https://github.com/tree-sitter/tree-sitter-python",
         revision="v0.25.0",
+    ),
+    Language(
+        name="query",
+        url="https://github.com/tree-sitter-grammars/tree-sitter-query",
     ),
     Language(name="rust", url="https://github.com/tree-sitter/tree-sitter-rust"),
     Language(
@@ -126,12 +138,12 @@ def main() -> int:
 
     parser_directory.mkdir(parents=True, exist_ok=True)
     queries_directory.mkdir(parents=True, exist_ok=True)
-    clone_repo(tree_sitter_manager_url, tree_sitter_manager_directory, None)
+    clone_repo(nvim_treesitter_url, nvim_treesitter_directory, None)
 
     for language in languages:
         name = language.name
 
-        query_source_path = tree_sitter_manager_queries_directory / name
+        query_source_path = nvim_treesitter_queries_directory / name
         if query_source_path.is_dir():
             query_destination_path = queries_directory / name
             copy_queries(query_source_path, query_destination_path)
