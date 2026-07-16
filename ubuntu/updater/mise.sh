@@ -1,0 +1,1 @@
+../../arch/updater/mise.sh
