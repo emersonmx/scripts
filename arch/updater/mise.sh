@@ -185,7 +185,11 @@ function update_rust() {
 
         mise exec "$tool" -- cargo install-update --all --git
 
+        mise exec "$tool" -- rustup completions zsh >"$COMPLETIONS_PATH/_rustup"
         mise exec "$tool" -- just --completions zsh >"$COMPLETIONS_PATH/_just"
+        mise exec "$tool" -- kache completions zsh >"$COMPLETIONS_PATH/_kache"
+        mise exec "$tool" -- droast completion zsh >"$COMPLETIONS_PATH/_droast"
+        mise exec "$tool" -- tp completions zsh >"$COMPLETIONS_PATH/_tp"
     done
 }
 
