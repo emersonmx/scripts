@@ -6,15 +6,18 @@ COMPLETIONS_PATH="$HOME/.cache/zsh/completions"
 
 function main() {
     setup
+
     if [[ $# -eq 0 ]]; then
-        update_tools
+        for language in $(get_languages); do
+            "update_$language"
+        done
     else
         for language in "$@"; do
             "update_$language"
         done
     fi
 
-    reshim
+    mise reshim
 
     echo ""
     echo "Installed versions:"
@@ -72,16 +75,6 @@ function setup() {
     mkdir -p "$COMPLETIONS_PATH"
 }
 
-function update_tools() {
-    for language in $(get_languages); do
-        "update_$language"
-    done
-}
-
-function reshim() {
-    mise reshim
-}
-
 function update_golang() {
     language="golang"
     for version in $(get_tool_versions $language); do
@@ -89,9 +82,7 @@ function update_golang() {
         tool="$language@$latest_version"
         install_tool "$tool"
 
-        for package in $(get_packages $language); do
-            mise exec "$tool" -- go install "$package"
-        done
+        get_packages $language | xargs -r -n1 mise exec "$tool" -- go install $packages
     done
 }
 
@@ -120,9 +111,7 @@ function update_lua() {
         tool="$language@$latest_version"
         install_tool "$tool"
 
-        for package in $(get_packages $language); do
-            mise exec "$tool" -- luarocks install "$package"
-        done
+        get_packages $language | xargs -r -n1 mise exec "$tool" -- luarocks install "$package"
     done
 }
 
@@ -133,8 +122,7 @@ function update_nodejs() {
         tool="$language@$latest_version"
         install_tool "$tool"
 
-        packages=$(get_packages $language)
-        if [[ $packages ]]; then
+        if packages=$(get_packages $language); then
             mise exec "$tool" -- npm install -g $packages
         fi
     done
@@ -148,8 +136,7 @@ function update_python() {
         install_tool "$tool"
 
         mise exec "$tool" -- python -m pip install --upgrade pip
-        packages=$(get_packages $language)
-        if [[ $packages ]]; then
+        if packages=$(get_packages $language); then
             mise exec "$tool" -- python -m pip install --upgrade $packages
         fi
 
@@ -164,8 +151,7 @@ function update_rust() {
         tool="$language@$latest_version"
         install_tool "$tool"
 
-        targets=$(get_packages "rustup")
-        if [[ $targets ]]; then
+        if targets=$(get_packages "rustup"); then
             mise exec "$tool" -- rustup target install $targets
         fi
 
@@ -178,8 +164,7 @@ function update_rust() {
             fi
         done
 
-        packages=$(get_packages "rust-binstall")
-        if [[ $packages ]]; then
+        if packages=$(get_packages "rust-binstall"); then
             mise exec "$tool" -- cargo binstall -y $packages
         fi
 
