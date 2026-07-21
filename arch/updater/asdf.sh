@@ -2,7 +2,7 @@
 # shellcheck disable=SC2086,SC2048
 
 CONFIG_PATH="$HOME/.config/asdf"
-COMPLETIONS_PATH="$HOME/.cache/zsh/completions"
+COMPLETIONS_PATH="$ZSH_CACHE_DIR/completions"
 OLD_PATH=$PATH
 
 function main() {
