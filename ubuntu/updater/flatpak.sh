@@ -1,3 +1,1 @@
-#!/bin/bash
-
-sudo flatpak update -y
+../../arch/updater/flatpak.sh
