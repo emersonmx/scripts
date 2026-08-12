@@ -1,9 +1,14 @@
 #!/usr/bin/env python
 
+import subprocess
 import tempfile
 from os import environ as env
 from pathlib import Path
-from subprocess import run
+
+
+def run(*args, **kwargs):
+    return subprocess.run(*args, check=True, **kwargs)
+
 
 HOMEDIR = Path.home()
 HOME_LOCAL = HOMEDIR / ".local"
