@@ -7,3 +7,5 @@ else
 fi
 
 sed '/^# pnpm$/,/^# pnpm end$/d' -i ~/.zshrc
+
+pnpm completion zsh >~/.cache/zsh/completions/_pnpm
