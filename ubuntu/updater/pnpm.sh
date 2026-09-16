@@ -1,0 +1,1 @@
+../../arch/updater/pnpm.sh
