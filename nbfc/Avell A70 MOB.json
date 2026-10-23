@@ -1,0 +1,231 @@
+{
+  "NotebookModel": "A70 MOB",
+  "Author": "emersonmx",
+  "EcPollInterval": 3000,
+  "ReadWriteWords": false,
+  "CriticalTemperature": 92,
+  "CriticalTemperatureOffset": 10,
+  "LuaLibraries": [
+    "string",
+    "math"
+  ],
+  "FanConfigurations": [
+    {
+      "FanDisplayName": "CPU Fan",
+      "ReadLuaCode": [
+        "return acpi_call(\"\\\\_SB.INOU.ECRR 0x075B\")"
+      ],
+      "WriteLuaCode": [
+        "local function rd(a) return acpi_call(string.format(\"\\\\_SB.INOU.ECRR 0x%04X\", a)) end",
+        "local function wr(a, v) return acpi_call(string.format(\"\\\\_SB.INOU.ECRW 0x%04X 0x%02X\", a, v)) end",
+        "local function setbit(a, b, on)",
+        "  local e, v = rd(a); if e then return e end",
+        "  local set = math.floor(v / 2 ^ b) % 2 == 1",
+        "  if set == on then return nil end",
+        "  return (wr(a, math.floor(on and v + 2 ^ b or v - 2 ^ b)))",
+        "end",
+        "local function init()",
+        "  local e, v = rd(0x07C6); if e then return e end",
+        "  if math.floor(v / 4) % 2 == 1 then return nil end",
+        "  e = setbit(0x0741, 0, true); if e then return e end",
+        "  e = setbit(0x0751, 6, false); if e then return e end",
+        "  e = setbit(0x07C5, 7, true); if e then return e end",
+        "  for k = 0, 1 do",
+        "    local t = 0x0F00 + k * 0x30",
+        "    e = wr(t, 115) or wr(t + 0x10, 0) or wr(t + 0x20, 0x3C); if e then return e end",
+        "    for i = 1, 15 do",
+        "      e = wr(t + i, 116 + i) or wr(t + 0x10 + i, 115 + i) or wr(t + 0x20 + i, 200)",
+        "      if e then return e end",
+        "    end",
+        "  end",
+        "  return setbit(0x07C6, 2, true)",
+        "end",
+        "local e = init(); if e then return e, 0 end",
+        "local d = get_value()",
+        "if d < 25 then d = 1 elseif d < 50 then d = 50 end",
+        "return wr(0x0F20, d)"
+      ],
+      "ResetLuaCode": [
+        "local function rd(a) return acpi_call(string.format(\"\\\\_SB.INOU.ECRR 0x%04X\", a)) end",
+        "local function wr(a, v) return acpi_call(string.format(\"\\\\_SB.INOU.ECRW 0x%04X 0x%02X\", a, v)) end",
+        "local function setbit(a, b, on)",
+        "  local e, v = rd(a); if e then return e end",
+        "  local set = math.floor(v / 2 ^ b) % 2 == 1",
+        "  if set == on then return nil end",
+        "  return (wr(a, math.floor(on and v + 2 ^ b or v - 2 ^ b)))",
+        "end",
+        "local e = setbit(0x07C6, 2, false) or setbit(0x07C5, 7, false) or setbit(0x0741, 0, false)",
+        "return e, 0"
+      ],
+      "MinSpeedValue": 0,
+      "MaxSpeedValue": 200,
+      "IndependentReadMinMaxValues": false,
+      "ResetRequired": true,
+      "Sensors": [
+        "@CPU"
+      ],
+      "TemperatureAlgorithmType": "Max",
+      "TemperatureThresholds": [
+        {
+          "UpThreshold": 0,
+          "DownThreshold": 0,
+          "FanSpeed": 0.0
+        },
+        {
+          "UpThreshold": 54,
+          "DownThreshold": 48,
+          "FanSpeed": 30.0
+        },
+        {
+          "UpThreshold": 63,
+          "DownThreshold": 50,
+          "FanSpeed": 35.0
+        },
+        {
+          "UpThreshold": 67,
+          "DownThreshold": 62,
+          "FanSpeed": 45.0
+        },
+        {
+          "UpThreshold": 70,
+          "DownThreshold": 66,
+          "FanSpeed": 48.0
+        },
+        {
+          "UpThreshold": 74,
+          "DownThreshold": 69,
+          "FanSpeed": 50.0
+        },
+        {
+          "UpThreshold": 78,
+          "DownThreshold": 73,
+          "FanSpeed": 55.0
+        },
+        {
+          "UpThreshold": 82,
+          "DownThreshold": 77,
+          "FanSpeed": 70.0
+        },
+        {
+          "UpThreshold": 85,
+          "DownThreshold": 81,
+          "FanSpeed": 80.0
+        },
+        {
+          "UpThreshold": 87,
+          "DownThreshold": 84,
+          "FanSpeed": 100.0
+        }
+      ]
+    },
+    {
+      "FanDisplayName": "GPU Fan",
+      "ReadLuaCode": [
+        "return acpi_call(\"\\\\_SB.INOU.ECRR 0x075C\")"
+      ],
+      "WriteLuaCode": [
+        "local function rd(a) return acpi_call(string.format(\"\\\\_SB.INOU.ECRR 0x%04X\", a)) end",
+        "local function wr(a, v) return acpi_call(string.format(\"\\\\_SB.INOU.ECRW 0x%04X 0x%02X\", a, v)) end",
+        "local function setbit(a, b, on)",
+        "  local e, v = rd(a); if e then return e end",
+        "  local set = math.floor(v / 2 ^ b) % 2 == 1",
+        "  if set == on then return nil end",
+        "  return (wr(a, math.floor(on and v + 2 ^ b or v - 2 ^ b)))",
+        "end",
+        "local function init()",
+        "  local e, v = rd(0x07C6); if e then return e end",
+        "  if math.floor(v / 4) % 2 == 1 then return nil end",
+        "  e = setbit(0x0741, 0, true); if e then return e end",
+        "  e = setbit(0x0751, 6, false); if e then return e end",
+        "  e = setbit(0x07C5, 7, true); if e then return e end",
+        "  for k = 0, 1 do",
+        "    local t = 0x0F00 + k * 0x30",
+        "    e = wr(t, 115) or wr(t + 0x10, 0) or wr(t + 0x20, 0x3C); if e then return e end",
+        "    for i = 1, 15 do",
+        "      e = wr(t + i, 116 + i) or wr(t + 0x10 + i, 115 + i) or wr(t + 0x20 + i, 200)",
+        "      if e then return e end",
+        "    end",
+        "  end",
+        "  return setbit(0x07C6, 2, true)",
+        "end",
+        "local e = init(); if e then return e, 0 end",
+        "local d = get_value()",
+        "if d < 25 then d = 1 elseif d < 50 then d = 50 end",
+        "return wr(0x0F50, d)"
+      ],
+      "ResetLuaCode": [
+        "local function rd(a) return acpi_call(string.format(\"\\\\_SB.INOU.ECRR 0x%04X\", a)) end",
+        "local function wr(a, v) return acpi_call(string.format(\"\\\\_SB.INOU.ECRW 0x%04X 0x%02X\", a, v)) end",
+        "local function setbit(a, b, on)",
+        "  local e, v = rd(a); if e then return e end",
+        "  local set = math.floor(v / 2 ^ b) % 2 == 1",
+        "  if set == on then return nil end",
+        "  return (wr(a, math.floor(on and v + 2 ^ b or v - 2 ^ b)))",
+        "end",
+        "local e = setbit(0x07C6, 2, false) or setbit(0x07C5, 7, false) or setbit(0x0741, 0, false)",
+        "return e, 0"
+      ],
+      "MinSpeedValue": 0,
+      "MaxSpeedValue": 200,
+      "IndependentReadMinMaxValues": false,
+      "ResetRequired": true,
+      "Sensors": [
+        "@GPU",
+        "@CPU"
+      ],
+      "TemperatureAlgorithmType": "Max",
+      "TemperatureThresholds": [
+        {
+          "UpThreshold": 0,
+          "DownThreshold": 0,
+          "FanSpeed": 0.0
+        },
+        {
+          "UpThreshold": 54,
+          "DownThreshold": 48,
+          "FanSpeed": 30.0
+        },
+        {
+          "UpThreshold": 63,
+          "DownThreshold": 50,
+          "FanSpeed": 35.0
+        },
+        {
+          "UpThreshold": 67,
+          "DownThreshold": 62,
+          "FanSpeed": 45.0
+        },
+        {
+          "UpThreshold": 70,
+          "DownThreshold": 66,
+          "FanSpeed": 48.0
+        },
+        {
+          "UpThreshold": 74,
+          "DownThreshold": 69,
+          "FanSpeed": 50.0
+        },
+        {
+          "UpThreshold": 78,
+          "DownThreshold": 73,
+          "FanSpeed": 55.0
+        },
+        {
+          "UpThreshold": 82,
+          "DownThreshold": 77,
+          "FanSpeed": 70.0
+        },
+        {
+          "UpThreshold": 85,
+          "DownThreshold": 81,
+          "FanSpeed": 80.0
+        },
+        {
+          "UpThreshold": 87,
+          "DownThreshold": 84,
+          "FanSpeed": 100.0
+        }
+      ]
+    }
+  ]
+}
