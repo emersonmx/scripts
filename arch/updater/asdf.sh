@@ -207,7 +207,12 @@ function update_rust() {
         latest_version=$(get_latest_version $language "$version")
         install_tool $language "$latest_version"
 
-        mapfile -t targets < <(get_packages "rustup") || true
+        mapfile -t components < <(get_packages "rustup-components") || true
+        if [[ ${#components[@]} -gt 0 ]]; then
+            asdf exec rustup component add "${components[@]}"
+        fi
+
+        mapfile -t targets < <(get_packages "rustup-targets") || true
         if [[ ${#targets[@]} -gt 0 ]]; then
             asdf exec rustup target install "${targets[@]}"
         fi
